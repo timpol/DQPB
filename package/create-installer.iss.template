@@ -1,0 +1,95 @@
+// Based on script by Marius Retegan of the European Synchrotron Radiation
+// Facility. See: https://github.com/mretegan/dqpb/package
+
+[Setup]
+AppId={{6eec4c5c-1e66-4e64-981d-339324c9b459}
+AppName=DQPB
+AppVersion=#Version
+AppVerName=DQPB
+AppPublisher=Timothy Pollard
+AppPublisherURL=https://github.com/timpol/dqpb
+AppSupportURL=https://github.com/timpol/dqpb
+AppUpdatesURL=https://github.com/timpol/dqpb/releases
+DefaultDirName={autopf}\DQPB
+DefaultGroupName=DQPB
+LicenseFile=..\LICENSE.md
+OutputDir=artifacts
+OutputBaseFilename=DQPB-#Version-win-x64
+Compression=lzma
+SolidCompression=yes
+ArchitecturesAllowed=x64
+ArchitecturesInstallIn64BitMode=x64
+
+[Languages]
+Name: "english"; MessagesFile: "compiler:Default.isl"
+
+[Files]
+Source: "dist\DQPB\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+// Source: "dqpb.ico"; DestDir: "{app}"
+
+[Icons]
+// Name: "{group}\DQPB"; Filename: "{app}\dqpb.exe";  IconFilename: "{app}\DQPB.ico"
+Name: "{autoprograms}\DQPB"; Filename: "{app}\DQPB.exe"
+Name: "{group}\Uninstall"; Filename: "{uninstallexe}"
+
+//// Code from https://stackoverflow.com/questions/2000296/inno-setup-how-to-automatically-uninstall-previous-installed-version/2099805#209980
+//[Code]
+//
+///////////////////////////////////////////////////////////////////////
+//function GetUninstallString(): String;
+//var
+//  sUnInstPath: String;
+//  sUnInstallString: String;
+//begin
+//  sUnInstPath := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#emit SetupSetting("AppId")}_is1');
+//  sUnInstallString := '';
+//  if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+//    RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+//  Result := sUnInstallString;
+//end;
+//
+//
+///////////////////////////////////////////////////////////////////////
+//function IsUpgrade(): Boolean;
+//begin
+//  Result := (GetUninstallString() <> '');
+//end;
+//
+//
+///////////////////////////////////////////////////////////////////////
+//function UnInstallOldVersion(): Integer;
+//var
+//  sUnInstallString: String;
+//  iResultCode: Integer;
+//begin
+//  // Return Values:
+//  // 1 - uninstall string is empty
+//  // 2 - error executing the UnInstallString
+//  // 3 - successfully executed the UnInstallString
+//
+//  // default return value
+//  Result := 0;
+//
+//  // get the uninstall string of the old app
+//  sUnInstallString := GetUninstallString();
+//  if sUnInstallString <> '' then begin
+//    sUnInstallString := RemoveQuotes(sUnInstallString);
+//    if Exec(sUnInstallString, '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES','', SW_HIDE, ewWaitUntilTerminated, iResultCode) then
+//      Result := 3
+//    else
+//      Result := 2;
+//  end else
+//    Result := 1;
+//end;
+//
+///////////////////////////////////////////////////////////////////////
+//procedure CurStepChanged(CurStep: TSetupStep);
+//begin
+//  if (CurStep=ssInstall) then
+//  begin
+//    if (IsUpgrade()) then
+//    begin
+//      UnInstallOldVersion();
+//    end;
+//  end;
+//end;
