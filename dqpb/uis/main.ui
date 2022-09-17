@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>439</width>
+    <height>439</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DQPB</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Main</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Calc. and plot type</string>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="5,1">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="2" column="1" colspan="2">
+                <widget class="QComboBox" name="fitCombo"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Data Type:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="3">
+                <widget class="QComboBox" name="taskCombo"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Fit Type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <widget class="QComboBox" name="normPbCombo"/>
+               </item>
+               <item row="1" column="1" colspan="2">
+                <widget class="QComboBox" name="dataTypeCombo">
+                 <property name="currentText">
+                  <string/>
+                 </property>
+                 <property name="minimumContentsLength">
+                  <number>10</number>
+                 </property>
+                 <property name="placeholderText">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="3">
+                <widget class="QCheckBox" name="wavCovOpt">
+                 <property name="text">
+                  <string> Account for covariance in wav.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Norm.  isotope</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_2">
+               <property name="title">
+                <string>Input errors</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_11">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout">
+                  <item>
+                   <widget class="QCheckBox" name="err1sOpt">
+                    <property name="text">
+                     <string>1s</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="err2sOpt">
+                    <property name="text">
+                     <string>2s</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_8">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <widget class="QComboBox" name="errTypeCombo"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="covOpt">
+                  <property name="text">
+                   <string>Covariance matrix</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="1" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <widget class="QCheckBox" name="autoscaleOpt">
+                <property name="text">
+                 <string>Autoscale axis limits</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="dpLabelOpt">
+                <property name="text">
+                 <string>Add data point labels</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="printSettingsOpt">
+                <property name="text">
+                 <string>Output calc.  settings</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="plotDataOpt">
+                <property name="text">
+                 <string>Output plot data</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="savePlotsOpt">
+                <property name="text">
+                 <string>Save plots to disk</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1" rowspan="2">
+             <widget class="QGroupBox" name="dataRangeBox">
+              <property name="title">
+               <string>Data range</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_13">
+               <item>
+                <widget class="QLineEdit" name="dataRangeEntry">
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_3">
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_3">
+                     <item>
+                      <widget class="QPushButton" name="selectButton">
+                       <property name="toolTip">
+                        <string>Launch Excel range selection dialog.</string>
+                       </property>
+                       <property name="text">
+                        <string>select</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_3">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="prefsButton">
+              <property name="text">
+               <string>Preferences</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="closeButton">
+              <property name="text">
+               <string>Close</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="okButton">
+              <property name="text">
+               <string>Ok</string>
+              </property>
+              <property name="default">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string>Disequilibrium</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="title">
+             <string>Numerical Age Solution</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Initial guess (Ma):</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="ageGuessEntry"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QCheckBox" name="eqGuessOpt">
+                 <property name="text">
+                  <string>Use equilibrium age</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="outputEqOpt">
+                 <property name="text">
+                  <string>Output equilibrium age</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="title">
+             <string>Activty ratios</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <layout class="QGridLayout" name="ARGrid_2" rowstretch="0,0,0,0,0" columnstretch="2,2,2,2,1">
+               <item row="4" column="3">
+                <widget class="QComboBox" name="A15Combo"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLineEdit" name="A08ErrEntry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_22">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;± 1σ&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <widget class="QLineEdit" name="A15ErrEntry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_21">
+                 <property name="text">
+                  <string>value</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="A48Entry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="A48Combo"/>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="A15Entry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="A08Entry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QComboBox" name="A08Combo"/>
+               </item>
+               <item row="3" column="2">
+                <widget class="QLineEdit" name="A68ErrEntry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QComboBox" name="A68Combo"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="A48ErrEntry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="A68Entry">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="4">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="A48Label">
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[&lt;span style=&quot; vertical-align:super;&quot;&gt;234&lt;/span&gt;U/&lt;span style=&quot; vertical-align:super;&quot;&gt;238&lt;/span&gt;U]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="A08Label">
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[&lt;span style=&quot; vertical-align:super;&quot;&gt;230&lt;/span&gt;Th/&lt;span style=&quot; vertical-align:super;&quot;&gt;238&lt;/span&gt;U]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="A68Label">
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[&lt;span style=&quot; vertical-align:super;&quot;&gt;226&lt;/span&gt;Ra/&lt;span style=&quot; vertical-align:super;&quot;&gt;238&lt;/span&gt;U]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="A15Label">
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[&lt;span style=&quot; vertical-align:super;&quot;&gt;231&lt;/span&gt;Pa/&lt;span style=&quot; vertical-align:super;&quot;&gt;238&lt;/span&gt;U]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="initialEqOpt">
+               <property name="text">
+                <string>Assume initial equilibrium</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="McOpt">
+               <property name="text">
+                <string>Equilibrium age Monte Carlo errors</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Monte Carlo</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QCheckBox" name="McSummaryOpt">
+            <property name="text">
+             <string>Show full Monte Carlo results summary</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="nTrialsEntry"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Number of trials:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QGroupBox" name="groupBox_6">
+              <property name="title">
+               <string>Simulation options</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="dcErrOpt">
+                 <property name="text">
+                  <string>Include decay constant errors</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="uratErrOpt">
+                 <property name="text">
+                  <string>Include 238U/235U errors</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="rnArvOpt">
+                 <property name="text">
+                  <string>Reject negative activity ratio trials</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="rnAgesOpt">
+                 <property name="text">
+                  <string>Reject negative age trials</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QGroupBox" name="groupBox_8">
+              <property name="title">
+               <string>Monte Carlo Plots</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="ageHistOpt">
+                 <property name="text">
+                  <string>Age histogram</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="arHistOpt">
+                 <property name="text">
+                  <string>Activity ratio histograms</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>439</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>taskCombo</tabstop>
+  <tabstop>dataTypeCombo</tabstop>
+  <tabstop>fitCombo</tabstop>
+  <tabstop>err1sOpt</tabstop>
+  <tabstop>err2sOpt</tabstop>
+  <tabstop>errTypeCombo</tabstop>
+  <tabstop>covOpt</tabstop>
+  <tabstop>printSettingsOpt</tabstop>
+  <tabstop>dataRangeEntry</tabstop>
+  <tabstop>selectButton</tabstop>
+  <tabstop>prefsButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>ageGuessEntry</tabstop>
+  <tabstop>eqGuessOpt</tabstop>
+  <tabstop>outputEqOpt</tabstop>
+  <tabstop>A48Entry</tabstop>
+  <tabstop>A48ErrEntry</tabstop>
+  <tabstop>A48Combo</tabstop>
+  <tabstop>A08Entry</tabstop>
+  <tabstop>A08ErrEntry</tabstop>
+  <tabstop>A08Combo</tabstop>
+  <tabstop>A68Entry</tabstop>
+  <tabstop>A68ErrEntry</tabstop>
+  <tabstop>A68Combo</tabstop>
+  <tabstop>A15Entry</tabstop>
+  <tabstop>A15ErrEntry</tabstop>
+  <tabstop>A15Combo</tabstop>
+  <tabstop>initialEqOpt</tabstop>
+  <tabstop>McSummaryOpt</tabstop>
+  <tabstop>nTrialsEntry</tabstop>
+  <tabstop>dcErrOpt</tabstop>
+  <tabstop>uratErrOpt</tabstop>
+  <tabstop>rnArvOpt</tabstop>
+  <tabstop>rnAgesOpt</tabstop>
+  <tabstop>ageHistOpt</tabstop>
+  <tabstop>arHistOpt</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

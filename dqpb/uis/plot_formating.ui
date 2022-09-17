@@ -1,0 +1,4721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>596</width>
+    <height>502</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>DQPB Plot Format Settings</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="1" colspan="2">
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOn</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>556</width>
+           <height>3353</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout" columnstretch="0">
+          <item row="46" column="0">
+           <widget class="QGroupBox" name="groupBox_20">
+            <property name="title">
+             <string>Weighted average envelope</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_20">
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_121">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="wavEnvZEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_122">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_123">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="wavEnvEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_124">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="wavEnvFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_31">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="9">
+                <spacer name="horizontalSpacer_32">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="6">
+                <widget class="QLabel" name="label_78">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_79">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="8">
+                <widget class="QLineEdit" name="wavEnvAlphaEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_80">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavEnvLineWidthEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_81">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <spacer name="horizontalSpacer_125">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="wavEnvLineStyleCombo"/>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_16">
+                 <property name="text">
+                  <string>face color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_77">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="15" column="0">
+           <widget class="QGroupBox" name="groupBox_28">
+            <property name="title">
+             <string>Figure</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_7">
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_189">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_190">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <widget class="QComboBox" name="figBorderColorCombo"/>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_136">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="4">
+                <spacer name="horizontalSpacer_188">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_186">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <widget class="QLabel" name="label_130">
+                 <property name="text">
+                  <string>border color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="figBackgroundColorCombo"/>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_134">
+                 <property name="text">
+                  <string>background color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QGroupBox" name="groupBox_23">
+            <property name="title">
+             <string>Concordia age ellipses</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_20">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_28">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_66">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_95">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_98">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_158">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="ageEllipseZEntry"/>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_15">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_65">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="ageEllipseEdgeWidthEntry"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="ageEllipseAlphaEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_45">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_60">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_51">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="ageEllipseFillColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_159">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_96">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="ageEllipseEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_52">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QGroupBox" name="groupBox_25">
+            <property name="title">
+             <string>Common Pb projection line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_22">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_30">
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="pb76LineStyleCombo"/>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_160">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_161">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_53">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_60">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="pb76LineAlphaEntry"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_106">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_107">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_162">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_168">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_169">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="pb76LineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_61">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_28">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="pb76LineZEntry"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_108">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_109">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="pb76LineWidthEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="32" column="0">
+           <widget class="QGroupBox" name="groupBox_18">
+            <property name="title">
+             <string>Regression envelope</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_19">
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_117">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="regressionEnvelopeZEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_76">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_118">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="regressionEnvelopeFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_76">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_119">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="regressionEnvelopeLineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_29">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="9">
+                <spacer name="horizontalSpacer_30">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="6">
+                <widget class="QLabel" name="label_74">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_52">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="8">
+                <widget class="QLineEdit" name="regressionEnvelopeAlphaEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_72">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="regressionEnvelopeLineWidthEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <spacer name="horizontalSpacer_120">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="regressionEnvelopeLineStyleCombo"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>face color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QGroupBox" name="groupBox_17">
+            <property name="title">
+             <string>Concordia intercept markers</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_22">
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_35">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_87">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_130">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="mcMarkerEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_88">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>marker type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_131">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="mcMarkerFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="mcMarkerTypeCombo"/>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_36">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_132">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_133">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_37">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_134">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="mcMarkerAlphaEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_89">
+                 <property name="text">
+                  <string>size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="mcMarkerSizeEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_90">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_18">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QLineEdit" name="mcMarkerEdgeWidthEntry"/>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_91">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="mcMarkerZEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="43" column="0">
+           <widget class="QGroupBox" name="groupBox_19">
+            <property name="title">
+             <string>Scatter plot markers</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_29">
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_111">
+                 <property name="text">
+                  <string>face color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_55">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_163">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_164">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_113">
+                 <property name="text">
+                  <string>marker type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="scatterPlotMarkerEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_56">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="scatterPlotMarkerTypeCombo"/>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_165">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_167">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_166">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="scatterPlorMarkerSizeEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_112">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="scatterPlotMarkerFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_57">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_114">
+                 <property name="text">
+                  <string>size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="scatterPlotMarkerAlphaEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_115">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_117">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="scatterPlotMarkerEdgeWidthEntry"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_116">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="scatterPlotMarkerZEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="20" column="0">
+           <widget class="QGroupBox" name="groupBox_8">
+            <property name="title">
+             <string>Histogram bar</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_19">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_27">
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_49">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_48">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_50">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_157">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_156">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_27">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_105">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_155">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="histogramFillColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="histogramEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_154">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_153">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_104">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="histogramAlphaEntry"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="histogramLineWidthEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_102">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>hist. type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QComboBox" name="histogramHistTypeCombo"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QGroupBox" name="groupBox_10">
+            <property name="title">
+             <string>Concordia intercept ellipse</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_23">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_31">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_110">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_170">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_171">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_172">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="interceptEllipseZEntry"/>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_62">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_118">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_29">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="interceptEllipseEdgeWidthEntry"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="interceptEllipseAlphaEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_119">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_120">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_63">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="interceptEllipseFillColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_173">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_174">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="interceptEllipseEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_64">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="title">
+             <string>Axis labels</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_15">
+               <item row="0" column="3">
+                <spacer name="horizontalSpacer_102">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_18">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="4" colspan="2">
+                <widget class="QComboBox" name="axLabelFontSizeCombo">
+                 <property name="editable">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <widget class="QLabel" name="label_62">
+                 <property name="text">
+                  <string>font color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QComboBox" name="axLabelFontColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>font size </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_100">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QGroupBox" name="groupBox_26">
+            <property name="title">
+             <string>Concordia envelope</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_25">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_33">
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_180">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="concEnvZEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_181">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_182">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="concEnvFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_124">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_183">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="concEnvEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_68">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="9">
+                <spacer name="horizontalSpacer_69">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="6">
+                <widget class="QLabel" name="label_125">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_126">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="8">
+                <widget class="QLineEdit" name="concEnvAlphaEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_127">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="concEnvLineWidthEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_128">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <spacer name="horizontalSpacer_184">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="concEnvLineStyleCombo"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_35">
+                 <property name="text">
+                  <string>face color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QGroupBox" name="groupBox_12">
+            <property name="title">
+             <string>Concordia envelope line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_71">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_92">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_93">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_70">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="concEnvLineColorCombo"/>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_38">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_74">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <widget class="QLabel" name="label_61">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4">
+                <spacer name="horizontalSpacer_72">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <widget class="QLineEdit" name="concEnvLineLineWidthEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_94">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_95">
+                 <property name="text">
+                  <string>zorder</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_137">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_138">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="0">
+                <spacer name="horizontalSpacer_139">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="0">
+                <spacer name="horizontalSpacer_185">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="4">
+                <spacer name="horizontalSpacer_187">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="concEnvLineLineStyleCombo"/>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="concEnvLineZEntry"/>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLineEdit" name="concEnvLineAlphaEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="44" column="0">
+           <widget class="QGroupBox" name="groupBox_29">
+            <property name="title">
+             <string>Tick labels</string>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="0">
+           <widget class="QGroupBox" name="groupBox_22">
+            <property name="title">
+             <string>Font</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0,0,0,0,0,0,0,0">
+               <item row="0" column="1">
+                <widget class="QLabel" name="label69">
+                 <property name="text">
+                  <string>Label font</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="fontCombo"/>
+               </item>
+               <item row="0" column="4">
+                <spacer name="horizontalSpacer_54">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>Font weight</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_40">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_58">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_59">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <widget class="QComboBox" name="fontWeightCombo">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_101">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="12" column="0">
+           <widget class="QGroupBox" name="groupBox_15">
+            <property name="title">
+             <string>Data point Ellipses</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_27">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_11">
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_80">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_83">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="ellipseEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="ellipseFillColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_86">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_48">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_84">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_85">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="ellipseEdgeWidthEntry"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_46">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_47">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_44">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="ellipseAlphaEntry"/>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="ellipseZEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Concordia age markers</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_13">
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_57">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_93">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="concEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_58">
+                 <property name="text">
+                  <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_10">
+                 <property name="text">
+                  <string>marker type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_91">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="concMarkerFillColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="concMarkerTypeCombo"/>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_82">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_92">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_94">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="concMarkerAlphaEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_54">
+                 <property name="text">
+                  <string>size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="concMarkerSizeEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_56">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>edge width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_55">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="concMarkerZEntry"/>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="concMarkerEdgeWidthEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="54" column="0">
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="title">
+             <string>Wtd.  average plot markers - systematic uncertainty</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_17">
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_107">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_108">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_22">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_109">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_110">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_24">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_111">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_64">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="wavMarkerFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_67">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_68">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavMarkerAlphaEntry"/>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="wavMarkerZEntry"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLineEdit" name="wavMarkerWidthEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="55" column="0">
+           <widget class="QGroupBox" name="groupBox_24">
+            <property name="title">
+             <string>Wtd.  average plot markers - random uncertainty</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_24">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_32">
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_175">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_176">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_65">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_66">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_177">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_178">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_67">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_179">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_121">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="wavRandMarkerFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_122">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_123">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavRandMarkerAlphaEntry"/>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="wavRandMarkerZEntry"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_34">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLineEdit" name="wavRandMarkerWidthEntry">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="title">
+             <string>Concordia age marker labels</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_16">
+               <item row="0" column="7">
+                <widget class="QLabel" name="label_63">
+                 <property name="text">
+                  <string>x offset</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_103">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="10">
+                <spacer name="horizontalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="4" colspan="2">
+                <widget class="QComboBox" name="concLabelFontColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>font size </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <spacer name="horizontalSpacer_105">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="6">
+                <spacer name="horizontalSpacer_104">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_106">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLabel" name="label_30">
+                 <property name="text">
+                  <string>h alignment</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="fo">
+                 <property name="text">
+                  <string>font color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QLabel" name="label_33">
+                 <property name="text">
+                  <string>v alignment</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4" colspan="2">
+                <widget class="QComboBox" name="concLabelHAlignmentCombo"/>
+               </item>
+               <item row="3" column="4" colspan="2">
+                <widget class="QComboBox" name="concLabelVAlignmentCombo"/>
+               </item>
+               <item row="0" column="9">
+                <widget class="QLineEdit" name="concLabelXoffsetEntry"/>
+               </item>
+               <item row="0" column="4" colspan="2">
+                <widget class="QComboBox" name="concLabelFontSizeCombo"/>
+               </item>
+               <item row="3" column="9">
+                <widget class="QLineEdit" name="concLabelZEntry"/>
+               </item>
+               <item row="2" column="9">
+                <widget class="QComboBox" name="concLabelTextCoordsCombo"/>
+               </item>
+               <item row="3" column="7">
+                <widget class="QLabel" name="label_32">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="9">
+                <widget class="QLineEdit" name="concLabelYoffsetEntry"/>
+               </item>
+               <item row="2" column="7">
+                <widget class="QLabel" name="label_31">
+                 <property name="text">
+                  <string>text coords.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLabel" name="label_37">
+                 <property name="text">
+                  <string>y offset</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Axis lines</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_14">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_59">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_97">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <widget class="QComboBox" name="axSpineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <spacer name="horizontalSpacer_99">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="4">
+                <widget class="QLineEdit" name="axSpineLineWidthEntry"/>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_135">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="63" column="0">
+           <widget class="QGroupBox" name="groupBox_5">
+            <property name="title">
+             <string>Custom matplotlib dictionary settings</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QTableWidget" name="dictTable">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="rowCount">
+                <number>20</number>
+               </property>
+               <property name="columnCount">
+                <number>3</number>
+               </property>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <row/>
+               <column/>
+               <column/>
+               <column/>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QPushButton" name="PushButton_2">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Clear</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="23" column="0">
+           <widget class="QGroupBox" name="groupBox_13">
+            <property name="title">
+             <string>Major ticks</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_17">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_25">
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_23">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLineEdit" name="majorTicksSizeEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_149">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="majorTicksDirectionCombo"/>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_145">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_100">
+                 <property name="text">
+                  <string>width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_98">
+                 <property name="text">
+                  <string>direction</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_146">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_44">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_45">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_24">
+                 <property name="text">
+                  <string>size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <widget class="QLineEdit" name="majorTicksWidthEntry"/>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_147">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="majorTicksColorCombo"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_19">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>pad</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="lineEdit_9">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_39">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="14" column="0">
+           <widget class="QGroupBox" name="groupBox_6">
+            <property name="title">
+             <string>Data point labels</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_18">
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_69">
+                 <property name="text">
+                  <string>h alighment</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_112">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="8">
+                <spacer name="horizontalSpacer_25">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_115">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_114">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="7">
+                <widget class="QLabel" name="label_71">
+                 <property name="text">
+                  <string>x offset</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <widget class="QLineEdit" name="dpLabelXoffsetEntry"/>
+               </item>
+               <item row="2" column="6">
+                <spacer name="horizontalSpacer_116">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_27">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>v alignment</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_70">
+                 <property name="text">
+                  <string>font color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="dpLabelFontColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>font size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="dpLabelFontSizeCombo"/>
+               </item>
+               <item row="0" column="10">
+                <spacer name="horizontalSpacer_26">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QComboBox" name="dpLabelHAlignmentCombo"/>
+               </item>
+               <item row="1" column="6">
+                <spacer name="horizontalSpacer_28">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QComboBox" name="dpLabelVAlignmentCombo"/>
+               </item>
+               <item row="3" column="9">
+                <widget class="QLineEdit" name="dpLabelZEntry"/>
+               </item>
+               <item row="3" column="7">
+                <widget class="QLabel" name="label_73">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="7">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>offset coord.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="9">
+                <widget class="QComboBox" name="dpLabelTextCoordsCombo"/>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLabel" name="label_36">
+                 <property name="text">
+                  <string>y offset</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="9">
+                <widget class="QLineEdit" name="dpLabelYoffsetEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>Concordia line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_12">
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="concLineStyleCombo"/>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_81">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_87">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="concLineAlphaEntry"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_53">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_50">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_88">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_90">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_89">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="concLineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="concLineZEntry"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_49">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_51">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="concLineWidthEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="18" column="0">
+           <widget class="QGroupBox" name="groupBox_11">
+            <property name="title">
+             <string>Gridlines</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_24">
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_21">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_144">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="majorGridlinesStyleCombo"/>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_143">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_22">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_140">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_141">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_42">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QComboBox" name="majorGridlinesColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_96">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="majorGridlinesAlphaEntry"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="majorGridlinesWidthEntry"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_97">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_41">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="5">
+                <spacer name="horizontalSpacer_142">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="7">
+                <spacer name="horizontalSpacer_43">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="26" column="0">
+           <widget class="QGroupBox" name="groupBox_14">
+            <property name="title">
+             <string>Minor ticks</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_18">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_26">
+               <item row="0" column="7">
+                <widget class="QLineEdit" name="minorTicksWidthEntry"/>
+               </item>
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_152">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_150">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_46">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLineEdit" name="minorTicksSizeEntry"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_25">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="minorTicksDirectionCombo"/>
+               </item>
+               <item row="0" column="8">
+                <spacer name="horizontalSpacer_47">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_26">
+                 <property name="text">
+                  <string>width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_151">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_99">
+                 <property name="text">
+                  <string>direction</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="minorTicksColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_101">
+                 <property name="text">
+                  <string>size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_148">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_20">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>pad</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="lineEdit_10">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_38">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="30" column="0">
+           <widget class="QGroupBox" name="groupBox_16">
+            <property name="title">
+             <string>Regression line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_26">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_10">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_40">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_77">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="regressionLineAlphaEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_41">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="regressionLineZEntry"/>
+               </item>
+               <item row="3" column="3">
+                <widget class="QLineEdit" name="regressionLineWidthEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_43">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_73">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_78">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="regressionLineStyleCombo"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_42">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_39">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_79">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="regressionLineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="4">
+                <spacer name="horizontalSpacer_75">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="9">
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="33" column="0">
+           <widget class="QGroupBox" name="groupBox_27">
+            <property name="title">
+             <string>Regression envelope line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_15">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_8">
+               <item row="1" column="8">
+                <spacer name="horizontalSpacer_192">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_129">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <spacer name="horizontalSpacer_191">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="4">
+                <spacer name="horizontalSpacer_194">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_103">
+                 <property name="text">
+                  <string>color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <spacer name="horizontalSpacer_193">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="regressionEnvLineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QComboBox" name="regressionEnvLineLineStyleCombo"/>
+               </item>
+               <item row="1" column="6">
+                <spacer name="horizontalSpacer_195">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_131">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <widget class="QLabel" name="label_133">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <widget class="QLabel" name="label_132">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QLineEdit" name="regressionEnvLineLineWidthEntry"/>
+               </item>
+               <item row="1" column="7">
+                <widget class="QLineEdit" name="regressionEnvLineZEntry"/>
+               </item>
+               <item row="2" column="7">
+                <widget class="QLineEdit" name="regressionEnvLineAlphaEntry"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="45" column="0">
+           <widget class="QGroupBox" name="groupBox_21">
+            <property name="title">
+             <string>Wtd.  average line</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_21">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_82">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_113">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="wavLineAlphaEntry"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_83">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavLineZEntry"/>
+               </item>
+               <item row="3" column="3">
+                <widget class="QLineEdit" name="wavLineWidthEntry"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_84">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_126">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_127">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QComboBox" name="wavLineStyleCombo"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_85">
+                 <property name="text">
+                  <string>line style</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_86">
+                 <property name="text">
+                  <string>line color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_128">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QComboBox" name="wavLineColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="9">
+                <spacer name="horizontalSpacer_33">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="9">
+                <spacer name="horizontalSpacer_34">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="5">
+                <spacer name="horizontalSpacer_129">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="resetButton">
+           <property name="text">
+            <string>Reset Defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="doneButton">
+           <property name="text">
+            <string>Done</string>
+           </property>
+           <property name="default">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>axLabelFontSizeCombo</tabstop>
+  <tabstop>axLabelFontColorCombo</tabstop>
+  <tabstop>axSpineLineWidthEntry</tabstop>
+  <tabstop>axSpineColorCombo</tabstop>
+  <tabstop>ageEllipseFillColorCombo</tabstop>
+  <tabstop>ageEllipseEdgeColorCombo</tabstop>
+  <tabstop>ageEllipseEdgeWidthEntry</tabstop>
+  <tabstop>ageEllipseAlphaEntry</tabstop>
+  <tabstop>ageEllipseZEntry</tabstop>
+  <tabstop>concMarkerTypeCombo</tabstop>
+  <tabstop>concMarkerFillColorCombo</tabstop>
+  <tabstop>concMarkerEdgeWidthEntry</tabstop>
+  <tabstop>concEdgeColorCombo</tabstop>
+  <tabstop>concMarkerSizeEntry</tabstop>
+  <tabstop>concMarkerAlphaEntry</tabstop>
+  <tabstop>concMarkerZEntry</tabstop>
+  <tabstop>resetButton</tabstop>
+  <tabstop>concLabelHAlignmentCombo</tabstop>
+  <tabstop>concLabelVAlignmentCombo</tabstop>
+  <tabstop>concLabelXoffsetEntry</tabstop>
+  <tabstop>concLabelFontSizeCombo</tabstop>
+  <tabstop>wavLineAlphaEntry</tabstop>
+  <tabstop>wavLineZEntry</tabstop>
+  <tabstop>wavLineWidthEntry</tabstop>
+  <tabstop>wavLineStyleCombo</tabstop>
+  <tabstop>wavLineColorCombo</tabstop>
+  <tabstop>majorTicksDirectionCombo</tabstop>
+  <tabstop>majorTicksSizeEntry</tabstop>
+  <tabstop>majorTicksWidthEntry</tabstop>
+  <tabstop>majorTicksColorCombo</tabstop>
+  <tabstop>minorTicksDirectionCombo</tabstop>
+  <tabstop>minorTicksColorCombo</tabstop>
+  <tabstop>minorTicksWidthEntry</tabstop>
+  <tabstop>minorTicksSizeEntry</tabstop>
+  <tabstop>pb76LineStyleCombo</tabstop>
+  <tabstop>pb76LineAlphaEntry</tabstop>
+  <tabstop>pb76LineColorCombo</tabstop>
+  <tabstop>pb76LineZEntry</tabstop>
+  <tabstop>pb76LineWidthEntry</tabstop>
+  <tabstop>scatterPlotMarkerEdgeColorCombo</tabstop>
+  <tabstop>scatterPlotMarkerTypeCombo</tabstop>
+  <tabstop>scatterPlorMarkerSizeEntry</tabstop>
+  <tabstop>scatterPlotMarkerFaceColorCombo</tabstop>
+  <tabstop>scatterPlotMarkerAlphaEntry</tabstop>
+  <tabstop>scatterPlotMarkerEdgeWidthEntry</tabstop>
+  <tabstop>scatterPlotMarkerZEntry</tabstop>
+  <tabstop>histogramFillColorCombo</tabstop>
+  <tabstop>histogramEdgeColorCombo</tabstop>
+  <tabstop>histogramAlphaEntry</tabstop>
+  <tabstop>histogramLineWidthEntry</tabstop>
+  <tabstop>histogramHistTypeCombo</tabstop>
+  <tabstop>regressionLineAlphaEntry</tabstop>
+  <tabstop>regressionLineZEntry</tabstop>
+  <tabstop>regressionLineWidthEntry</tabstop>
+  <tabstop>regressionLineStyleCombo</tabstop>
+  <tabstop>regressionLineColorCombo</tabstop>
+  <tabstop>interceptEllipseZEntry</tabstop>
+  <tabstop>interceptEllipseEdgeWidthEntry</tabstop>
+  <tabstop>interceptEllipseAlphaEntry</tabstop>
+  <tabstop>interceptEllipseFillColorCombo</tabstop>
+  <tabstop>interceptEllipseEdgeColorCombo</tabstop>
+  <tabstop>ellipseEdgeColorCombo</tabstop>
+  <tabstop>ellipseFillColorCombo</tabstop>
+  <tabstop>ellipseEdgeWidthEntry</tabstop>
+  <tabstop>ellipseAlphaEntry</tabstop>
+  <tabstop>ellipseZEntry</tabstop>
+  <tabstop>wavMarkerFaceColorCombo</tabstop>
+  <tabstop>wavMarkerAlphaEntry</tabstop>
+  <tabstop>wavMarkerZEntry</tabstop>
+  <tabstop>wavMarkerWidthEntry</tabstop>
+  <tabstop>mcMarkerEdgeColorCombo</tabstop>
+  <tabstop>mcMarkerFaceColorCombo</tabstop>
+  <tabstop>mcMarkerTypeCombo</tabstop>
+  <tabstop>mcMarkerAlphaEntry</tabstop>
+  <tabstop>mcMarkerSizeEntry</tabstop>
+  <tabstop>mcMarkerEdgeWidthEntry</tabstop>
+  <tabstop>mcMarkerZEntry</tabstop>
+  <tabstop>wavEnvZEntry</tabstop>
+  <tabstop>wavEnvFaceColorCombo</tabstop>
+  <tabstop>wavEnvLineWidthEntry</tabstop>
+  <tabstop>wavRandMarkerFaceColorCombo</tabstop>
+  <tabstop>wavRandMarkerAlphaEntry</tabstop>
+  <tabstop>wavRandMarkerZEntry</tabstop>
+  <tabstop>concEnvZEntry</tabstop>
+  <tabstop>concEnvFaceColorCombo</tabstop>
+  <tabstop>concEnvEdgeColorCombo</tabstop>
+  <tabstop>concEnvAlphaEntry</tabstop>
+  <tabstop>concEnvLineWidthEntry</tabstop>
+  <tabstop>concEnvLineStyleCombo</tabstop>
+  <tabstop>majorGridlinesStyleCombo</tabstop>
+  <tabstop>wavEnvEdgeColorCombo</tabstop>
+  <tabstop>wavEnvAlphaEntry</tabstop>
+  <tabstop>wavEnvLineStyleCombo</tabstop>
+  <tabstop>concLineStyleCombo</tabstop>
+  <tabstop>concLineAlphaEntry</tabstop>
+  <tabstop>concLineColorCombo</tabstop>
+  <tabstop>concLineZEntry</tabstop>
+  <tabstop>concLineWidthEntry</tabstop>
+  <tabstop>regressionEnvelopeZEntry</tabstop>
+  <tabstop>regressionEnvelopeFaceColorCombo</tabstop>
+  <tabstop>regressionEnvelopeLineColorCombo</tabstop>
+  <tabstop>regressionEnvelopeAlphaEntry</tabstop>
+  <tabstop>regressionEnvelopeLineWidthEntry</tabstop>
+  <tabstop>regressionEnvelopeLineStyleCombo</tabstop>
+  <tabstop>dpLabelXoffsetEntry</tabstop>
+  <tabstop>dpLabelFontColorCombo</tabstop>
+  <tabstop>dpLabelFontSizeCombo</tabstop>
+  <tabstop>dpLabelHAlignmentCombo</tabstop>
+  <tabstop>dpLabelVAlignmentCombo</tabstop>
+  <tabstop>fontWeightCombo</tabstop>
+  <tabstop>fontCombo</tabstop>
+  <tabstop>dictTable</tabstop>
+  <tabstop>PushButton_2</tabstop>
+  <tabstop>concLabelFontColorCombo</tabstop>
+  <tabstop>doneButton</tabstop>
+  <tabstop>wavRandMarkerWidthEntry</tabstop>
+  <tabstop>majorGridlinesWidthEntry</tabstop>
+  <tabstop>majorGridlinesAlphaEntry</tabstop>
+  <tabstop>dpLabelZEntry</tabstop>
+  <tabstop>dpLabelTextCoordsCombo</tabstop>
+  <tabstop>concLabelZEntry</tabstop>
+  <tabstop>concLabelTextCoordsCombo</tabstop>
+  <tabstop>majorGridlinesColorCombo</tabstop>
+  <tabstop>lineEdit_9</tabstop>
+  <tabstop>lineEdit_10</tabstop>
+  <tabstop>dpLabelYoffsetEntry</tabstop>
+  <tabstop>concLabelYoffsetEntry</tabstop>
+  <tabstop>figBorderColorCombo</tabstop>
+  <tabstop>concEnvLineColorCombo</tabstop>
+  <tabstop>concEnvLineLineWidthEntry</tabstop>
+  <tabstop>concEnvLineLineStyleCombo</tabstop>
+  <tabstop>concEnvLineZEntry</tabstop>
+  <tabstop>concEnvLineAlphaEntry</tabstop>
+  <tabstop>regressionEnvLineColorCombo</tabstop>
+  <tabstop>regressionEnvLineLineStyleCombo</tabstop>
+  <tabstop>regressionEnvLineLineWidthEntry</tabstop>
+  <tabstop>regressionEnvLineZEntry</tabstop>
+  <tabstop>regressionEnvLineAlphaEntry</tabstop>
+  <tabstop>figBackgroundColorCombo</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
