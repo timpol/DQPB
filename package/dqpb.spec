@@ -45,20 +45,17 @@ datas = [
 hiddenimports = []
 
 # Needed to ensure savefigure command works properly on Windows.
-# hooksconfig = {
-#                   "matplotlib": {
-#                       # "backends": "auto",  # auto-detect; the default behavior
-#                       # "backends": "all",  # collect all backends
-#                       # "backends": "TkAgg",  # collect a specific backend
-#                       "backends": '["Agg", "pdf", "pgf", "svg", "ps"]',  # collect multiple backends
-#                   },
-#               }
-# not ideal, but specifying list causes TypeError bug?
-hooksconfig={
-    "matplotlib": {
-        "backends": "all"
-    }
-}
+hooksconfig = {
+                  "matplotlib": {
+                      "backends": ["Agg", "pdf", "pgf", "svg", "ps"],
+                  },
+              }
+# version 5.4.1 has bug that precludes use of list, so just include all.
+# hooksconfig={
+#     "matplotlib": {
+#         "backends": "all"
+#     }
+# }
 
 
 a = Analysis(
