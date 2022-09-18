@@ -4,7 +4,7 @@ Manage application settings.
 Code in this module is adapted from PyQtConfig written by Martin Fitzpatrick.
 see: https://github.com/pythonguis/pyqtconfig
 
-A copy of the PyQtConfig is available in the LICENSE-3RD-PARTY.md document
+A copy of the PyQtConfig license is available in the LICENSE-3RD-PARTY.md document
 distributed with the DQPB source code.
 
 """
