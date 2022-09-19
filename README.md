@@ -19,10 +19,10 @@ The functionality of DQPB is also available as part of a pure Python package for
 
 # Basic Installation
 
-The easiest way to install DQPB on macOS and Windows is to simply download the latest installer [here](https://github.com/timpol/DQPB-test/releases/latest). These installers provide a pre-built stand-alone version of the software, that does not require Python to be pre-installed.  
+The easiest way to install DQPB on macOS and Windows is to simply download the latest installer [here](https://github.com/timpol/DQPB/releases/latest). These installers provide a pre-built stand-alone version of the software, that does not require Python to be pre-installed.  
 
 ## Mac
-1. Download the Mac .dmg [installer](https://github.com/timpol/DQPB-test/releases/latest)
+1. Download the Mac .dmg [installer](https://github.com/timpol/DQPB/releases/latest)
 2. Open the .dmg and drag the DQPB icon into your Applications folder to install the software.
 3. Navigate to your Applications folder.
 4. Right-click on the icon and select "Open" to launch the Application for the first time.
@@ -34,7 +34,7 @@ The easiest way to install DQPB on macOS and Windows is to simply download the l
 
 ## Windows
 
-1. Download the Windows .exe [installer](https://github.com/timpol/DQPB-test/releases/latest).
+1. Download the Windows .exe [installer](https://github.com/timpol/DQPB/releases/latest).
 2. Launch the installer and follow the usual steps to install the software.
 3. When opening the installer, a Windows Defender warning may pop up informing you that this is an "unrecognized" app. DQPB is open-source software distributed free of charge so we have opted not to pay fees to Microsoft or other third-parties in order to codesign the application. Therefore, this warning cannot be avoided. If this happens, click the "More info" link, then click "Run anway".
 4. The application can now be launched from the start menu. If for some reason the icon does not appear, go to the installation directory (usually C:\Program Files\DQPB\) and double-click the DQPB.exe icon.
@@ -45,7 +45,7 @@ DQPB will also soon be available for installation via pip (Python's package mana
 
 # Usage 
 
-See the pdf user guide [here](https://github.com/timpol/DQPB-test/blob/main/docs/DQPB-v0.0.1-user-guide.pdf) to get started. 
+See the pdf user guide [here](https://github.com/timpol/DQPB/blob/main/docs/DQPB-v0.0.1-user-guide.pdf) to get started. 
 
 Complete online documentation will
 be available soon...
