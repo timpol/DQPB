@@ -90,8 +90,8 @@ SHORT_FITS = {
     "Model 1": "c1",
     "Model 2": "c2",
     "Model 3": "c3",
-    "classical wav.": "ca",
-    "Spine wav.": "rs",
+    # "classical wav.": "ca",
+    # "Spine wav.": "rs",
     "no fit": None}
 REGRESSION_FITS = [
     # "robust",
@@ -103,8 +103,10 @@ REGRESSION_FITS = [
     "Model 3"
 ]
 WAV_FITS = [
-    "Spine wav.",
-    "classical wav."
+    "Spine",
+    "classical"
+    # "Spine wav.",
+    # "classical wav."
 ]    # 'none' added later where relevant
 
 # Invert combo box data
