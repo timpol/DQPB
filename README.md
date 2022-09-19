@@ -27,16 +27,16 @@ The easiest way to install DQPB on macOS and Windows is to simply download the l
 3. Navigate to your Applications folder.
 4. Right-click on the icon and select "Open" to launch the Application for the first time.
 
-**Note** the application will not launch if you double-click on the icon the first time you try to open it. You must right-click and select "Open". 
+**Note**: the application may not launch if you double-click on the icon the first time you try to open it. Instead, you should right-click and select "Open". 
 
-4. A security message may pop up telling you that this file is from an “unknown developer” and asking if you wish to continue. DQPB is open-source software distributed free of charge so we have opted not to pay fees to Apple to codesign the application. Therefore, this warning cannot be avoided.
+4. A security message may pop up telling you that this file is from an “unknown developer” and asking if you wish to continue. DQPB is open-source software distributed free of charge so we have opted not to pay fees to Apple to codesign the application, and so this warning cannot be avoided.
 5. When running DQPB for the first time, you will probably be asked to give permission to DQPB to "control Excel". You must click OK, otherwise DQPB will not be able to read data from Excel and the application will not function.
 
 ## Windows
 
 1. Download the Windows .exe [installer](https://github.com/timpol/DQPB-test/releases/latest).
 2. Launch the installer and follow the usual steps to install the software.
-3. When opening the installer, a Windows Defender warning may pop up informing you that this is an "unrecognized" app. DQPB is open-source software distributed free of charge so we have opted not to pay fees to Microsoft or other third-parties in order to codesign the application. Therefore, this warning cannot be avoided. Click the "More info" link, then click "Run anway".
+3. When opening the installer, a Windows Defender warning may pop up informing you that this is an "unrecognized" app. DQPB is open-source software distributed free of charge so we have opted not to pay fees to Microsoft or other third-parties in order to codesign the application. Therefore, this warning cannot be avoided. If this happens, click the "More info" link, then click "Run anway".
 4. The application can now be launched from the start menu. If for some reason the icon does not appear, go to the installation directory (usually C:\Program Files\DQPB\) and double-click the DQPB.exe icon.
 
 ## Advanced Installation Methods 
