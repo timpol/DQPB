@@ -39,7 +39,7 @@ def plot_data(task):
         opts_frame = spreadsheet.PrintFrame()
         task.printer.stack_frame(opts_frame, yorder=999)
         opts = []
-        opts += ['task: %s' % 'Data plot']
+        opts += ['task: %s' % 'x-y plot']
         opts += [f'assume initial eq.: {task.eq}']
         opts += [f'regression algorithm: {combo.LONG_FITS[task.fit]}']
         if task.fit.startswith('sp'):
@@ -1170,9 +1170,9 @@ def append_arv(opts, task_obj, series='both', fcA48i=False):
         types = [task_obj.A48_type, task_obj.A08_type]
         if fcA48i:
              ar[0] = err[0] = types[0] = 'n/a'
-        opts.append(f'[234U/238], [230Th/238U], [226Ra/238U]: {tuple(ar)}')
-        opts.append(f'[X/238] 1σ errors: {tuple(err)}')
-        opts.append(f"[234U/238], [230Th/238U] types: (" + "".join(['initial '
+        opts.append(f'[234U/238U], [230Th/238U], [226Ra/238U]: {tuple(ar)}')
+        opts.append(f'[X/238U] 1σ errors: {tuple(err)}')
+        opts.append(f"[234U/238U], [230Th/238U] types: (" + "".join(['initial '
                     if x == 'initial' else 'present ' for x in list(types)]) + ")")
     if series in ('[231Pa/235U]', 'both'):
         opts.append('[231Pa/235U]: %s' % task_obj.A15)
