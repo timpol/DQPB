@@ -358,7 +358,7 @@ class MainWindow(QMainWindow):
         else:
             self.fitCombo.addItems(WAV_FITS)
             if 'Pb/U ages' in task:
-                self.fitCombo.addItems(['none'])
+                self.fitCombo.addItems(['no fit'])
 
     def setCovOpts(self):
         task = self.taskCombo.currentText()
@@ -645,7 +645,6 @@ class MainWindow(QMainWindow):
                 # show forced-concordance dp selecion dialogue:
                 if not self.fcDialog.exec():
                     raise InputError()      # return to main window
-            if task == 'forced_concordance':
                 # check each data selection
                 self.dp_iso86 = validateSelection(self, self.fcDialog.iso86_dp, 'iso-Pb6U8',
                                     data_name='data points', shape=None,
@@ -665,9 +664,13 @@ class MainWindow(QMainWindow):
                 if not self.selectLabelsWindow.exec():
                     raise InputError('task cancelled')
                 self.dp_labels = self.selectLabelsWindow.data
+                if task == 'forced_concordance':
+                    dp_shape = (self.dp_iso86.shape[0],)
+                else:
+                    dp_shape = (self.dp.shape[0],)
                 validateSelection(self, self.dp_labels, 'dp_labels',
                                   data_name='data point labels',
-                                  check_dp_errors=False, shape=(self.dp.shape[0],),
+                                  check_dp_errors=False, shape=dp_shape,
                                   dtype=str)
             # reset to None so labels aren't recycled for next task:
             else:
@@ -807,7 +810,8 @@ def validateSelection(main, data, array_type, data_name='data point',
         main.inputError('Data selection error', f'Could not load {data_name} into '
                        f'numeric array of type {dtype}. Check all elements are '
                        f'of appropriate data type.')
-    if data.ndim == 0:
+    if data.ndim == 0 and array_type in \
+            ("tw", "wc", "mod-207Pb", "iso-Pb7U5", "iso-Pb6U8"):
         main.inputError("Data selection error", f"Date point selection must "
                     f"include more than one cell.")
 
