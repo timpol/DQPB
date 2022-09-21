@@ -45,7 +45,7 @@ DQPB will also soon be available for installation via pip (Python's package mana
 
 # Usage 
 
-See the pdf user guide [here](https://github.com/timpol/DQPB/blob/main/docs/DQPB-v0.0.1-user-guide.pdf) to get started. 
+See the pdf user guide [here](https://github.com/timpol/DQPB/blob/main/docs/DQPB-v0.1.0-user-guide.pdf) to get started. 
 
 Complete online documentation will
 be available soon...
