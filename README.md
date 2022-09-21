@@ -1,5 +1,7 @@
 # DQPB
 
+[![license](https://img.shields.io/github/license/timpol/pysoplot.svg)](https://github.com/timpol/pysoplot/blob/master/LICENSE.txt)
+
 **DQPB** is a GUI application for geochronology that focuses on calculating disequilibrium U-Pb ages and plotting results, although it can also be used for computing standard equilibrium U-Pb ages, performing linear regression and computing weighted averages.  The software allows isotopic data to be read directly from open Microsoft Excel spreadsheets, and results (both graphical and numerical) printed back to the same sheet once computations are completed. In this way, it aims to emulate the ease of use of Ken Ludwig’s popular Isoplot/Ex program. The program is distributed on Windows and macOS as a stand-alone application and does not require a pre-existing Python installation to run.
 
 DQPB can be used to:
@@ -13,9 +15,9 @@ DQPB can be used to:
 *	Compute weighted averages that optionally account for error covariances using both classical and robust algorithms
 *	Plot disequilibrium concordia curves on Tera-Wasserburg diagrams, accounting for different states of initial or present disequilibrium.
 
-The functionality of DQPB is also available as part of a pure Python package for more experienced Python users. For this version, see: https://www.github.com/timpol/pysoplot.
-
 ![Example](/resources/Screenshot.png)
+
+The functionality of DQPB is also available as part of a pure Python package for more experienced Python users. For this version, see: https://www.github.com/timpol/pysoplot.
 
 # Basic Installation
 
