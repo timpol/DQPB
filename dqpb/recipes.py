@@ -133,7 +133,8 @@ def plot_data(task):
     if task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(fig, task.fig_export_dir,
-                                      fname="X-y plot")
+                                      fname="X-y plot",
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
 
     # print results to spread sheet
@@ -415,11 +416,13 @@ def diagram_age(task):
     if task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(fig_dpp, task.fig_export_dir,
-                                      fname="Isochron plot")
+                                      fname="Isochron plot",
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
         if task.concordia_intercept and task.show_int_plot:
             path = util.save_plot_to_disk(fig_int, task.fig_export_dir,
-                                          fname='Concordia-intercept plot')
+                                          fname='Concordia-intercept plot',
+                                          file_ext='.'+task.fig_extension)
             logger.info(f"concordia-intercept plot saved to: '{path}.{task.fig_extension}'")
 
     # print results to spread sheet
@@ -487,7 +490,9 @@ def wav_other(task):
 
     if task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
-        path = util.save_plot_to_disk(fig, task.fig_export_dir, fname="Wtd average")
+        path = util.save_plot_to_disk(fig, task.fig_export_dir,
+                                      fname="Wtd average",
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"wtd. average plot saved to: '{path}.{task.fig_extension}'")
 
     # print results to spread sheet:
@@ -641,7 +646,7 @@ def pbu_age(task):
                               add_line_sep=False)
         task.printer.stack_frame(print_frame)
 
-        if task.show_wav_plot:
+        if wav and task.show_wav_plot:
             results, formats = results_for_wav(diseqAges['wav'], age=True)
             print_frame.add_table(results,
                                   title=f'Weighted average '
@@ -697,7 +702,8 @@ def pbu_age(task):
     if task.data_type.startswith('mod') and task.dp_plot and task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(fig_dp, task.fig_export_dir,
-                                      fname="Mod 207Pb data plot")
+                                      fname="Mod 207Pb data plot",
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
 
     # print results
@@ -748,10 +754,10 @@ def forced_concordance(task):
     task.update_progress(25, "Fitting regression models... ")
     if task.fit_iso57.startswith('c'):
         fit57 = regression.classical_fit(*dp57, model=task.fit_iso57, plot=True,
-                                         diagram='iso-Pb7U5')
+                                         diagram='iso-Pb7U5', dp_labels=task.dp_labels)
     else:
         fit57 = regression.robust_fit(*dp57, model=task.fit_iso57, plot=True,
-                                      diagram='iso-Pb7U5')
+                                      diagram='iso-Pb7U5', dp_labels=task.dp_labels)
 
     fig_iso57 = fit57['fig']
     results, formats = results_for_fit(fit57)
@@ -762,10 +768,10 @@ def forced_concordance(task):
     # iso-Pb6U8 regression
     if task.fit_iso86.startswith('c'):
         fit86 = regression.classical_fit(*dp57, model=task.fit_iso57, plot=True,
-                                         diagram='iso-Pb6U8')
+                                         diagram='iso-Pb6U8', dp_labels=task.dp_labels)
     else:
         fit86 = regression.robust_fit(*dp86, model=task.fit_iso86, plot=True,
-                                      diagram='iso-Pb6U8')
+                                      diagram='iso-Pb6U8', dp_labels=task.dp_labels)
     fig_iso86 = fit86['fig']
     results, formats = results_for_fit(fit86)
     print_frame.add_table(results, title='238U-206Pb regression:',
@@ -835,10 +841,12 @@ def forced_concordance(task):
     if task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(fig_iso57, task.fig_export_dir,
-                                      fname='235U-207Pb isochron plot')
+                                      fname='235U-207Pb isochron plot',
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"235U-207Pb isochron plot saved to: '{path}.{task.fig_extension}'")
         path = util.save_plot_to_disk(fig_iso86, task.fig_export_dir,
-                                      fname="238U-206Pb isochron plot")
+                                      fname="238U-206Pb isochron plot",
+                                      file_ext='.'+task.fig_extension)
         logger.info(f"238U-206Pb isochron plot saved to: '{path}.{task.fig_extension}'")
 
     # print results to spread sheet
