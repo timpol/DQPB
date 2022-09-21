@@ -22,20 +22,17 @@ def fixedFont():
     return font
 
 
-def save_plot_to_disk(fig, dir, fname='Plot', overwrite=False):
+def save_plot_to_disk(fig, dir, fname='Plot', file_ext='', overwrite=False):
     """
-    Notes
-    -----
-    Figure file extension set in rcParams.
     """
     if dir == '':
         dir = os.path.expanduser("~/Desktop/DQPB/Figures/")
-    path = get_save_path(dir, fname, overwrite=overwrite)
+    path = get_save_path(dir, fname, file_ext, overwrite=overwrite)
     fig.savefig(path, bbox_inches='tight')
     return path
 
 
-def get_save_path(dirname, fname, overwrite=False):
+def get_save_path(dirname, fname, file_ext, overwrite=False):
     """ """
     try:
         os.makedirs(dirname)
@@ -48,7 +45,7 @@ def get_save_path(dirname, fname, overwrite=False):
         index = ""
         file_exists = True
         while file_exists is True:
-            path = os.path.join(dirname, fname + index)
+            path = os.path.join(dirname, fname + index + file_ext)
             if os.path.isfile(path):
                 if index:
                     # append 1 to number in brackets:
