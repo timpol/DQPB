@@ -422,7 +422,7 @@ def print_plot_data(ax, sheet_name='Plot data', header='Isochron plot data',
             concordia_label_txt.append(ch.get_text())
             concordia_label_x.append(ch.xy[0])
             concordia_label_y.append(ch.xy[1])
-        elif ch.get_label() == 'intercept marker':
+        elif ch.get_label() == 'intercept markers':
             d["intercept marker, x"] = ch.get_data()[0]
             d["intercept marker, y"] = ch.get_data()[1]
 
