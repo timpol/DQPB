@@ -42,9 +42,10 @@ def plot_data(task):
         opts += ['task: %s' % 'x-y plot']
         opts += [f'assume initial eq.: {task.eq}']
         opts += [f'regression algorithm: {combo.LONG_FITS[task.fit]}']
-        if task.fit.startswith('sp'):
-            # Spines model
-            opts += [f'Spines h-value: {cfg.h}']
+        if task.fit is not None:
+            if task.fit.startswith('sp'):
+                # Spines model
+                opts += [f'Spines h-value: {cfg.h}']
         if task.data_type in ('tw', 'wc'):
             if not task.eq:
                 append_arv(opts, task, series='both', fcA48i=False)
@@ -63,19 +64,9 @@ def plot_data(task):
     print_frame = spreadsheet.PrintFrame()
     task.printer.stack_frame(print_frame)
 
+    # plot data points
     dp = np.array(task.dp, dtype=np.double)
     dp = transform.dp_errors(dp, in_error_type=task.error_type, row_wise=True)
-
-    # fit regression
-    if task.fit.startswith('c'):
-        fit = regression.classical_fit(*dp, model=task.fit, isochron=False,
-                                       plot=False)
-    else:
-        fit = regression.robust_fit(*dp, model=task.fit, plot=False)
-
-    results, formats = results_for_fit(fit)
-    print_frame.add_table(results, title='Linear regression results:',
-                          formats=formats)
 
     task.update_progress(25, "Plotting data... ")
 
@@ -83,7 +74,22 @@ def plot_data(task):
     ax = fig.get_axes()[0]
     plotting.set_axis_limits(ax, xmin=task.dpp_xmin, xmax=task.dpp_xmax,
                              ymin=task.dpp_ymin, ymax=task.dpp_ymax)
-    plotting.plot_rfit(ax, fit)
+
+    # fit regression
+    if task.fit is not None:
+        set_plot_config(task, plot_type='data_point')
+        if task.fit.startswith('c'):
+            fit = regression.classical_fit(*dp, model=task.fit, isochron=False,
+                        plot=False, diagram=task.data_type)
+        else:
+            fit = regression.robust_fit(*dp, model=task.fit, plot=False,
+                        diagram=task.data_type)
+
+        results, formats = results_for_fit(fit)
+        print_frame.add_table(results, title='Linear regression results:',
+                              formats=formats)
+        plotting.plot_rfit(ax, fit)
+
     plotting.apply_plot_settings(
         fig, diagram=task.data_type,
         xlim=(task.dpp_xmin, task.dpp_xmax),
@@ -92,6 +98,7 @@ def plot_data(task):
         norm_isotope=task.norm_isotope
     )
 
+    # plot concordia
     if task.dpp_plot_concordia and task.data_type == 'tw':
         if task.eq:
             concordia.plot_concordia(
@@ -141,6 +148,9 @@ def plot_data(task):
     task.update_progress(75, "Printing results to spreadsheet...")
     task.printer.flush_stack()
 
+    if task.output_plot_data:
+        logger.warning('output plot data option not yet implemented for '
+                       'weighted average plots')
 
 # ==========================================================================
 # Compute isochron / concordia-intercept age
@@ -389,8 +399,6 @@ def diagram_age(task):
                 if hist in diseqAge['mc'].keys():
                     task.printer.stack_figure(diseqAge['mc'][hist], yorder=3)
 
-
-
     # Output plot data to spreadsheet:
     if task.output_plot_data:
         ws_plot_data, next_col = \
@@ -483,7 +491,8 @@ def wav_other(task):
         if cov is not None:
             sx = np.sqrt(np.diag(cov))
         fig = plotting.wav_plot(x, 2. * sx, wav['ave'], wav['ave_95pm'],
-                        sorted=task.wav_sort_ages, dp_labels=task.dp_labels)
+                        sorted=task.wav_sort_ages, dp_labels=task.dp_labels,
+                        ylim=(task.wav_ymin, task.wav_ymax))
         ax = fig.get_axes()[0]
         ax.set_ylabel(task.y_label)
         task.printer.stack_figure(fig, yorder=2)
@@ -500,7 +509,7 @@ def wav_other(task):
     task.printer.flush_stack()
 
     if task.output_plot_data:
-        logger.warn('output plot data option not yet available for weighted '
+        logger.warning('output plot data option not yet available for weighted '
                     'average plots')
 
 
@@ -578,7 +587,7 @@ def pbu_age(task):
 
     task.update_progress(25, 'Computing ages and errors...')
 
-    set_plot_config(task, plot_type='histogram')
+    set_plot_config(task, plot_type='wav')
 
     if task.eq:
         raise ValueError('Equilibrium Pb/U and modified 207Pb age calculations '
@@ -652,8 +661,8 @@ def pbu_age(task):
                                   title=f'Weighted average '
                                         f'{combo.LONG_DATA_TYPES[task.data_type]} age:',
                                   formats=formats)
-            fig = diseqAges['fig_wav']
-            task.printer.stack_figure(fig, yorder=2)
+            fig_wav = diseqAges['fig_wav']
+            task.printer.stack_figure(fig_wav, yorder=2)
 
         # plot data points
         if task.data_type.startswith('mod') and task.dp_plot:
@@ -684,27 +693,39 @@ def pbu_age(task):
                     remove_overlaps=task.int_avoid_label_overlaps,
                     negative_ar=not task.mc_rnar
                 )
-        plotting.plot_mod207_projection(ax, *dp, task.Pb76)
-        task.printer.stack_figure(fig_dp, yorder=3)
+            plotting.plot_mod207_projection(ax, *dp, task.Pb76)
+            task.printer.stack_figure(fig_dp, yorder=3)
+
+            if task.output_plot_data:
+                spreadsheet.print_plot_data(
+                    fig_dp.get_axes()[0],
+                    sheet_name='Plot data',
+                    header='Mod. 207Pb data point plot',
+                    ws_main=task.ws, next_col=1,
+                    labels=task.dp_labels
+                )
 
     if task.output_plot_data:
         logger.warning('output plot data option not yet available for weighted '
                        'average plots')
-        spreadsheet.print_plot_data(
-            fig_dp.get_axes()[0],
-            sheet_name='Plot data',
-            header='Mod. 207Pb data point plot',
-            ws_main=task.ws, next_col=1,
-            labels=task.dp_labels
-        )
 
     # Save plots to disk:
     if task.data_type.startswith('mod') and task.dp_plot and task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
-        path = util.save_plot_to_disk(fig_dp, task.fig_export_dir,
-                                      fname="Mod 207Pb data plot",
-                                      file_ext='.'+task.fig_extension)
+        path = util.save_plot_to_disk(
+            fig_dp, task.fig_export_dir,
+            fname="Mod 207Pb data plot",
+            file_ext='.'+task.fig_extension
+        )
         logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
+    if wav and task.save_plots:
+        task.update_progress(60, "Saving plots to disk... ")
+        path = util.save_plot_to_disk(
+            fig_wav, task.fig_export_dir,
+            fname="Wtd average plot",
+            file_ext='.'+task.fig_extension
+        )
+        logger.info(f"wtd. average plot saved to: '{path}.{task.fig_extension}'")
 
     # print results
     task.update_progress(75, 'Printing results to sheet...')
@@ -725,8 +746,8 @@ def forced_concordance(task):
         task.printer.stack_frame(opts_frame, yorder=999)
         opts = []
         opts += ['task: forced-concordance [234U/238U]i']
-        opts += [f'regression algorithms: {combo.LONG_FITS[task.fit_iso57]}, \
-                                    {combo.LONG_FITS[task.fit_iso86]}']
+        opts += [f'Pb7U5 regression algorithm: {combo.LONG_FITS[task.fit_iso57]}']
+        opts += [f'Pb6U8 regression algorithm: {combo.LONG_FITS[task.fit_iso86]}']
         if task.fit_iso57.startswith('rs') or task.fit_iso86.startswith('rs'):
             opts += ['Spines h-value: %s' % task.spines_h]
         opts += ['normalising isotope: %s' % task.norm_isotope]
@@ -754,32 +775,37 @@ def forced_concordance(task):
     task.update_progress(25, "Fitting regression models... ")
     if task.fit_iso57.startswith('c'):
         fit57 = regression.classical_fit(*dp57, model=task.fit_iso57, plot=True,
-                                         diagram='iso-Pb7U5', dp_labels=task.dp_labels)
+                    diagram='iso-Pb7U5', dp_labels=task.dp_labels,
+                    norm_isotope=task.norm_isotope)
     else:
         fit57 = regression.robust_fit(*dp57, model=task.fit_iso57, plot=True,
-                                      diagram='iso-Pb7U5', dp_labels=task.dp_labels)
+                    diagram='iso-Pb7U5', dp_labels=task.dp_labels,
+                    norm_isotope=task.norm_isotope)
 
     fig_iso57 = fit57['fig']
     results, formats = results_for_fit(fit57)
-    print_frame.add_table(results, title='235U-207Pb regression:',
+    print_frame.add_table(results, title='235U-207Pb linear regression:',
                           formats=formats)
     task.printer.stack_figure(fig_iso57, yorder=2)
 
     # iso-Pb6U8 regression
     if task.fit_iso86.startswith('c'):
-        fit86 = regression.classical_fit(*dp57, model=task.fit_iso57, plot=True,
-                                         diagram='iso-Pb6U8', dp_labels=task.dp_labels)
+        fit86 = regression.classical_fit(*dp86, model=task.fit_iso86, plot=True,
+                    diagram='iso-Pb6U8', dp_labels=task.dp_labels,
+                    norm_isotope=task.norm_isotope)
     else:
         fit86 = regression.robust_fit(*dp86, model=task.fit_iso86, plot=True,
-                                      diagram='iso-Pb6U8', dp_labels=task.dp_labels)
+                    diagram='iso-Pb6U8', dp_labels=task.dp_labels,
+                    norm_isotope=task.norm_isotope)
     fig_iso86 = fit86['fig']
     results, formats = results_for_fit(fit86)
-    print_frame.add_table(results, title='238U-206Pb regression:',
+    print_frame.add_table(results, title='238U-206Pb linear regression:',
                           formats=formats)
 
     # print regression fit plots
     task.printer.stack_figure(fig_iso86, yorder=2)
 
+    task.update_progress(50, "Computing [234U/238]i and uncertainty... ")
     # calculate "concordant" 234U/238U activity ratio and age
     if task.eq_guess:
         eqAge = upb.isochron_age(fit57, age_type='iso-Pb7U5')
@@ -817,6 +843,22 @@ def forced_concordance(task):
         plotting.apply_plot_settings(fig, plot_type='hist')
         task.printer.stack_figure(fig, yorder=2)
 
+    # Save plots to disk:
+    if task.save_plots:
+        task.update_progress(60, "Saving plots to disk... ")
+        path = util.save_plot_to_disk(fig_iso57, task.fig_export_dir,
+                                      fname='235U-207Pb isochron plot',
+                                      file_ext='.'+task.fig_extension)
+        logger.info(f"235U-207Pb isochron plot saved to: '{path}.{task.fig_extension}'")
+        path = util.save_plot_to_disk(fig_iso86, task.fig_export_dir,
+                                      fname="238U-206Pb isochron plot",
+                                      file_ext='.'+task.fig_extension)
+        logger.info(f"238U-206Pb isochron plot saved to: '{path}.{task.fig_extension}'")
+
+    # print results to spread sheet
+    task.update_progress(75, "Printing results to spreadsheet...")
+    task.printer.flush_stack()
+
     # Output plot data to spreadsheet:
     if task.output_plot_data:
         ws_plot_data, next_col = \
@@ -836,22 +878,6 @@ def forced_concordance(task):
             next_col=next_col,
             labels=task.dp_labels
         )
-
-    # Save plots to disk:
-    if task.save_plots:
-        task.update_progress(60, "Saving plots to disk... ")
-        path = util.save_plot_to_disk(fig_iso57, task.fig_export_dir,
-                                      fname='235U-207Pb isochron plot',
-                                      file_ext='.'+task.fig_extension)
-        logger.info(f"235U-207Pb isochron plot saved to: '{path}.{task.fig_extension}'")
-        path = util.save_plot_to_disk(fig_iso86, task.fig_export_dir,
-                                      fname="238U-206Pb isochron plot",
-                                      file_ext='.'+task.fig_extension)
-        logger.info(f"238U-206Pb isochron plot saved to: '{path}.{task.fig_extension}'")
-
-    # print results to spread sheet
-    task.update_progress(75, "Printing results to spreadsheet...")
-    task.printer.flush_stack()
 
 
 #==============================================================================
@@ -1371,6 +1397,7 @@ def set_dqpb_config(obj, plot_type='data_point'):
         'direction': obj.major_ticks_direction,
         'size': obj.major_ticks_size,
         'width': obj.major_ticks_width,
+        'zorder': obj.major_ticks_zorder
     }
 
     cfg.minor_ticks_kw = {
@@ -1378,6 +1405,7 @@ def set_dqpb_config(obj, plot_type='data_point'):
         'direction': obj.minor_ticks_direction,
         'size': obj.minor_ticks_size,
         'width': obj.minor_ticks_width,
+        'zorder': obj.minor_ticks_zorder
     }
 
     cfg.pb76_line_kw = {
