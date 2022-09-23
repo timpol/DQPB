@@ -16,7 +16,7 @@ import os
 import sys
 
 version = __version__
-debug = False
+debug = 0
 
 # https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
 def resourceAbsolutePath(relativePath):
