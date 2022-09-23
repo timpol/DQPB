@@ -293,11 +293,13 @@ GuiSettingsMap = {
     'major_ticks_direction':      {'default': 'in',        'widget': 'majorTicksDirectionCombo'},
     'major_ticks_size':           {'default': '4',         'widget': 'majorTicksSizeEntry'},
     'major_ticks_width':          {'default': '0.5',       'widget': 'majorTicksWidthEntry'},
+    'major_ticks_zorder':         {'default': 100,         'widget': 'majorTicksZorder'},
 
     'minor_ticks_color':          {'default': 'black',     'widget': 'minorTicksColorCombo'},
     'minor_ticks_direction':      {'default': 'in',        'widget': 'minorTicksDirectionCombo'},
     'minor_ticks_size':           {'default': '2',         'widget': 'minorTicksSizeEntry'},
     'minor_ticks_width':          {'default': '0.5',       'widget': 'minorTicksWidthEntry'},
+    'minor_ticks_zorder':         {'default': 100,         'widget': 'minorTicksZorder'},
 
     'pb76_line_alpha':            {'default': '0.50',      'widget': 'pb76LineAlphaEntry'},
     'pb76_line_color':            {'default': 'blue',      'widget': 'pb76LineColorCombo'},
