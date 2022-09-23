@@ -68,7 +68,7 @@
                <item>
                 <layout class="QGridLayout" name="gridLayout">
                  <item row="4" column="0">
-                  <widget class="QCheckBox" name="dppComSepThousandOpt">
+                  <widget class="QCheckBox" name="dppComSepOpt">
                    <property name="text">
                     <string>comma separated thousands</string>
                    </property>
@@ -454,7 +454,7 @@
                   </widget>
                  </item>
                  <item row="4" column="0">
-                  <widget class="QCheckBox" name="intComSepThousandOpt">
+                  <widget class="QCheckBox" name="intComSepOpt">
                    <property name="text">
                     <string>comma separated thousands</string>
                    </property>
@@ -788,7 +788,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>429</width>
+             <width>250</width>
              <height>468</height>
             </rect>
            </property>
@@ -1033,8 +1033,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>445</width>
-             <height>431</height>
+             <width>244</width>
+             <height>413</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_30">
