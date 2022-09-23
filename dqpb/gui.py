@@ -601,7 +601,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(message, 3000)
 
     def showErrorDialog(self, icon=QMessageBox.Warning, text="text",
-                          informative_text=None):
+                        informative_text=None, return_to_main=True):
         """Show error dialog.
         """
         dialog = QMessageBox(parent=self)
@@ -611,7 +611,8 @@ class MainWindow(QMainWindow):
             dialog.setInformativeText(informative_text)
         dialog.setStandardButtons(QMessageBox.Ok)
         dialog.exec()
-        self.show()
+        if return_to_main:
+            self.show()
 
     def inputError(self, text, informative_text):
         """Show error dialog then raise InputError
@@ -721,7 +722,14 @@ class MainWindow(QMainWindow):
                 self.y_label = self.axisLabelsDialog.y_label
             # Show axis limits dialog.
             if not self.autoscaleOpt.isChecked():
-                self.axisLimsDialog.exec()
+                if task == 'forced_concordance':
+                    msg = 'User set axis limits are not yet implemented for ' \
+                          'concordant [234U/238U]i routine. Axis limits will be ' \
+                          'autoscaled.'
+                    self.showErrorDialog(text='Please Note:',
+                            informative_text=msg, return_to_main=False)
+                else:
+                    self.axisLimsDialog.exec()
             # Get output address.
             if task == "forced_concordance":
                 self.outputAddressDialog.setDefault(self.fcDialog.iso86_range.offset(
@@ -832,12 +840,12 @@ def validateSelection(main, data, array_type, data_name='data point',
             main.inputError('Data selection error',
                             f"4 or 5 columns must be included in a for a "
                             f"{array_type} selection.")
-    elif array_type in ("Pb6U8", "Pb7U5", "other"):
-        if main.covOpt.isChecked():
-            if data.ndim != 1:
-                main.inputError("Data selection error", f"Data point selection "
-                               f"must contain 1 column if inputting errors as covariance "
-                               f"matrix.")
+    elif array_type in ('other', 'Pb6U8', 'Pb7U5'):
+        if array_type == "other" and main.covOpt.isChecked():
+                if data.ndim != 1:
+                    main.inputError("Data selection error", f"Data point selection "
+                                   f"must contain 1 column if inputting errors as covariance "
+                                   f"matrix.")
         else:
             if data.ndim != 2 or data.shape[1] != 2:
                 # note: inputting errors as a covariance matrix not yet allowed...
@@ -1004,7 +1012,7 @@ def getTaskOpts(main, task, data_type):
                                        == "percent" else "abs"
     if opts['xl_cell_color'] == '':
         opts['xl_cell_color'] = None
-    if opts['rng_seed'].strip() == '':
+    if opts['rng_seed'] == '':
         opts['rng_seed'] = None
 
     return opts
