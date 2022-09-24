@@ -142,7 +142,7 @@ def plot_data(task):
         path = util.save_plot_to_disk(fig, task.fig_export_dir,
                                       fname="X-y plot",
                                       file_ext='.'+task.fig_extension)
-        logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"isochron plot saved to: '{path}'")
 
     # print results to spread sheet
     task.update_progress(75, "Printing results to spreadsheet...")
@@ -164,7 +164,7 @@ def diagram_age(task):
         opts = []
         opts += ['diagram: %s' % combo.LONG_DATA_TYPES[task.data_type]]
         opts += ['assume initial eq.: %s' % task.eq]
-        opts += ['regression algorithm: %s' % task.fit]
+        opts += ['regression algorithm: %s' % combo.LONG_FITS[task.fit]]
         if task.fit.startswith('sp'):
             opts += ['Spines h-value: %s' % task.spines_h]
         if task.data_type.startswith('iso'):
@@ -399,6 +399,23 @@ def diagram_age(task):
                 if hist in diseqAge['mc'].keys():
                     task.printer.stack_figure(diseqAge['mc'][hist], yorder=3)
 
+    # Save plots to disk:
+    if task.save_plots:
+        task.update_progress(60, "Saving plots to disk... ")
+        path = util.save_plot_to_disk(fig_dpp, task.fig_export_dir,
+                                      fname="Isochron plot",
+                                      file_ext='.'+task.fig_extension)
+        logger.info(f"isochron plot saved to: '{path}'")
+        if task.concordia_intercept and task.show_int_plot:
+            path = util.save_plot_to_disk(fig_int, task.fig_export_dir,
+                                          fname='Concordia-intercept plot',
+                                          file_ext='.'+task.fig_extension)
+            logger.info(f"concordia-intercept plot saved to: '{path}'")
+
+    # print results to spread sheet
+    task.update_progress(80, "Printing results to spreadsheet...")
+    task.printer.flush_stack()
+
     # Output plot data to spreadsheet:
     if task.output_plot_data:
         ws_plot_data, next_col = \
@@ -419,23 +436,6 @@ def diagram_age(task):
                 next_col=next_col,
                 labels=task.dp_labels
             )
-
-    # Save plots to disk:
-    if task.save_plots:
-        task.update_progress(60, "Saving plots to disk... ")
-        path = util.save_plot_to_disk(fig_dpp, task.fig_export_dir,
-                                      fname="Isochron plot",
-                                      file_ext='.'+task.fig_extension)
-        logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
-        if task.concordia_intercept and task.show_int_plot:
-            path = util.save_plot_to_disk(fig_int, task.fig_export_dir,
-                                          fname='Concordia-intercept plot',
-                                          file_ext='.'+task.fig_extension)
-            logger.info(f"concordia-intercept plot saved to: '{path}.{task.fig_extension}'")
-
-    # print results to spread sheet
-    task.update_progress(80, "Printing results to spreadsheet...")
-    task.printer.flush_stack()
 
 
 # =========================================================================
@@ -502,7 +502,7 @@ def wav_other(task):
         path = util.save_plot_to_disk(fig, task.fig_export_dir,
                                       fname="Wtd average",
                                       file_ext='.'+task.fig_extension)
-        logger.info(f"wtd. average plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"wtd. average plot saved to: '{path}'")
 
     # print results to spread sheet:
     task.update_progress(75, "Printing results to spreadsheet...")
@@ -622,7 +622,9 @@ def pbu_age(task):
                 cov=task.wav_cov,
                 ylim=(task.wav_ymin, task.wav_ymax),
                 wav_plot_prefix=task.wav_age_prefix,
-                dp_labels=task.dp_labels
+                dp_labels=task.dp_labels,
+                negative_ages = not task.mc_rnar,
+                negative_ar = not task.mc_rnages,
             )
         else:
             diseqAges = uxpb.dqpb.pbu_age(
@@ -717,7 +719,7 @@ def pbu_age(task):
             fname="Mod 207Pb data plot",
             file_ext='.'+task.fig_extension
         )
-        logger.info(f"isochron plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"isochron plot saved to: '{path}'")
     if wav and task.save_plots:
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(
@@ -725,7 +727,7 @@ def pbu_age(task):
             fname="Wtd average plot",
             file_ext='.'+task.fig_extension
         )
-        logger.info(f"wtd. average plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"wtd. average plot saved to: '{path}'")
 
     # print results
     task.update_progress(75, 'Printing results to sheet...')
@@ -849,11 +851,11 @@ def forced_concordance(task):
         path = util.save_plot_to_disk(fig_iso57, task.fig_export_dir,
                                       fname='235U-207Pb isochron plot',
                                       file_ext='.'+task.fig_extension)
-        logger.info(f"235U-207Pb isochron plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"235U-207Pb isochron plot saved to: '{path}'")
         path = util.save_plot_to_disk(fig_iso86, task.fig_export_dir,
                                       fname="238U-206Pb isochron plot",
                                       file_ext='.'+task.fig_extension)
-        logger.info(f"238U-206Pb isochron plot saved to: '{path}.{task.fig_extension}'")
+        logger.info(f"238U-206Pb isochron plot saved to: '{path}'")
 
     # print results to spread sheet
     task.update_progress(75, "Printing results to spreadsheet...")
