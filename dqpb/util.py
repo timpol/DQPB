@@ -28,7 +28,8 @@ def save_plot_to_disk(fig, dir, fname='Plot', file_ext='', overwrite=False):
     if dir == '':
         dir = os.path.expanduser("~/Desktop/DQPB/Figures/")
     path = get_save_path(dir, fname, file_ext, overwrite=overwrite)
-    fig.savefig(path, bbox_inches='tight')
+    # fig.savefig(path, bbox_inches='tight')
+    fig.savefig(path, dpi=fig.get_dpi())
     return path
 
 
