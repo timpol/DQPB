@@ -16,7 +16,7 @@ DQPB can be used to:
 *	Compute weighted averages that optionally account for error covariances using both classical and robust algorithms
 *	Plot disequilibrium concordia curves on Tera-Wasserburg diagrams, accounting for different states of initial or present disequilibrium.
 
-For more info, see the online DQPB [documentation](https://timpo.github.io/DQPB)
+For more info, see the online DQPB [documentation](https://timpol.github.io/DQPB/)
 
 ![Example](/resources/Screenshot.png)
 
@@ -46,7 +46,7 @@ If using DQPB in published work, please cite the following pre-print article
     }
 ```
 
-In addition, please cite primary works upon which the algorithms implemented in DQPB are based. Further information may be found within the [documentation](https://timpo.github.io/DQPB) and in the DQPB source code.
+In addition, please cite primary works upon which the algorithms implemented in DQPB are based. Further information may be found within the [documentation](https://timpol.github.io/DQPB/) and in the DQPB source code.
 
 # License
 
