@@ -2,6 +2,8 @@
 dev/
 notes/
 package/artifacts/
+sphinx/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
