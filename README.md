@@ -46,7 +46,7 @@ If using DQPB in published work, please cite the following pre-print article
     }
 ```
 
-In addition, please cite primary works upon which the algorithms implemented in DQPB are based. This information may be found within this documentation and in the DQPB source code.
+In addition, please cite primary works upon which the algorithms implemented in DQPB are based. Further information may be found within the [documentation](https://timpo.github.io/DQPB) and in the DQPB source code.
 
 # License
 
