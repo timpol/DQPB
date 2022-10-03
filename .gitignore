@@ -3,6 +3,7 @@ dev/
 notes/
 package/artifacts/
 sphinx/
+.buildinfo
 
 
 # Byte-compiled / optimized / DLL files
