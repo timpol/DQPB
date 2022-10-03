@@ -27,7 +27,7 @@ The functionality of DQPB is also available as part of a pure Python package for
 
 The easiest way to install DQPB on macOS and Windows is to simply download the latest installer [here](https://github.com/timpol/DQPB/releases/latest). These installers provide a pre-built stand-alone version of the software, that does not require Python to be pre-installed.  
 
-See the DQPB [documentation](https://timpo.github.io/DQPB) for more details on getting started.
+See the DQPB [documentation](https://timpol.github.io/DQPB/) for more details on getting started.
 
 
 # Citation
