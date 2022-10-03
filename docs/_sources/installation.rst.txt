@@ -1,0 +1,44 @@
+Installation
+============
+
+The easiest way to install DQPB on macOS and Windows is to simply download the latest installer from the GitHub DQPB `releases`_ page. These installers provide a stand-alone version of the software, that does not require a separate Python distribution.
+
+.. _releases: https://github.com/timpol/DQPB/releases/latest
+
+Mac
+---
+
+1. Download the Mac .dmg `installer`_
+2. Open the .dmg and drag the DQPB.app icon into your Applications folder to install the software.
+3. Navigate to your Applications folder.
+4. Right-click on the icon and select ``Open`` to launch the Application for the first time.
+
+.. note::
+    The application will probably refuse to launch if you double-click on the icon the first time you try to open it. You **must** right-click and select ``Open``. After the first launch, it is then possible to launch the application by double clicking.
+
+5. A security message may pop up saying that this app is from an “unknown developer” and asking if you wish to continue. DQPB is open-source software distributed free of charge, and so we have opted not to pay fees to Apple to codesign the application. Therefore, this warning cannot be avoided.
+6. When running DQPB for the first time, you will probably be asked to give permission to DQPB to "control Excel". You **must** click ``OK``, otherwise DQPB will not be able to read data from Excel spreadsheets or write results, and the application will not function.
+
+Windows
+-------
+1. Download the Windows `installer`_
+2. Launch the installer and follow the usual steps to install the software.
+
+.. note::
+    On some versions of Windows, a Windows Defender warning may pop up claiming that DQPB is an "unrecognized" app. DQPB is open-source software distributed free of charge, so we have opted not to pay fees to Microsoft or other third parties in order to codesign the application. Therefore, this warning cannot be avoided. Click the ``More info`` link, then click ``Run anyway``.
+
+3. The application can now be launched from the start menu. If for some reason the icon does not appear, go to the installation directory (usually ``C:\Program Files\DQPB\``) and double-click the DQPB.exe icon. A shortcut to this .exe file may then be manually added to the start menu or another suitable location.
+
+.. _installer: https://github.com/timpol/DQPB/releases/latest
+
+
+Verifying Installation
+----------------------
+To verify that the installation was successful and explore software features, test data sets may be downloaded from the DQPB Github `page`_ in .csv format. These can be opened in Excel workbooks like any other .csv or text files.
+
+.. _page: https://github.com/timpol/DQPB-test/tree/main/tests/datasets
+
+Uninstalling DQPB
+-----------------
+* On Mac, simply delete DQPB.app from you Applications folder.
+* On Windows, go to the ``Add or remove programs`` dialog. Click on the DQPB icon and select ``Uninstall``.

@@ -1,0 +1,215 @@
+Settings
+=========
+
+.. _main-settings:
+
+Main window settings
+--------------------
+
+The following options are available in the first tab of the main window:
+
+:Account for covariance in wav.: If true, uncertainty covrrelations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and modified |207Pb| ages only).
+
+:Norm. isotope:	Normalising isotope (|204Pb| or |208Pb|) for isochron isotope ratios. Only affects plot axis labels, since |208Pb| is treated as a stable isotope (and thus should only be used for young samples).
+
+:Autoscale axis limits:	If checked, plot axis limits will be determined automatically. If not, a dialog will pop up after clicking ``Ok``, allowing the user to specify axis limits for relevant plot types.
+
+:Add data point labels:	If checked, labels are added to plotted data points. After clicking ``Ok``, a dialog will pop up asking the user to select the data point labels from the Excel worksheet.
+
+:Output calc. settings:	Output calculation settings (decay constant values, activity ratio values, Monte Carlo settings, etc.) to spreadsheet along with age results.
+
+:Output plot data: If checked, all data used to construct plots (e.g., data points, regression lines etc.) will be output to a new Excel spreadsheet.
+
+:Save plots to disk:	Save figures to disk (e.g., to obtain figures in a specific size and/or file type). The save location and file type can be set in the :ref:`I/O <io-settings>` tab of the 'Preferences' window. Figure sizes are set in the :ref:`type-specific plot options <type-settings>` window.
+
+:Covariance matrix:	Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.
+
+.. _mc-settings:
+
+Monte Carlo settings
+^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+    By default, age uncertainties are computed by Monte Carlo simulation for all **dis**\equilibrium U-Pb ages.  For **eq**\uilibrium U-Pb ages, uncertainties will only be computed by Monte Carlo simulation if the ``Equilibrium age Monte Carlo errors`` option is checked in the main window.
+
+The following options are available in the ‘Monte Carlo’ tab of the main window:
+
+:Show full Monte Carlo results summary:	Include information on cause of failed trials in Monte Carlo results, and additional summary statistics.
+
+:Number of trials:	Number of age simulations to attempt. For single-analysis Pb/U and modified |207Pb| ages, this is the number of trials for each individual age.
+
+:Include decay constant errors:	Include the effects of decay constant errors (set in the ‘Constants’ tab of the ‘Preferences’ window). These effects are typically negligible when computing disequilibrium ages for young samples.
+
+  .. Note::
+    This option does not yet apply to single-analysis Pb/U or modified |207Pb| ages.
+
+:Include |238U|/|235U| errors:	As above, but for the natural present-day |238U|/|235U| ratio value. These effects are also typically negligible for young samples.
+
+:Reject negative activity ratio trials:	Reject any trial encountering a negative activity ratio value, both at the initial randomisation stage or as an initial activity ratio solution where a present-day value is input.
+
+:Reject negative age trials:	Reject any trials with a negative age solution.
+
+:Age histogram:	Output a histogram of simulated ages (as well as simulated regression slope and y-intercept values if applicable).
+
+:Activity ratio histograms:	Output a histogram of simulated activity ratio values and computed initial activity ratio solutions (where present-day values are input).
+
+.. _prefs-window:
+
+Preferences window
+--------------------
+
+The following options are available in the ‘Preferences’ window:
+
+.. _plotting-settings:
+
+Plotting
+^^^^^^^^^
+
+:Output weighted average plot:	Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and modified |207Pb| ages.
+
+:Output data ellipse plot for mod. |207Pb| ages:	Plot modified |207Pb| data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant |DTh/U|  value.
+
+:plot projected lines through modified |207Pb| data points:	Show lines projected from common |207Pb|/|206Pb| value through each data point for modified |207Pb| data point plots.
+
+:Equilibrium concordia curve limits:	The equilibrium concordia curve will not extend beyond these age limits.
+
+:Disequilibrium concordia curve limits:	The disequilibrium concordia curve on concordia-intercept plots will not extend beyond these age limits.
+
+    .. Note::
+       Different limits are used for (a) curves constructed based on initial activity ratio values only, (b) curves constructed based on a present-day [|234U|/|238U|] value but initial [|230Th|/|238U|] value, and (c) curves based on a present-day [|230Th|/|238U|] value. The disequilibrium concordia envelope plotting routine will likely fail if limits (b) and (c) are set too high.
+
+.. _numerical-settings:
+
+Numerical
+^^^^^^^^^^^
+
+:Min / max age, [|234U|/|238U|]i, and [|230Th|/|238U|]i:	Reject disequilibrium concordia-intercept age solutions (where present-day activity ratio(s) are input) if numerical solutions are outside these limits. See Sect. 4.2 of this document for further explanation.
+
+:Classical linear regression fit MSWD thresholds: MSWD one-sided confidence limit thresholds. The lower limit is the threshold at which model 1 transitions to model 1x. Upper is the threshold at which model 1x transitions to model 2 / 3. Only applies if the :ref:`classical <classical-regression>` linear regression fit type is selected.
+
+:Wtd. average excess scatter thresholds:	MSWD one-sided confidence limit thresholds. If MSWD is above this lower limit, uncertainty on the weighted average result is inflated according to data scatter. The upper limit is not currently implemented. Only applies to the :ref:`classical <classical-wav>` weighted average algorithm.
+
+:RNG seed:	Random number generator seed used to generate reproducible Monte Carlo results. Use an integer seed sequence (e.g., ``42``) or leave blank for non-reproducible results . See: https://numpy.org/doc/stable/reference/random/generator.html
+
+:h value:	h value used in the spine linear regression and weighted average routines (default = 1.4).
+
+.. _io-settings:
+
+I/O
+^^^^
+
+:Save figures to:	Directory (i.e., ‘folder’) where figures are saved to.
+
+:Export file type:	Image file format of plots saved to disk.
+
+:Spreadsheet figure height: 	Height of figures that are output to spreadsheet (in number of cells). Width is determined by original aspect ratio (i.e., the width and height set in the :ref:`type-specific plot settings <type-settings>` dialog).
+
+:Apply spreadsheet number formats to results:	Apply number formatting to results output to spreadsheet (e.g., so that the correct number of significant figures are shown). Complete digits are still retained and are visible in the formula bar when the cell is selected, or if the cell is copied to the clipboard.
+
+:Clear cells before printing results:	Clear cells of formatting before printing results to spreadsheet (this may slow down printing results to Excel a bit).
+
+:Font:	Apply a non-default font to results in spreadsheet (this may also slow down printing results to Excel a bit).
+
+:Apply cell colours:	Apply a background colour to results that are output to spreadsheet (this may also slow down printing results to Excel a bit
+
+.. _type-settings:
+
+Type-specific plot settings
+------------------------------
+
+Type-specific plot settings that are only applied to plots of a given type:
+
+  .. note::
+     The "Isochron" settings apply to: isochron diagrams, concordia-intercept age "regression plots", modified |207Pb| data plots, and other x-y plots
+
+
+All plot types
+^^^^^^^^^^^^^^^
+:comma separated thousands:	E.g., show 10,000 in axis labels instead of 10000.
+
+:hide top and right spines:	Remove the top and right-hand side lines bordering the axis window.
+
+:lower exponent limit:	If axis tick values are less than or equal to ``10 ^ (this limit)`` they will be displayed in scientific notation.
+
+:upper exponent limit:	If axis tick values are greater than or equal to ``10 ^ (this limit)`` then they will be displayed in scientific notation.
+
+:height:	Figure height (in inches). This may be different to the height of the figure output to Excel (which is set as height in number of cells via the :ref:`I/O <io-settings>` tab of 'Preferences' window), however, figures exported to disk will be set to this height.
+
+:width:	Figure width (in inches). As above, this may be different to the width of the figure output to Excel, however, figures exported to disk will be set to this width.
+
+:dpi:	Dots per square inch of exported figures (only applied to certain image file types such as .png)
+
+
+Concordia-intercept plots
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:plot concordia intercept ellipse:	Plot the Monte Carlo concordia intercept points from each successful Monte Carlo trial as a confidence ellipse.
+
+   .. Note::
+      This option is  not suitable for plots displaying large intercept age errors.
+
+:plot concordia intercept x-y points:	Plot the concordia intercept points for each successful Monte Carlo trial as individual markers.
+
+:plot concordia uncertainty envelope:	Plot uncertainty envelope about the concordia curve representing uncertainty arising from activity ratio uncertainties.
+
+:‘spaghetti’ type concordia envelope:	Plot each Monte Carlo simulated curve used to construct the concordia envelope. This can be useful for diagnosing problems with concordia envelope plotting.
+
+:plot concordia age markers as ellipses:	Plot each age marker along the concordia curve as a confidence ellipse accounting for uncertainty in activity ratio values for disequilibrium curves or decay constant values for equilibrium curves.
+
+    .. Note::
+       This setting may work poorly if activity ratio values have large errors.  May also fail for older ages if present-day activity ratios are set (in such cases, reduce the ‘auto markers max age’ value).
+
+:auto markers max age:	Automatically generated concordia age markers / ellipses will not exceed this value.
+
+:use manual marker ages:	Option to plot concordia age markers or ellipses at user specified locations that are set in the field below.
+
+:manual age marker locations:	Enter manual concordia age marker locations, separating each age by a space. These should be in same ‘units’ as the ``age label prefix`` option.
+
+:show age prefix in label:	Show ‘Ma’ or ‘ka’ in concordia age marker labels.
+
+:rotate labels:	Rotate concordia age marker labels according to the settings below.
+
+:rotate perpendicular:	If checked, rotate perpendicular to concordia line slope at the age marker position (only applies if the ``rotate labels`` option is selected). Otherwise, rotate parallel to the concordia line slope.
+
+:avoid label overlaps:	Any concordia age markers older than the first marker that is overlapped will be removed.
+
+:label offset factor:	Controls how far concordia age marker labels are offset from markers (higher number = further away from concordia marker).
+
+
+.. _format-settings:
+
+Plot format settings
+^^^^^^^^^^^^^^^^^^^^^
+
+Plot format settings (e.g., colours, line thicknesses, fonts) can be set in the ‘Plot format settings’ window. These settings are mostly self-explanatory, but keep in mind:
+
+* ‘zorder’ determines the order in which elements are overlayed on a figure (i.e., those which a higher ‘zorder’ will be placed on top of those with a lower ‘zorder’. These values must be positive whole numbers.
+
+* Setting a linewidth to 0 will make the line (and in some cases the plot element) disappear.
+
+* Alpha is a transparency setting between 0 (clear) and 1 (opaque).
+
+* Colours may be selected from the matplotlib named colours via the drop-down combo boxes. Named colours are shown below. Alternatively, colours may be entered into the combo box as a case-insensitive (8-bit per channel) `hexadecimal RGB string`_ (e.g.: #0f0f0f). These values can be obtained from colour selection dialogs in applications such as Excel.
+
+.. _hexadecimal RGB string: https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations
+
+
+Matplotlib named colors
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following named colors are available in the color drop-down boxes in the :ref:`plot formatting <format-settings>` window.
+
+.. figure:: https://matplotlib.org/stable/_images/sphx_glr_named_colors_001.png
+  :alt: Matplotlib base colors
+
+  Matplotlib base colors
+
+.. figure:: https://matplotlib.org/stable/_images/sphx_glr_named_colors_003.png
+  :alt: Matplotlib named css colors
+
+  Matplotlib css colors
+
+.. figure:: https://matplotlib.org/stable/_images/sphx_glr_named_colors_002.png
+  :alt: Matplotlib tableau palette
+
+  Matplotlib tableau colors

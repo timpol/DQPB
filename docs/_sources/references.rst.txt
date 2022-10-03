@@ -1,0 +1,68 @@
+References
+==========
+
+.. [BROOKS1972] Brooks, C., Hart, S.R., Wendt, I., 1972. Realistic use of
+    two-error regression treatments as applied to rubidium-strontium data.
+    Reviews of Geophysics 10, 551–577. https://doi.org/10.1029/RG010i002p00551
+
+.. [ENGEL2019] Engel, J., Woodhead, J., Hellstrom, J., Maas, R., Drysdale, R.,
+    Ford, D., 2019. Corrections for initial isotopic disequilibrium in the
+    speleothem U-Pb dating method. Quaternary Geochronology 54, 101009.
+    https://doi.org/10.1016/j.quageo.2019.101009
+
+.. [FAURE1977] Faure, G., Appendix 1: Fitting of isochrons for dating by the
+    Rb-Sr method, in: Principles of Isotope Geology. John Wiley and Sons,
+    pp. 1–17, 1977.
+
+.. [LUDWIG2012] Ludwig, K. R.: Isoplot/Ex Version 3.75: A Geochronological
+    Toolkit for Microsoft Excel, Special Publication 4, Berkeley Geochronology
+    Center, 2012.
+
+.. [LYONS1988] Lyons, L., Gibaut, D., Clifford, P., 1988. How to combine correlated
+    estimates of a single physical quantity. Nuclear Instruments and Methods in
+    Physics Research Section A: Accelerators, Spectrometers, Detectors and
+    Associated Equipment 270, 110–117.
+    https://doi.org/10.1016/0168-9002(88)90018-6
+
+.. [MCLEAN2011] McLean, N. M., Bowring, J. F., and Bowring, S. A.: An Algorithm
+    for U-Pb Isotope Dilution Data Reduction and Uncertainty Propagation,
+    Geochemistry, Geophysics, Geosystems, 12,
+    https://doi.org/10.1029/2010GC003478, 2011.
+
+.. [POWELL2020] Powell, R., Green, E.C.R., Marillo Sialer, E., Woodhead, J.,
+    2020. Robust isochron calculation. Geochronology 2, 325–342.
+    https://doi.org/10.5194/gchron-2-325-2020
+
+.. [POWELL1988] Powell, R. and Holland, T.: An Internally Consistent Dataset
+    with Uncertainties and Correlations: 3. Applications to Geobarometry,
+    Worked Examples and a Computer Program, Journal of Metamorphic Geology, 6,
+    173–204, https://doi.org/10.1111/j.1525-1314.1988.tb00415.x, 1988.
+
+.. [SAKATA2018] A practical method for calculating the U-Pb age of Quaternary
+    zircon: Correction for common Pb and initial disequilibria. Geochemical
+    Journal 52, 281–286. https://doi.org/10.2343/geochemj.2.0508
+
+.. [TAYLOR1997] Taylor, J., 1997. Introduction to Error Analysis, the Study of
+    Uncertainties in Physical Measurements, 2nd Edition, Published by
+    University Science Books. University Science Books, New York.
+
+.. [TITT1979] Titterington, D.M., Halliday, A.N., 1979. On the fitting of parallel
+    isochrons and the method of maximum likelihood. Chemical Geology 26, 183–195.
+
+.. [YORK2004] York, D., Evensen, N.M., Martı́nez, M.L., De Basabe Delgado, J., 2004. Unified
+    equations for the slope, intercept, and standard errors of the best
+    straight line. American Journal of Physics 72, 367–375.
+    https://doi.org/10.1119/1.1632486
+
+.. [YORK1969] York, D., 1969. York, D., 1968. Least squares fitting of a straight
+    line with correlated errors. Earth and Planetary Science Letters 5, 320–324.
+    https://doi.org/10.1016/S0012-821X(68)80059-7
+
+
+
+
+
+
+
+
+

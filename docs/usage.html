@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic usage &#8212; DQPB: software for calculating disequilibrium U-Pb ages</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Age calculations" href="age_calcs.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="age_calcs.html" title="Age calculations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Basic usage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="basic-usage">
+<h1>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h1>
+<p>Begin by launching the main application window via the app icon. If running DQPB for the first time on Mac, you will need to right-click on the application icon and select <code class="docutils literal notranslate"><span class="pre">Open</span></code>, rather than double-clicking.</p>
+<p>All tasks are invoked via the main window, which is displayed when the application is first launched. After choosing a task from the drop-down menu, some options on this main menu may be altered or deactivated if they are not applicable. Further settings may be adjusted via the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a>, <a class="reference internal" href="settings.html#type-settings"><span class="std std-ref">Type-specific plot settings</span></a>, and <a class="reference internal" href="settings.html#format-settings"><span class="std std-ref">Plot format settings</span></a> dialogs.</p>
+<blockquote>
+<div><blockquote>
+<div><figure class="align-default">
+<a class="reference internal image-reference" href="_images/main_window.png"><img alt="Main window screenshot" src="_images/main_window.png" style="width: 500px;" /></a>
+</figure>
+</div></blockquote>
+<p>Main window on Mac.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>It is recommended that you save and backup your Excel workbook before running DQPB for the first time in case something unexpected happens (e.g., spreadsheet data cells are accidentally overwritten).</p>
+</div>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Choose an age calculation or plotting task from the task drop-down menu at the top-left.</p></li>
+<li><p>Select the appropriate data type from the ‘Data Type’ drop-down menu.</p></li>
+<li><p>Select the input data points from an open Microsoft Excel spreadsheet, by clicking the <code class="docutils literal notranslate"><span class="pre">select</span></code> button in the ‘Data range’ group box. This will hide the main window and launch a smaller data selection dialog. The easiest way to select data is to navigate to the worksheet containting your data and highlight the data with the keyboard or mouse in the normal Excel way (excluding headings). Then click <code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">selection</span></code> on the data selection dialog.</p>
+<figure class="align-default" id="id1">
+<img alt="Data selection example screenshot" src="_images/data_selection.png" />
+<figcaption>
+<p><span class="caption-text">Data selection dialog on Mac</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>DQPB will read the data from Excel. The data selection will typically be n rows × m columns, where n is the number of data points and m is the number of variables required, but see the <a class="reference internal" href="age_calcs.html"><span class="doc">age calculations</span></a> section for further details on how to arrange your data.</p></li>
+<li><p>Choose the appropriate input data error type, either absolute (abs.) or percent at the 1 or 2 sigma level.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the incorrect input error type is selected, the task may still run without error but you will receive very strange results. For example, data point uncertainty ellipses may be highly elongated in one direction or completely flat!</p>
+<p>Future versions of the software will check that selected uncertainties are of a reasonable magnitude to guard against accidently making the wrong selection, but for now, keep an eye out for this.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Choose a linear regression fit type.</p></li>
+<li><p>Go to the <code class="docutils literal notranslate"><span class="pre">Disequilibrium</span></code> tab on the main window. To compute a disequilibrium U-Pb age, enter relevant activity ratio values (or Th/U and/or Pa/U ratio data for single-analysis Pb/U ages). Alternatively, to compute an equilibrium age (using the standard U-Pb equations) check the <code class="docutils literal notranslate"><span class="pre">Assume</span> <span class="pre">initial</span> <span class="pre">equilibrium</span></code> option.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Ok</span></code>. The main dialog will be hidden, and some further dialogs may pop up asking for additional settings and options to be specified.</p></li>
+<li><p>One of these dialogs will ask you to select where in Excel the data should be output to. A single cell may be selected in the same workbook as your data, but care needs to be taken not to overwrite pre-existing data, as the results may be spread over multiple cells down and across to the right.</p>
+<blockquote>
+<div><div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Data cells that are overwritten by DQPB results cannot be undone in the normal Excel way, so please save and backup important data before running DQPB!</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Ok</span></code>. A progress bar will then appear showing the progress of the computations.</p></li>
+<li><p>When the task is complete, results and figures (in .jpg format) will be printed back to the Excel worksheet.</p>
+<figure class="align-default" id="id2">
+<img alt="Progress bar screenshot" src="_images/progress_bar.png" />
+<figcaption>
+<p><span class="caption-text">Progress bar on Mac with results printed to the Excel workbook</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>If an error occurs during the computation (e.g., if no disequilibrium age solution is found), the task will be aborted, and an error dialog will be displayed. If this happens, check the log console  for information on what went wrong (in the file menu go to <code class="docutils literal notranslate"><span class="pre">Window</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Log</span> <span class="pre">console...</span></code>.</p>
+<figure class="align-default" id="id3">
+<img alt="Log console screenshot" src="_images/console_log.png" />
+<figcaption>
+<p><span class="caption-text">Example of the log console window on Mac</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="installation.html"
+                          title="previous chapter">Installation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="age_calcs.html"
+                          title="next chapter">Age calculations</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="age_calcs.html" title="Age calculations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Basic usage</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Timothy Pollard.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
+    </div>
+  </body>
+</html>

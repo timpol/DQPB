@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Other calculation and plotting functionality &#8212; DQPB: software for calculating disequilibrium U-Pb ages</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear regression algorithms" href="regression.html" />
+    <link rel="prev" title="Age calculations" href="age_calcs.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="regression.html" title="Linear regression algorithms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="age_calcs.html" title="Age calculations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Other calculation and plotting functionality</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="other-calculation-and-plotting-functionality">
+<h1>Other calculation and plotting functionality<a class="headerlink" href="#other-calculation-and-plotting-functionality" title="Permalink to this heading"></a></h1>
+<section id="plot-any-x-y-data">
+<h2>Plot any x-y data<a class="headerlink" href="#plot-any-x-y-data" title="Permalink to this heading"></a></h2>
+<p>This routine allows arbitrary 2-dimensional data points to be plotted as 95% confidence ellipses. To invoke this routine select <code class="docutils literal notranslate"><span class="pre">Plot</span> <span class="pre">x-y</span> <span class="pre">data</span></code> option from the task combo box on the main window.</p>
+<p>Data point columns should be arranged as:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 22%" />
+<col style="width: 13%" />
+<col style="width: 22%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>x</p></td>
+<td><p>x uncert.</p></td>
+<td><p>y</p></td>
+<td><p>y uncert.</p></td>
+<td><p>corr.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">type</span></code> is set to <code class="docutils literal notranslate"><span class="pre">Tera-Wasserburg</span></code>, then an equilibrium or disequilibrium concordia curve may also be plotted by setting the activity ratios as for a disequilibrium <a class="reference internal" href="age_calcs.html#concordia-intercept"><span class="std std-ref">age calculation</span></a>, and setting concordia plot options in the <code class="docutils literal notranslate"><span class="pre">Isochron</span></code> tab of the <a class="reference internal" href="settings.html#type-settings"><span class="std std-ref">type-specific plot options</span></a> window.</p>
+<p>If the ‘Data type’ option is set to <code class="docutils literal notranslate"><span class="pre">other</span> <span class="pre">x-y</span></code>, then axis labels may be set in the ‘Axis labels’ dialog that pops up after clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>. For mathematical symbols and expressions, LaTeX syntax can be used (enclosed in dollar symbols). For example, use <code class="docutils literal notranslate"><span class="pre">$^{238}$U</span></code> for <sup>238</sup>U or <code class="docutils literal notranslate"><span class="pre">$\delta^{18}$O</span></code> for <span class="math notranslate nohighlight">\(\delta^{18}\)</span>O .</p>
+<p>To perform a linear regression, select a regression algorithm from the ‘Fit type’ combo box, or otherwise, select <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">fit</span></code>.</p>
+</section>
+<section id="linear-regression-of-any-x-y-data">
+<h2>Linear regression of any x-y data<a class="headerlink" href="#linear-regression-of-any-x-y-data" title="Permalink to this heading"></a></h2>
+<p>To perform linear regression on an arbitrary 2-dimensional dataset, follow the steps above and choose a regression algorithm from the ‘Fit type’ drop-down menu.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If applying a regression algorithm to an arbitrary dataset, be sure that the dataset conforms to the underlying assumptions of the regression algorithm.</p>
+</div>
+</section>
+<section id="weighted-average-calculations">
+<h2>Weighted average calculations<a class="headerlink" href="#weighted-average-calculations" title="Permalink to this heading"></a></h2>
+<p>To compute a weighted average for arbitrary data points, select <code class="docutils literal notranslate"><span class="pre">Weighted</span> <span class="pre">average</span></code> from the task combo box on the main window, then choose either the <a class="reference internal" href="wtd_average.html#spine-wav"><span class="std std-ref">Spine</span></a> or <a class="reference internal" href="wtd_average.html#classical-wav"><span class="std std-ref">classical</span></a> algorithms from the ‘Fit type’ combo box. Data point uncertainties may either be specified as:</p>
+<ul class="simple">
+<li><p>independent uncertainties on each data point</p></li>
+<li><p>a covariance matrix that accounts for uncertainties and uncertainty covariances</p></li>
+</ul>
+<p>For the former option, the data selection should contain two columns (the values in the first, and their uncertainties in the second). For the latter option, check the <code class="docutils literal notranslate"><span class="pre">Covariance</span> <span class="pre">matrix</span></code> option under on the main window. The data selection should contain a single column of values to be averaged. After clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>, a dialog will then pop up allowing you to select the n x n covariance matrix data from Excel.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Other calculation and plotting functionality</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plot-any-x-y-data">Plot any x-y data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-regression-of-any-x-y-data">Linear regression of any x-y data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#weighted-average-calculations">Weighted average calculations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="age_calcs.html"
+                          title="previous chapter">Age calculations</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="regression.html"
+                          title="next chapter">Linear regression algorithms</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="regression.html" title="Linear regression algorithms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="age_calcs.html" title="Age calculations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Other calculation and plotting functionality</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Timothy Pollard.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
+    </div>
+  </body>
+</html>

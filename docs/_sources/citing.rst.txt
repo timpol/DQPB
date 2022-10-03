@@ -1,0 +1,21 @@
+Citing this work
+=================
+
+If using DQPB in published work, please cite the following pre-print article::
+
+    @article{pollard2022,
+        author  = {Pollard, T. J. and Woodhead, J. D. and Hellstrom, J. C. and Engel, J. and Powell, R. and Drysdale, R. N.},
+        journal = {Geochronology Discussions},
+        pages   = {1--25},
+        title   = {DQPB: software for calculating disequilibrium U-Pb ages},
+        doi     = {10.5194/gchron-2022-24},
+        url     = {https://gchron.copernicus.org/preprints/gchron-2022-24/},
+        year    = {2022}
+    }
+
+
+
+In addition, please cite primary works upon which the algorithms implemented in DQPB are based. This information may be found within this documentation and in the DQPB source code.
+
+
+

@@ -1,0 +1,58 @@
+Basic usage
+===========
+
+Begin by launching the main application window via the app icon. If running DQPB for the first time on Mac, you will need to right-click on the application icon and select ``Open``, rather than double-clicking.
+
+All tasks are invoked via the main window, which is displayed when the application is first launched. After choosing a task from the drop-down menu, some options on this main menu may be altered or deactivated if they are not applicable. Further settings may be adjusted via the :ref:`Preferences <prefs-window>`, :ref:`Type-specific plot settings <type-settings>`, and :ref:`Plot format settings <format-settings>` dialogs.
+
+    .. figure:: /assets/main_window.png
+      :alt: Main window screenshot
+      :width: 500
+
+  Main window on Mac.
+
+  .. caution::
+     It is recommended that you save and backup your Excel workbook before running DQPB for the first time in case something unexpected happens (e.g., spreadsheet data cells are accidentally overwritten).
+
+#. Choose an age calculation or plotting task from the task drop-down menu at the top-left.
+#. Select the appropriate data type from the 'Data Type' drop-down menu.
+#. Select the input data points from an open Microsoft Excel spreadsheet, by clicking the ``select`` button in the 'Data range' group box. This will hide the main window and launch a smaller data selection dialog. The easiest way to select data is to navigate to the worksheet containting your data and highlight the data with the keyboard or mouse in the normal Excel way (excluding headings). Then click ``Get selection`` on the data selection dialog.
+
+
+   .. figure:: assets/data_selection.png
+      :alt: Data selection example screenshot
+
+      Data selection dialog on Mac
+
+#. DQPB will read the data from Excel. The data selection will typically be n rows × m columns, where n is the number of data points and m is the number of variables required, but see the :doc:`age calculations <age_calcs>` section for further details on how to arrange your data.
+
+#. Choose the appropriate input data error type, either absolute (abs.) or percent at the 1 or 2 sigma level.
+
+    .. note::
+        If the incorrect input error type is selected, the task may still run without error but you will receive very strange results. For example, data point uncertainty ellipses may be highly elongated in one direction or completely flat!
+
+        Future versions of the software will check that selected uncertainties are of a reasonable magnitude to guard against accidently making the wrong selection, but for now, keep an eye out for this.
+
+#. Choose a linear regression fit type.
+#. Go to the ``Disequilibrium`` tab on the main window. To compute a disequilibrium U-Pb age, enter relevant activity ratio values (or Th/U and/or Pa/U ratio data for single-analysis Pb/U ages). Alternatively, to compute an equilibrium age (using the standard U-Pb equations) check the ``Assume initial equilibrium`` option.
+#. Click ``Ok``. The main dialog will be hidden, and some further dialogs may pop up asking for additional settings and options to be specified.
+#. One of these dialogs will ask you to select where in Excel the data should be output to. A single cell may be selected in the same workbook as your data, but care needs to be taken not to overwrite pre-existing data, as the results may be spread over multiple cells down and across to the right.
+
+    .. caution::
+        Data cells that are overwritten by DQPB results cannot be undone in the normal Excel way, so please save and backup important data before running DQPB!
+
+
+#. Click ``Ok``. A progress bar will then appear showing the progress of the computations.
+#. When the task is complete, results and figures (in .jpg format) will be printed back to the Excel worksheet.
+
+   .. figure:: assets/progress_bar.png
+      :alt: Progress bar screenshot
+
+      Progress bar on Mac with results printed to the Excel workbook
+
+#. If an error occurs during the computation (e.g., if no disequilibrium age solution is found), the task will be aborted, and an error dialog will be displayed. If this happens, check the log console  for information on what went wrong (in the file menu go to ``Window`` -> ``Log console...``.
+
+   .. figure:: assets/console_log.png
+      :alt: Log console screenshot
+
+      Example of the log console window on Mac

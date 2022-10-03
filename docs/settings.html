@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Settings &#8212; DQPB: software for calculating disequilibrium U-Pb ages</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Weighted average algorithms" href="wtd_average.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Troubleshooting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="wtd_average.html" title="Weighted average algorithms"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this heading"></a></h1>
+<section id="main-window-settings">
+<span id="main-settings"></span><h2>Main window settings<a class="headerlink" href="#main-window-settings" title="Permalink to this heading"></a></h2>
+<p>The following options are available in the first tab of the main window:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Account for covariance in wav.</dt>
+<dd class="field-odd"><p>If true, uncertainty covrrelations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and modified <sup>207</sup>Pb ages only).</p>
+</dd>
+<dt class="field-even">Norm. isotope</dt>
+<dd class="field-even"><p>Normalising isotope (<sup>204</sup>Pb or <sup>208</sup>Pb) for isochron isotope ratios. Only affects plot axis labels, since <sup>208</sup>Pb is treated as a stable isotope (and thus should only be used for young samples).</p>
+</dd>
+<dt class="field-odd">Autoscale axis limits</dt>
+<dd class="field-odd"><p>If checked, plot axis limits will be determined automatically. If not, a dialog will pop up after clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>, allowing the user to specify axis limits for relevant plot types.</p>
+</dd>
+<dt class="field-even">Add data point labels</dt>
+<dd class="field-even"><p>If checked, labels are added to plotted data points. After clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>, a dialog will pop up asking the user to select the data point labels from the Excel worksheet.</p>
+</dd>
+<dt class="field-odd">Output calc. settings</dt>
+<dd class="field-odd"><p>Output calculation settings (decay constant values, activity ratio values, Monte Carlo settings, etc.) to spreadsheet along with age results.</p>
+</dd>
+<dt class="field-even">Output plot data</dt>
+<dd class="field-even"><p>If checked, all data used to construct plots (e.g., data points, regression lines etc.) will be output to a new Excel spreadsheet.</p>
+</dd>
+<dt class="field-odd">Save plots to disk</dt>
+<dd class="field-odd"><p>Save figures to disk (e.g., to obtain figures in a specific size and/or file type). The save location and file type can be set in the <a class="reference internal" href="#io-settings"><span class="std std-ref">I/O</span></a> tab of the ‘Preferences’ window. Figure sizes are set in the <a class="reference internal" href="#type-settings"><span class="std std-ref">type-specific plot options</span></a> window.</p>
+</dd>
+<dt class="field-even">Covariance matrix</dt>
+<dd class="field-even"><p>Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.</p>
+</dd>
+</dl>
+<section id="monte-carlo-settings">
+<span id="mc-settings"></span><h3>Monte Carlo settings<a class="headerlink" href="#monte-carlo-settings" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, age uncertainties are computed by Monte Carlo simulation for all <strong>dis</strong>equilibrium U-Pb ages.  For <strong>eq</strong>uilibrium U-Pb ages, uncertainties will only be computed by Monte Carlo simulation if the <code class="docutils literal notranslate"><span class="pre">Equilibrium</span> <span class="pre">age</span> <span class="pre">Monte</span> <span class="pre">Carlo</span> <span class="pre">errors</span></code> option is checked in the main window.</p>
+</div>
+<p>The following options are available in the ‘Monte Carlo’ tab of the main window:</p>
+<dl class="field-list">
+<dt class="field-odd">Show full Monte Carlo results summary</dt>
+<dd class="field-odd"><p>Include information on cause of failed trials in Monte Carlo results, and additional summary statistics.</p>
+</dd>
+<dt class="field-even">Number of trials</dt>
+<dd class="field-even"><p>Number of age simulations to attempt. For single-analysis Pb/U and modified <sup>207</sup>Pb ages, this is the number of trials for each individual age.</p>
+</dd>
+<dt class="field-odd">Include decay constant errors</dt>
+<dd class="field-odd"><p>Include the effects of decay constant errors (set in the ‘Constants’ tab of the ‘Preferences’ window). These effects are typically negligible when computing disequilibrium ages for young samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option does not yet apply to single-analysis Pb/U or modified <sup>207</sup>Pb ages.</p>
+</div>
+</dd>
+<dt class="field-even">Include <sup>238</sup>U/<sup>235</sup>U errors</dt>
+<dd class="field-even"><p>As above, but for the natural present-day <sup>238</sup>U/<sup>235</sup>U ratio value. These effects are also typically negligible for young samples.</p>
+</dd>
+<dt class="field-odd">Reject negative activity ratio trials</dt>
+<dd class="field-odd"><p>Reject any trial encountering a negative activity ratio value, both at the initial randomisation stage or as an initial activity ratio solution where a present-day value is input.</p>
+</dd>
+<dt class="field-even">Reject negative age trials</dt>
+<dd class="field-even"><p>Reject any trials with a negative age solution.</p>
+</dd>
+<dt class="field-odd">Age histogram</dt>
+<dd class="field-odd"><p>Output a histogram of simulated ages (as well as simulated regression slope and y-intercept values if applicable).</p>
+</dd>
+<dt class="field-even">Activity ratio histograms</dt>
+<dd class="field-even"><p>Output a histogram of simulated activity ratio values and computed initial activity ratio solutions (where present-day values are input).</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="preferences-window">
+<span id="prefs-window"></span><h2>Preferences window<a class="headerlink" href="#preferences-window" title="Permalink to this heading"></a></h2>
+<p>The following options are available in the ‘Preferences’ window:</p>
+<section id="plotting">
+<span id="plotting-settings"></span><h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading"></a></h3>
+<dl class="field-list">
+<dt class="field-odd">Output weighted average plot</dt>
+<dd class="field-odd"><p>Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and modified <sup>207</sup>Pb ages.</p>
+</dd>
+<dt class="field-even">Output data ellipse plot for mod. <sup>207</sup>Pb ages</dt>
+<dd class="field-even"><p>Plot modified <sup>207</sup>Pb data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant D <sub>Th/U</sub>  value.</p>
+</dd>
+<dt class="field-odd">plot projected lines through modified <sup>207</sup>Pb data points</dt>
+<dd class="field-odd"><p>Show lines projected from common <sup>207</sup>Pb/<sup>206</sup>Pb value through each data point for modified <sup>207</sup>Pb data point plots.</p>
+</dd>
+<dt class="field-even">Equilibrium concordia curve limits</dt>
+<dd class="field-even"><p>The equilibrium concordia curve will not extend beyond these age limits.</p>
+</dd>
+<dt class="field-odd">Disequilibrium concordia curve limits</dt>
+<dd class="field-odd"><p>The disequilibrium concordia curve on concordia-intercept plots will not extend beyond these age limits.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Different limits are used for (a) curves constructed based on initial activity ratio values only, (b) curves constructed based on a present-day [<sup>234</sup>U/<sup>238</sup>U] value but initial [<sup>230</sup>Th/<sup>238</sup>U] value, and (c) curves based on a present-day [<sup>230</sup>Th/<sup>238</sup>U] value. The disequilibrium concordia envelope plotting routine will likely fail if limits (b) and (c) are set too high.</p>
+</div>
+</dd>
+</dl>
+</section>
+<section id="numerical">
+<span id="numerical-settings"></span><h3>Numerical<a class="headerlink" href="#numerical" title="Permalink to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">Min / max age, [<sup>234</sup>U/<sup>238</sup>U]i, and [<sup>230</sup>Th/<sup>238</sup>U]i</dt>
+<dd class="field-odd"><p>Reject disequilibrium concordia-intercept age solutions (where present-day activity ratio(s) are input) if numerical solutions are outside these limits. See Sect. 4.2 of this document for further explanation.</p>
+</dd>
+<dt class="field-even">Classical linear regression fit MSWD thresholds</dt>
+<dd class="field-even"><p>MSWD one-sided confidence limit thresholds. The lower limit is the threshold at which model 1 transitions to model 1x. Upper is the threshold at which model 1x transitions to model 2 / 3. Only applies if the <a class="reference internal" href="regression.html#classical-regression"><span class="std std-ref">classical</span></a> linear regression fit type is selected.</p>
+</dd>
+<dt class="field-odd">Wtd. average excess scatter thresholds</dt>
+<dd class="field-odd"><p>MSWD one-sided confidence limit thresholds. If MSWD is above this lower limit, uncertainty on the weighted average result is inflated according to data scatter. The upper limit is not currently implemented. Only applies to the <a class="reference internal" href="wtd_average.html#classical-wav"><span class="std std-ref">classical</span></a> weighted average algorithm.</p>
+</dd>
+<dt class="field-even">RNG seed</dt>
+<dd class="field-even"><p>Random number generator seed used to generate reproducible Monte Carlo results. Use an integer seed sequence (e.g., <code class="docutils literal notranslate"><span class="pre">42</span></code>) or leave blank for non-reproducible results . See: <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html">https://numpy.org/doc/stable/reference/random/generator.html</a></p>
+</dd>
+<dt class="field-odd">h value</dt>
+<dd class="field-odd"><p>h value used in the spine linear regression and weighted average routines (default = 1.4).</p>
+</dd>
+</dl>
+</section>
+<section id="i-o">
+<span id="io-settings"></span><h3>I/O<a class="headerlink" href="#i-o" title="Permalink to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">Save figures to</dt>
+<dd class="field-odd"><p>Directory (i.e., ‘folder’) where figures are saved to.</p>
+</dd>
+<dt class="field-even">Export file type</dt>
+<dd class="field-even"><p>Image file format of plots saved to disk.</p>
+</dd>
+<dt class="field-odd">Spreadsheet figure height</dt>
+<dd class="field-odd"><p>Height of figures that are output to spreadsheet (in number of cells). Width is determined by original aspect ratio (i.e., the width and height set in the <a class="reference internal" href="#type-settings"><span class="std std-ref">type-specific plot settings</span></a> dialog).</p>
+</dd>
+<dt class="field-even">Apply spreadsheet number formats to results</dt>
+<dd class="field-even"><p>Apply number formatting to results output to spreadsheet (e.g., so that the correct number of significant figures are shown). Complete digits are still retained and are visible in the formula bar when the cell is selected, or if the cell is copied to the clipboard.</p>
+</dd>
+<dt class="field-odd">Clear cells before printing results</dt>
+<dd class="field-odd"><p>Clear cells of formatting before printing results to spreadsheet (this may slow down printing results to Excel a bit).</p>
+</dd>
+<dt class="field-even">Font</dt>
+<dd class="field-even"><p>Apply a non-default font to results in spreadsheet (this may also slow down printing results to Excel a bit).</p>
+</dd>
+<dt class="field-odd">Apply cell colours</dt>
+<dd class="field-odd"><p>Apply a background colour to results that are output to spreadsheet (this may also slow down printing results to Excel a bit</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="type-specific-plot-settings">
+<span id="type-settings"></span><h2>Type-specific plot settings<a class="headerlink" href="#type-specific-plot-settings" title="Permalink to this heading"></a></h2>
+<p>Type-specific plot settings that are only applied to plots of a given type:</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The “Isochron” settings apply to: isochron diagrams, concordia-intercept age “regression plots”, modified <sup>207</sup>Pb data plots, and other x-y plots</p>
+</div>
+</div></blockquote>
+<section id="all-plot-types">
+<h3>All plot types<a class="headerlink" href="#all-plot-types" title="Permalink to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">comma separated thousands</dt>
+<dd class="field-odd"><p>E.g., show 10,000 in axis labels instead of 10000.</p>
+</dd>
+<dt class="field-even">hide top and right spines</dt>
+<dd class="field-even"><p>Remove the top and right-hand side lines bordering the axis window.</p>
+</dd>
+<dt class="field-odd">lower exponent limit</dt>
+<dd class="field-odd"><p>If axis tick values are less than or equal to <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">^</span> <span class="pre">(this</span> <span class="pre">limit)</span></code> they will be displayed in scientific notation.</p>
+</dd>
+<dt class="field-even">upper exponent limit</dt>
+<dd class="field-even"><p>If axis tick values are greater than or equal to <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">^</span> <span class="pre">(this</span> <span class="pre">limit)</span></code> then they will be displayed in scientific notation.</p>
+</dd>
+<dt class="field-odd">height</dt>
+<dd class="field-odd"><p>Figure height (in inches). This may be different to the height of the figure output to Excel (which is set as height in number of cells via the <a class="reference internal" href="#io-settings"><span class="std std-ref">I/O</span></a> tab of ‘Preferences’ window), however, figures exported to disk will be set to this height.</p>
+</dd>
+<dt class="field-even">width</dt>
+<dd class="field-even"><p>Figure width (in inches). As above, this may be different to the width of the figure output to Excel, however, figures exported to disk will be set to this width.</p>
+</dd>
+<dt class="field-odd">dpi</dt>
+<dd class="field-odd"><p>Dots per square inch of exported figures (only applied to certain image file types such as .png)</p>
+</dd>
+</dl>
+</section>
+<section id="concordia-intercept-plots">
+<h3>Concordia-intercept plots<a class="headerlink" href="#concordia-intercept-plots" title="Permalink to this heading"></a></h3>
+<dl class="field-list">
+<dt class="field-odd">plot concordia intercept ellipse</dt>
+<dd class="field-odd"><p>Plot the Monte Carlo concordia intercept points from each successful Monte Carlo trial as a confidence ellipse.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option is  not suitable for plots displaying large intercept age errors.</p>
+</div>
+</dd>
+<dt class="field-even">plot concordia intercept x-y points</dt>
+<dd class="field-even"><p>Plot the concordia intercept points for each successful Monte Carlo trial as individual markers.</p>
+</dd>
+<dt class="field-odd">plot concordia uncertainty envelope</dt>
+<dd class="field-odd"><p>Plot uncertainty envelope about the concordia curve representing uncertainty arising from activity ratio uncertainties.</p>
+</dd>
+<dt class="field-even">‘spaghetti’ type concordia envelope</dt>
+<dd class="field-even"><p>Plot each Monte Carlo simulated curve used to construct the concordia envelope. This can be useful for diagnosing problems with concordia envelope plotting.</p>
+</dd>
+<dt class="field-odd">plot concordia age markers as ellipses</dt>
+<dd class="field-odd"><p>Plot each age marker along the concordia curve as a confidence ellipse accounting for uncertainty in activity ratio values for disequilibrium curves or decay constant values for equilibrium curves.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setting may work poorly if activity ratio values have large errors.  May also fail for older ages if present-day activity ratios are set (in such cases, reduce the ‘auto markers max age’ value).</p>
+</div>
+</dd>
+<dt class="field-even">auto markers max age</dt>
+<dd class="field-even"><p>Automatically generated concordia age markers / ellipses will not exceed this value.</p>
+</dd>
+<dt class="field-odd">use manual marker ages</dt>
+<dd class="field-odd"><p>Option to plot concordia age markers or ellipses at user specified locations that are set in the field below.</p>
+</dd>
+<dt class="field-even">manual age marker locations</dt>
+<dd class="field-even"><p>Enter manual concordia age marker locations, separating each age by a space. These should be in same ‘units’ as the <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">label</span> <span class="pre">prefix</span></code> option.</p>
+</dd>
+<dt class="field-odd">show age prefix in label</dt>
+<dd class="field-odd"><p>Show ‘Ma’ or ‘ka’ in concordia age marker labels.</p>
+</dd>
+<dt class="field-even">rotate labels</dt>
+<dd class="field-even"><p>Rotate concordia age marker labels according to the settings below.</p>
+</dd>
+<dt class="field-odd">rotate perpendicular</dt>
+<dd class="field-odd"><p>If checked, rotate perpendicular to concordia line slope at the age marker position (only applies if the <code class="docutils literal notranslate"><span class="pre">rotate</span> <span class="pre">labels</span></code> option is selected). Otherwise, rotate parallel to the concordia line slope.</p>
+</dd>
+<dt class="field-even">avoid label overlaps</dt>
+<dd class="field-even"><p>Any concordia age markers older than the first marker that is overlapped will be removed.</p>
+</dd>
+<dt class="field-odd">label offset factor</dt>
+<dd class="field-odd"><p>Controls how far concordia age marker labels are offset from markers (higher number = further away from concordia marker).</p>
+</dd>
+</dl>
+</section>
+<section id="plot-format-settings">
+<span id="format-settings"></span><h3>Plot format settings<a class="headerlink" href="#plot-format-settings" title="Permalink to this heading"></a></h3>
+<p>Plot format settings (e.g., colours, line thicknesses, fonts) can be set in the ‘Plot format settings’ window. These settings are mostly self-explanatory, but keep in mind:</p>
+<ul class="simple">
+<li><p>‘zorder’ determines the order in which elements are overlayed on a figure (i.e., those which a higher ‘zorder’ will be placed on top of those with a lower ‘zorder’. These values must be positive whole numbers.</p></li>
+<li><p>Setting a linewidth to 0 will make the line (and in some cases the plot element) disappear.</p></li>
+<li><p>Alpha is a transparency setting between 0 (clear) and 1 (opaque).</p></li>
+<li><p>Colours may be selected from the matplotlib named colours via the drop-down combo boxes. Named colours are shown below. Alternatively, colours may be entered into the combo box as a case-insensitive (8-bit per channel) <a class="reference external" href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">hexadecimal RGB string</a> (e.g.: #0f0f0f). These values can be obtained from colour selection dialogs in applications such as Excel.</p></li>
+</ul>
+</section>
+<section id="matplotlib-named-colors">
+<h3>Matplotlib named colors<a class="headerlink" href="#matplotlib-named-colors" title="Permalink to this heading"></a></h3>
+<p>The following named colors are available in the color drop-down boxes in the <a class="reference internal" href="#format-settings"><span class="std std-ref">plot formatting</span></a> window.</p>
+<figure class="align-default" id="id1">
+<img alt="Matplotlib base colors" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_001.png" />
+<figcaption>
+<p><span class="caption-text">Matplotlib base colors</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<img alt="Matplotlib named css colors" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_003.png" />
+<figcaption>
+<p><span class="caption-text">Matplotlib css colors</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<img alt="Matplotlib tableau palette" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_002.png" />
+<figcaption>
+<p><span class="caption-text">Matplotlib tableau colors</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-window-settings">Main window settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preferences-window">Preferences window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#type-specific-plot-settings">Type-specific plot settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="wtd_average.html"
+                          title="previous chapter">Weighted average algorithms</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="troubleshooting.html"
+                          title="next chapter">Troubleshooting</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Troubleshooting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="wtd_average.html" title="Weighted average algorithms"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Timothy Pollard.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
+    </div>
+  </body>
+</html>

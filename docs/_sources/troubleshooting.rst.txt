@@ -1,0 +1,24 @@
+Troubleshooting
+===============
+
+The log console
+---------------
+All software errors and warnings encountered while DQPB executes a plotting or calculation task are logged. To view this log, navigate via the file menu to ``Window`` –> ``Log console…``.  The content of the log includes information, warnings, and errors logged directly by the DQPB program, and also errors logged by third-party Python modules. The errors (technically speaking, "exceptions") logged by third-party Python modules are presented as a Python "traceback". This may be difficult to interpret for non-python programmers but reading the last line or two will often provide a hint as to what went wrong. The log console should be your first port of call anytime something unexpected happens and should be routinely checked.
+
+Unfreezing Excel workbooks
+--------------------------
+While DQPB is executing tasks, the Excel screen is locked in order to increase the speed at which results are printed back to the spreadsheet. In the event that DQPB crashes while executing a task, or is closed by the user, it is possible for the Excel screen to remain locked. To unfreeze the Excel screen, re-launch DQPB and navigate via the file menu to ``File`` –> ``Unfreeze Excel screen updating``.
+
+Overwriting old results
+------------------------
+Numerical results output to Excel will overwrite any pre-existing cell data if the calculation/plotting task is re-run. To avoid any potential confusion, it is best to delete old results and plots before re-running a task. Also, note that new figures output to Excel will be stacked on top of old figures. If too many figures accumulate this may slow down Excel, so it is a good idea to delete old figures as you go.
+
+Crowded concordia markers
+--------------------------
+The concordia curve plotting routine attempts to find a suitable spacing for age markers given the plot axis limits and the concordia age limits (set in the ‘plotting’ tab of the :ref:`preferences <prefs-window>` window). However, for Tera-Wasserburg diagrams that span a large range of x values (say, 0 - 10 000), there is often no constant age marker spacing that will deliver satisfactory results, and markers will tend to be bunched together at the left-hand side of the plot. There are at least three possible ways to address this:
+
+#.	Set manual age markers (see the ‘Isochron’ or ‘Concordia-intercept’ tabs of the :ref:`type-settings plot settings <type-settings>` window). Tick the ``use manual age markers`` option and set the ages in the ``manual age markers`` field below (separate each marker age by a space).
+
+#.	Use the auto age marker routine (untick the ``use manual age markers`` option) but set the ``auto markers max age`` to a suitable age lower than the concordia age limits.
+
+#.	Use the auto age marker routine (untick the ``use manual age markers`` option), but reduce the concordia age limit. Note this will also truncate the concordia curve line itself.

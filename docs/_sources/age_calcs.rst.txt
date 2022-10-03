@@ -1,0 +1,92 @@
+Age calculations
+=================
+
+Concordia-intercept U-Pb ages
+-----------------------------------------
+
+.. _concordia-intercept:
+
+Concordia-intercept ages are computed using Tera-Wasserburg diagram variables only (i.e., spreadsheet columns ordered as:
+
+   ======  ========  ======  =======  ======
+   |tw-x|  |tw-sx|   |tw-y|  |tw-sy|  |cor|
+   ======  ========  ======  =======  ======
+
+
+.. |tw-x| replace:: |206Pb|/|238U|
+.. |tw-sx| replace:: |206Pb|/|238U| uncert.
+.. |tw-y| replace:: |207Pb|/|206Pb|
+.. |tw-sy| replace:: |207Pb|/|206Pb| uncert.
+.. |cor| replace:: corr.
+
+.. Caution::
+   If the data point error correlation coefficients column is not provided, these correlations will be assumed equal to 0. This is not a good general assumption for young samples!
+
+Disequilibrium concordia-intercept ages are calculated by solving Eq. (15) in the |manuscript|_ using Newton’s method. The initial guess for the numerical age solution can either be entered directly (under the 'Disequilibrium' tab of the main window) or set to the lower intercept equilibrium age by selecting the ``Use equilibrium age`` option.
+
+In cases where present-day [|234U|/|238U|] or [|230Th|/|238U|] values are entered, it is possible to have two intercept age solutions in close proximity. In such cases, the algorithm uses a brute force method to search for all age solutions between user defined upper and lower age and activity ratio limits (set in set in the 'Numerical' tab of the :ref:`Preferences <prefs-window>` window). Typically, the upper intercept will have a physically implausible initial activity ratio solution, and so the lower intercept is always selected by default, however, the brute force method is implemented to guard against the numerical solution converging to the wrong intercept age.
+
+   .. figure:: assets/disequilibrium_tab.png
+      :alt: Disequilibrium tab
+      :width: 500
+
+      Disequilibrium tab of the main window on Mac
+
+
+If the ``assume initial eq.`` option is checked, a lower intercept initial equilibrium age will be computed from the standard U-Pb equations, using the algorithm in [POWELL2020]_. Note, this algorithm converges rapidly for intercept ages less than ~1 Ga but may not converge for older ages and does not propagate decay constant errors.
+
+For equilibrium ages, age uncertainties may optionally be computed using Monte Carlo methods. To do this, ensure the ``Equilibrium age Monte Carlo errors`` option is checked on the main window (note, for disequilibrium ages, Monte Carlo errors are always implemented whether this box is checked or not). Decay constant errors may be included if age uncertainties are computed by Monte Carlo simulation (see the 'Monte Carlo' tab in main window).
+
+For concordia-intercept ages, two separate plots are output by default. The first is an “isochron” style plot showing the data points as 95% confidence ellipses along with the linear regression fit. The second plot is a "concordia-intercept plot" and shows an enlarged view of the intersection between the regression line and the (dis)equilibrium concordia curve.
+
+.. _isochron-ages:
+
+U-Pb isochron ages
+-------------------
+
+To compute U-Pb isochron ages the data points should be arranged with columns ordered as:
+
+   ======  ========  ======  =======  ======
+   |i6-x|  |i6-sx|   |i6-y|  |i6-sy|  |cor|
+   ======  ========  ======  =======  ======
+
+.. |i6-x| replace:: |206Pb|/|20xPb|
+.. |i6-sx| replace:: |206Pb|/|20xPb| uncert.
+.. |i6-y| replace:: |23yU|/|20xPb|
+.. |i6-sy| replace:: |23yU|/|20xPb| uncert.
+
+where |23yU| is the primordial uranium isotope (either |238U| or |235U|), and |20xPb| is the normalising isotope (either |204Pb| or |208Pb|, with |208Pb| assumed to be a stable isotope and therefore, applicable to young ages only). Disequilibrium U-Pb isochron ages are calculated by solving the equations given in Sect. 3.2 of the |manuscript|_ using Newton’s method. As for concordia-intercept ages, the initial age guess can either be entered directly (under the `Disequilibrium` tab of the main window) or set to the equilibrium age. Again, age uncertainties may optionally be computed using Monte Carlo methods for equilibrium ages but are always implemented for disequilibrium ages.
+
+Pb/U and modified |207Pb| ages
+---------------------------------------------
+
+Typically, multiple single-analyses Pb/U ages will be computed in one go. For Pb/U ages, data points should be arranged with columns ordered as:
+
+   =======  ========
+   |pb-x|   |pb-sx|
+   =======  ========
+
+.. |pb-x| replace:: |206Pb|/|238U| or |207Pb|/|235U|
+.. |pb-sx| replace:: |206Pb|/|235U| or |207Pb|/|235U| uncert.
+
+
+and each row as a separate analysis (i.e., a separate mineral grain or spot analysis).
+
+For modified |207Pb| ages, data points should be input as Tera-Wasserburg diagram variables (i.e., columns ordered as :ref:`above <concordia-intercept>`).
+
+To output a plot of data points on a Tera-Wasserburg diagram, select the ``Output data point plot for mod. 207Pb ages`` option in 'Plotting' tab of the :ref:`Preferences<prefs-window>` window. A disequilibrium concordia may also be plotted if the Th/U disequilibrium state is input as a constant |DTh/U|  value for all data points, depending on the settings in the :ref:`Type-specific plot settings <type-settings>` window.
+
+For |206Pb|/|238U| and modified |207Pb| ages where initial Th/|Umelt| value is assumed constant, the Th/|Umelt| values are set in the 'Disequilibrium' tab of the main window, and the Th/|Umin| values for each data point are selected via a separate dialog that pops up after clicking ``Ok``.
+
+As for other age types, a single initial age guess can either be entered directly (under the 'Disequilibrium' tab of the main window) or set to the lower intercept equilibrium age solution(s).
+
+To compute a weighted average age from multiple single-analysis ages, select either ``spine`` or ``classical`` from the Fit type combo box on the main window. To output a plot of the weighted average, ensure ``Output weighted average plot`` is checked in the Plotting tab of the :ref:`Preferences <prefs-window>` window.
+
+.. note::
+   The ``Assume initial equilibrium`` option is not yet implemented for single-analysis Pb/U ages.
+
+
+Concordant initial [|234U|/|238U|] routine
+---------------------------------------------
+
+The concordant initial [|234U|/|238U|] routine computes an initial [|234U|/|238U|] value that results in agreement (i.e., "concordance") between the |238U|-|206Pb| and |235U|-|207Pb| isochron ages following [ENGEL2019]_. This routine requires two data selections, one to compute a |235U|-|207Pb| isochron ages, and another to compute a |238U|-|206Pb| isochron age. The columns for these data selections should be arranged as outlined above for :ref:`U-Pb isochron ages <isochron-ages>` above. After clicking ``Ok`` on the main window, a data point selection dialog will appear. The initial activity ratio state of isotopes other than |234U| may be specified in the 'Disequilibrium' tab of the main window. Typically, for carbonates [|230Th|/|238U|] and [|231Pa|/|235U|] will be set to zero. Uncertainties in the initial [|234U|/|238U|] value are computed using Monte Carlo methods.

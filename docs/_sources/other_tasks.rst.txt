@@ -1,0 +1,42 @@
+Other calculation and plotting functionality
+=============================================
+
+Plot any x-y data
+------------------
+
+This routine allows arbitrary 2-dimensional data points to be plotted as 95% confidence ellipses. To invoke this routine select ``Plot x-y data`` option from the task combo box on the main window.
+
+Data point columns should be arranged as:
+
+   ======  ==========  ======  ==========  ==============
+   x        x uncert.   y       y uncert.  corr.
+   ======  ==========  ======  ==========  ==============
+
+If the ``Data type`` is set to ``Tera-Wasserburg``, then an equilibrium or disequilibrium concordia curve may also be plotted by setting the activity ratios as for a disequilibrium :ref:`age calculation <concordia-intercept>`, and setting concordia plot options in the ``Isochron`` tab of the :ref:`type-specific plot options <type-settings>` window.
+
+If the 'Data type' option is set to ``other x-y``, then axis labels may be set in the 'Axis labels' dialog that pops up after clicking ``Ok``. For mathematical symbols and expressions, LaTeX syntax can be used (enclosed in dollar symbols). For example, use ``$^{238}$U`` for |238U| or ``$\delta^{18}$O`` for :math:`\delta^{18}`\ O .
+
+To perform a linear regression, select a regression algorithm from the 'Fit type' combo box, or otherwise, select ``No fit``.
+
+
+Linear regression of any x-y data
+----------------------------------
+
+To perform linear regression on an arbitrary 2-dimensional dataset, follow the steps above and choose a regression algorithm from the 'Fit type' drop-down menu.
+
+.. Note::
+   If applying a regression algorithm to an arbitrary dataset, be sure that the dataset conforms to the underlying assumptions of the regression algorithm.
+
+
+Weighted average calculations
+-----------------------------
+
+To compute a weighted average for arbitrary data points, select ``Weighted average`` from the task combo box on the main window, then choose either the :ref:`Spine <spine-wav>` or :ref:`classical <classical-wav>` algorithms from the 'Fit type' combo box. Data point uncertainties may either be specified as:
+
+* independent uncertainties on each data point
+* a covariance matrix that accounts for uncertainties and uncertainty covariances
+
+For the former option, the data selection should contain two columns (the values in the first, and their uncertainties in the second). For the latter option, check the ``Covariance matrix`` option under on the main window. The data selection should contain a single column of values to be averaged. After clicking ``Ok``, a dialog will then pop up allowing you to select the n x n covariance matrix data from Excel.
+
+
+
