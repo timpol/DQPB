@@ -47,7 +47,7 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-2185</y>
+           <y>0</y>
            <width>556</width>
            <height>3483</height>
           </rect>
@@ -2769,11 +2769,11 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3">
-                <widget class="QLineEdit" name="wavMarkerEdgeColor"/>
-               </item>
                <item row="0" column="8">
                 <widget class="QLineEdit" name="wavMarkerLineWidth"/>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="wavMarkerEdgeColorCombo"/>
                </item>
               </layout>
              </item>
@@ -2933,9 +2933,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3">
-                <widget class="QLineEdit" name="wavRandMarkerEdgeColor"/>
-               </item>
                <item row="1" column="6">
                 <widget class="QLabel" name="label_122">
                  <property name="text">
@@ -2960,6 +2957,13 @@
                 <widget class="QLabel" name="label_143">
                  <property name="text">
                   <string>edge color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="wavRandMarkerEdgeColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
