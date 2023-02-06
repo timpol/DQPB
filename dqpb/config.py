@@ -349,14 +349,14 @@ GuiSettingsMap = {
 
     'wav_marker_alpha':           {'default': '1.0',       'widget': 'wavMarkerAlphaEntry'},
     'wav_marker_face_color':      {'default': 'white',     'widget': 'wavMarkerFaceColorCombo'},
-    'wav_marker_edge_color':      {'default': 'blue',      'widget': 'wavMarkerEdgeColor'},
+    'wav_marker_edge_color':      {'default': 'blue',      'widget': 'wavMarkerEdgeColorCombo'},
     'wav_marker_width':           {'default': '0.8' ,      'widget': 'wavMarkerWidthEntry'},
     'wav_marker_linewidth':       {'default': '0.8',       'widget': 'wavMarkerLineWidth'},
     'wav_marker_z':               {'default': '41',        'widget': 'wavMarkerZEntry'},
 
     'wav_rand_marker_alpha':      {'default': '1.0',       'widget': 'wavRandMarkerAlphaEntry'},
     'wav_rand_marker_face_color': {'default': 'blue',      'widget': 'wavRandMarkerFaceColorCombo'},
-    'wav_rand_marker_edge_color': {'default': 'blue',      'widget': 'wavRandMarkerEdgeColor'},
+    'wav_rand_marker_edge_color': {'default': 'blue',      'widget': 'wavRandMarkerEdgeColorCombo'},
     'wav_rand_marker_linewidth':  {'default': '0.8',         'widget': 'wavRandMarkerLineWidth'},
     'wav_rand_marker_z':          {'default': '40',        'widget': 'wavRandMarkerZEntry'},
 
