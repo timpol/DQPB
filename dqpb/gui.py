@@ -144,7 +144,8 @@ class MainWindow(QMainWindow):
         self.selectDpWindow = RangeSelectDialog(title='Data Point Selection',
                                                 parent=self, text="Select data points in spreadsheet file:")
         self.outputAddressDialog = RangeSelectDialog(title='Output Location',
-                                                     parent=self, text="Where do you want to output results?")
+                                                     parent=self, text="Where do you want to output results?",
+                                                     button_txt='Set location')
         self.selectLabelsWindow = RangeSelectDialog(title="Label Selection",
                                                     parent=self, text="Select data point labels:", as_string=True)
         self.covMatDialog = RangeSelectDialog(parent=self, title="Covariance Matrix",
@@ -658,7 +659,7 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(message, 3000)
 
     def showErrorDialog(self, icon=QMessageBox.Warning, text="text",
-                        informative_text=None, return_to_main=True):
+                        informative_text=None):
         """Show error dialog.
         """
         dialog = QMessageBox(parent=self)
@@ -668,8 +669,6 @@ class MainWindow(QMainWindow):
             dialog.setInformativeText(informative_text)
         dialog.setStandardButtons(QMessageBox.Ok)
         dialog.exec()
-        if return_to_main:
-            self.show()
 
     def inputError(self, text, informative_text):
         """Show error dialog then raise InputError
@@ -736,6 +735,11 @@ class MainWindow(QMainWindow):
             # Show Th/U_min dialog
             if data_type in ("206Pb*", "cor207Pb"):
                 if not self.DThU_const:
+                    if data_type == "cor207Pb" and self.anUncertOpt.isChecked():
+                        self.inputError("Option not yet available",
+                            "Analytical uncertainties are not yet "
+                            "implemented for 207Pb-corrected ages " 
+                            "with constant Th/U melt.")
                     self.ThUminDialog.n = self.dp.shape[0]
                     if not self.ThUminDialog.exec():
                         raise InputError()      # task cancelled
@@ -783,8 +787,7 @@ class MainWindow(QMainWindow):
                     msg = 'User set axis limits are not yet implemented for ' \
                           'concordant [234U/238U]i routine. Axis limits will be ' \
                           'autoscaled.'
-                    self.showErrorDialog(text='Please Note:',
-                            informative_text=msg, return_to_main=False)
+                    self.showErrorDialog(text='Please Note:', informative_text=msg)
                 else:
                     self.axisLimsDialog.exec()
             # Get output address.
@@ -1514,7 +1517,8 @@ class RangeSelectDialog(QDialog):
     with the selection, then reject() is called.
     """
     def __init__(self, parent, text=None, warning_text=None, wb=None, ws=None,
-                 address=None, title='Dialog', check_dim=False, as_string=False):
+                 address=None, title='Dialog', check_dim=False, as_string=False,
+                 button_txt=None):
         super(RangeSelectDialog, self).__init__(parent)
 
         self.parent = parent
@@ -1538,6 +1542,8 @@ class RangeSelectDialog(QDialog):
 
         self.Label.setText(text)
         self.setWindowTitle(title)
+        if button_txt is not None:
+            self.getSelectionButton.setText(button_txt)
 
         self.getSelectionButton.clicked.connect(self.getSelection)
         self.okButton.clicked.connect(self.okEvent)
