@@ -32,7 +32,7 @@ See the DQPB [documentation](https://timpol.github.io/DQPB/) for more details on
 
 # Citation
 
-If using DQPB in published work, please cite the following pre-print article
+If using DQPB in published work, please cite the following pre-print article:
 
 ```
     @article{pollard2022,
