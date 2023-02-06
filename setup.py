@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
 	name='dqpb',
-	version='0.0.2a',
+	version='0.0.2b1',
 	description='A GUI application for U-Pb disequilibrium geochronology',
 	license='MIT',
 	packages=['dqpb'],
