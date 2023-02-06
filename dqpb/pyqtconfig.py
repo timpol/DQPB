@@ -963,7 +963,7 @@ class QSettingsManager(ConfigManagerBase):
         # appName = "dqpb" if sys.platform == "win32" else "dqpb"
         appName = "DQPB"
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope,
-                                   appName, 'DQPB-settings')
+                                   appName, 'DQPB-0.1.1-settings')
         #------------
 
         # self.settings = QSettings()
