@@ -14,10 +14,6 @@ FONT_SIZES = ['6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
 # TODO: move this to config?
 DP_ERROR_WARNING_THRESHOLD = 0.5
 
-PBU_EQUATION_TYPES = [
-    "Ludwig",
-    "Sakata / Guillong"]
-
 # task options map
 TASKS = {"Concordia-intercept age": {
     "fit": "regression",
@@ -31,11 +27,11 @@ TASKS = {"Concordia-intercept age": {
         "age": True,
         "data_types": ["238U-206Pb", "235U-207Pb"]
     },
-    "Pb/U ages": {
+    "Single aliquot ages": {
         "fit": "wtm",
         "series": "both",
         "age": True,
-        "data_types": ["206Pb/238U", "207Pb/235U", "Mod. 207Pb"]
+        "data_types": ["206Pb*/238U", "207Pb*/235U", "207Pb-corrected"]
     },
     "Concordant [234U/238U]i": {
         "fit": "regression",
@@ -59,24 +55,24 @@ TASKS = {"Concordia-intercept age": {
 }
 
 AGE_FULLNAMES = {'tw': 'Tera-Wasserburg',
-                 'iso-Pb6U8': '206Pb/238U isochron',
-                 'iso-Pb7U5': '207Pb/235U isochron'}
+                 'iso-206Pb': '206Pb/238U isochron',
+                 'iso-207Pb': '207Pb/235U isochron'}
 
 
 SHORT_TASK_NAMES = {
     "Concordia-intercept age": "concordia_intercept_age",
     "U-Pb isochron age": "isochron_age",
-    "Pb/U ages": "pbu_age",
+    "Single aliquot ages": "pbu_age",
     "Concordant [234U/238U]i": "forced_concordance",
     "Plot x-y data": "plot_data",
     "Weighted average": "wtd_average"}
 SHORT_DATA_TYPES = {
     "Tera-Wasserburg": "tw",
-    "238U-206Pb": "iso-Pb6U8",
-    "235U-207Pb": "iso-Pb7U5",
-    "206Pb/238U": "Pb6U8",
-    "207Pb/235U": "Pb7U5",
-    "Mod. 207Pb": "mod-207Pb",
+    "238U-206Pb": "iso-206Pb",
+    "235U-207Pb": "iso-207Pb",
+    "206Pb*/238U": "206Pb*",
+    "207Pb*/235U": "207Pb*",
+    "207Pb-corrected": "cor207Pb",
     "other x-y": "other_xy",
     "other": "other",
     "multiple": None,
