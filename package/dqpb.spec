@@ -20,7 +20,7 @@ import subprocess
 # from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 # from DQPB import version
-version = "0.1.1a"
+version = "0.0.2b"
 
 logger = logging.getLogger("pyinstaller")
 
