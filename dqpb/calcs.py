@@ -1199,9 +1199,9 @@ def results_for_diseq_pbu(results, mc_summary=False, uncert='mc',
 
     if uncert == 'mc':
 
-        if age_type in ('206Pb*', '207Pb-corrected') and not DThU_const:
+        if age_type in ('206Pb*', '207Pb-corrected'):
 
-            if not meas_Th232_U238:
+            if not meas_Th232_U238 and not DThU_const:
                 ThU_min = ['Th/U min.']
                 ThU_min_1s = ['1σ']
                 ThU_min_upper_95ci = ['Lower 95% CI']
@@ -1259,9 +1259,9 @@ def results_for_diseq_pbu(results, mc_summary=False, uncert='mc',
 
     else:
         # TODO: upper and lower CI uncessary for analytical uncertainties
-        if age_type in ('206Pb*', '207Pb-corrected') and not DThU_const:
+        if age_type in ('206Pb*', '207Pb-corrected'):
 
-            if not meas_Th232_U238:
+            if not meas_Th232_U238 and not DThU_const:
                 ThU_min = ['Th/U min.']
                 ThU_min_1s = ['1σ']
                 format += [[None], [None]]
