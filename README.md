@@ -9,7 +9,7 @@ DQPB can be used to:
 *	Calculate disequilibrium U-Pb concordia intercept ages on a Tera-Wasserburg diagram
 *	Calculate disequilibrium 238U-206Pb and 235U-207Pb isochron ages 
 *	Calculate disequilibrium single-analysis 206Pb/238U and 207Pb/235U ages
-*	Calculate “modified 207Pb” ages using an approach similar to Sakata (2018)
+*	Calculate “207Pb-correced” ages
 *	Calculate initial equilibrium U-Pb  ages using the above approaches
 *	Compute “concordant” initial [234U/238U] values from isochron age data using the routine described in Engel et al., (2019) 
 *	Perform linear regression using algorithms that are based on classical statistics (i.e., the model 1, 2, and 3 popularised by Isoplot (Ludwig, 2012), or robust statistics (i.e., the spine algorithm of Powell et al., (2020) and a new ‘robust model 2’ algorithm).
