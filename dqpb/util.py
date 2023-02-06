@@ -11,6 +11,8 @@ import numpy as np
 
 from PyQt5.QtGui import QFontDatabase
 
+from pysoplot import stats
+from pysoplot import cfg
 
 logger = logging.getLogger("dqpb.util")
 
@@ -185,3 +187,20 @@ def guess_type(x):
             return float
     # Otherwise, probably string.
     return str
+
+
+def meas_diseq(x, sx, which='a234_238'):
+    """
+    Check if a measured activity ratio is resolvable from radioactive
+    equilibrium with minimum probability accounting for measurement
+    uncertainty.
+    """
+    if which == 'a234_238':
+        mu = cfg.a234_238_eq
+        mu_1s = cfg.a234_238_eq_1s
+    else:
+        mu = cfg.a230_238_eq
+        mu_1s = cfg.a230_238_eq_1s
+    p = stats.two_sample_p(x, sx, mu, mu_1s)
+    diseq = False if p > 0.05 else True
+    return diseq
