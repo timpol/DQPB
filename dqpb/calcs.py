@@ -559,6 +559,8 @@ def wav_other(task):
     if task.output_plot_data:
         logger.warning('output plot data option not yet available for weighted '
                     'average plots')
+        task.retval += "Output plot data not available|The output plot data " \
+                       "option is not yet available for weighted average plots.::"
 
 
 # =========================================================================
@@ -752,7 +754,7 @@ def pbu_age(task):
         task.update_progress(60, "Saving plots to disk... ")
         path = util.save_plot_to_disk(
             fig_dp, task.fig_export_dir,
-            fname="Mod 207Pb data plot",
+            fname="207Pb-corrected data plot",
             file_ext='.'+task.fig_extension
         )
         logger.info(f"isochron plot saved to: '{path}'")
@@ -1376,8 +1378,8 @@ def set_dqpb_config(obj, plot_type='data_point'):
     cfg.seed = np.random.default_rng(obj.rng_seed)
 
     cfg.h = obj.spines_h
-    cfg.mswd_regression_thresholds = (obj.mswd_lim_lower, obj.mswd_lim_upper)
-    cfg.mswd_wav_thresholds = (obj.wav_mswd_lim_lower, obj.wav_mswd_lim_upper)
+    cfg.mswd_ci_thresholds = (obj.mswd_lim_lower, obj.mswd_lim_upper)
+    cfg.mswd_wav_ci_thresholds = (obj.wav_mswd_lim_lower, obj.wav_mswd_lim_upper)
 
     cfg.conc_age_bounds = (obj.eq_conc_min_age, obj.eq_conc_max_age)
     cfg.diseq_conc_age_bounds = [(obj.dq_conc_min_age_1, obj.dq_conc_max_age_1),
