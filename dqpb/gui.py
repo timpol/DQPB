@@ -36,12 +36,12 @@ from PyQt5.uic import loadUi
 from pysoplot import misc
 
 from dqpb import config
-from dqpb import tasks
+from dqpb import setup_calc
 from dqpb import util
 from dqpb.combo import (TASKS, REGRESSION_FITS, WAV_FITS, SHORT_TASK_NAMES,
-                        SHORT_DATA_TYPES, SHORT_FITS, PBU_EQUATION_TYPES,
-                        MPL_V_ALIGNMENTS, MPL_H_ALIGNMENTS, MPL_HISTTYPES,
-                        AGE_PREFIXES, FONT_SIZES, DP_ERROR_WARNING_THRESHOLD,
+                        SHORT_DATA_TYPES, SHORT_FITS, MPL_V_ALIGNMENTS,
+                        MPL_H_ALIGNMENTS, MPL_HISTTYPES, AGE_PREFIXES,
+                        FONT_SIZES, DP_ERROR_WARNING_THRESHOLD,
                         MPL_TICK_DIRECTIONS)
 
 from dqpb.loggers import ConsoleHandler, setUpLoggers
@@ -81,10 +81,18 @@ U235_LABELS = ['A15Label']
 # =============================================================================
 
 class InputError(Exception):
+    """ 
+    Raise when a calculation can't proceed due to a problem with user inputs. 
+    Usually this means that focus should return to the main window.
+    """
     pass
 
 
 class XlError(Exception):
+    """ 
+    Raised when there is a problem connecting to an Excel workbook or reading
+    data from Excel.
+    """
     pass
 
 
@@ -111,9 +119,13 @@ class MainWindow(QMainWindow):
         self.dp_iso86 = None
         self.dp_iso57 = None
         self.DThU_const = None
+        self.ThUmin_data = None
         self.norm_isotope = None
         self.Pb76 = None
         self.Pb76_1s = None
+        
+        # Data returned from the calc thread.
+        self.retval = None
 
         self.console_handler = ConsoleHandler()
 
@@ -137,9 +149,8 @@ class MainWindow(QMainWindow):
                                                     parent=self, text="Select data point labels:", as_string=True)
         self.covMatDialog = RangeSelectDialog(parent=self, title="Covariance Matrix",
                                               text='Select n x n covariance matrix data:')
-        self.minRatioDialog = RangeSelectDialog(self, text='Select mineral Th/U values:',
-                                                warning_text=None,
-                                                title='Spreadsheet data selection')
+        self.ThUminDialog = ThUminSelectDialog(self)
+
         # dialogs
         self.logWindow = LogDialog(self)
         self.progressDialog = ProgressDialog(self)
@@ -236,6 +247,11 @@ class MainWindow(QMainWindow):
         self.sigmaGroup.addButton(self.err1sOpt, 1)
         self.sigmaGroup.addButton(self.err2sOpt, 2)
 
+        # Create age uncertainty radiobutton group
+        self.uncertGroup = QButtonGroup()
+        self.uncertGroup.addButton(self.mcUncertOpt, 1)
+        self.uncertGroup.addButton(self.anUncertOpt, 2)
+
         # Populate error type combo boxes
         self.errTypeCombo.addItems(("abs.", "percent"))
         self.normPbCombo.addItems(["204Pb", "208Pb"])
@@ -325,12 +341,15 @@ class MainWindow(QMainWindow):
             self.fitCombo.setEnabled(False)
             self.selectButton.setEnabled(False)
             self.dataRangeEntry.setEnabled(False)
+            self.initialEqOpt.setChecked(False)
+            self.initialEqOpt.setEnabled(False)
         else:
             self.fitCombo.setEnabled(True)
             self.selectButton.setEnabled(True)
             self.dataRangeEntry.setEnabled(True)
+            self.initialEqOpt.setEnabled(True)
 
-        if task == "Pb/U ages":
+        if task == "Single aliquot ages":
             self.wavCovOpt.setEnabled(True)
         else:
             self.wavCovOpt.setEnabled(False)
@@ -341,7 +360,7 @@ class MainWindow(QMainWindow):
         data_type = self.dataTypeCombo.currentText()
         self.setActivityRatioOpts()
         self.setCovOpts()
-        self.setMcOpt()
+        # self.setMcOpt()
         # set initial_eq option
         if data_type in ("other", "other x-y", "multiple"):
             self.initialEqOpt.setEnabled(False)
@@ -357,7 +376,7 @@ class MainWindow(QMainWindow):
             self.fitCombo.addItems(REGRESSION_FITS)
         else:
             self.fitCombo.addItems(WAV_FITS)
-            if 'Pb/U ages' in task:
+            if 'Single aliquot ages' in task:
                 self.fitCombo.addItems(['no fit'])
 
     def setCovOpts(self):
@@ -381,13 +400,28 @@ class MainWindow(QMainWindow):
             self.errTypeCombo.setEnabled(True)
 
     def setMcOpt(self):
+        """
+        Enable Monte Carlo uncertainty option.
+        """
         task = self.taskCombo.currentText()
-        if task in ('Concordia-intercept age', 'U-Pb isochron age'):
-            self.McOpt.setEnabled(True)
+        if task == 'Concordant [234U/238U]i':
+            self.anUncertOpt.setEnabled(False)
+            self.mcUncertOpt.setEnabled(True)
+            self.mcUncertOpt.setChecked(True)
+        elif task in ('Concordia-intercept age', 'U-Pb isochron age'):
+            if self.initialEqOpt.isChecked():
+                self.anUncertOpt.setEnabled(True)
+                self.mcUncertOpt.setEnabled(True)
+                self.mcUncertOpt.setChecked(True)
+            else:
+                self.anUncertOpt.setEnabled(False)
+                self.mcUncertOpt.setEnabled(True)
+                self.mcUncertOpt.setChecked(True)
+        elif task in ('Plot x-y data', 'Weighted average'):
+            self.anUncertOpt.setEnabled(False)
+            self.mcUncertOpt.setEnabled(False)
         else:
-            # Monte carlo errors for Pb/U agess etc. not yet implemented
-            self.McOpt.setChecked(False)
-            self.McOpt.setEnabled(False)
+            self.anUncertOpt.setEnabled(True)
 
     def setActivityRatioOpts(self):
         task = self.taskCombo.currentText()
@@ -402,8 +436,8 @@ class MainWindow(QMainWindow):
         for x in (U238_ENTRIES + U238_ERR + U235_ENTRIES + U238_LABELS
                   + U235_ERR + U238_COMBOS + U235_COMBOS + U235_LABELS):
             w = getattr(self, x)
-            # note eq. ages not allowed for Mod. 207Pb:
-            if self.initialEqOpt.isChecked() and task != 'Mod. 207Pb':
+            # note eq. ages not allowed for 207Pb-corrected:
+            if self.initialEqOpt.isChecked() and task != '207Pb-corrected':
                 w.setEnabled(False)
             else:
                 w.setEnabled(True)
@@ -423,15 +457,17 @@ class MainWindow(QMainWindow):
                 for x in (U238_ERR + U238_COMBOS + U238_ENTRIES):
                     w = getattr(self, x)
                     w.setEnabled(False)
-            elif task == "Concordant [234U/238U]i":
-                for x in (U238_ERR + U235_ERR + U238_COMBOS + U235_COMBOS):
-                    w = getattr(self, x)
-                    w.setEnabled(True)
-                self.A48Entry.setEnabled(False)
-                self.A48ErrEntry.setEnabled(False)
-                self.A48Combo.setEnabled(False)
 
-        if task == "Pb/U ages":
+        if task == "Concordant [234U/238U]i":
+            for x in (U238_ENTRIES + U235_ENTRIES + U238_ERR + U235_ERR +
+                      U238_COMBOS + U235_COMBOS):
+                w = getattr(self, x)
+                w.setEnabled(True)
+            self.A48Entry.setEnabled(False)
+            self.A48ErrEntry.setEnabled(False)
+            self.A48Combo.setEnabled(False)
+
+        if task == "Single aliquot ages":
             for x in (U238_ENTRIES + U235_ENTRIES + U238_ERR + U235_ERR
                       + U238_COMBOS + U235_COMBOS):
                 if not (x.startswith('A08') or x.startswith('A15')):
@@ -453,13 +489,17 @@ class MainWindow(QMainWindow):
         while self.A15Combo.count() > 0:
             self.A15Combo.removeItem(0)
 
-        if task == "Pb/U ages":
+        if task == "Single aliquot ages":
             self.A08Combo.addItems(['DTh/U const.', 'Th/U melt const.'])
             # self.A48Combo.addItems(['initial'])
             self.A15Combo.addItems(['DPa/U const.'])
         else:
-            self.A08Combo.addItems(['initial', 'present-day'])
+
             self.A48Combo.addItems(['initial', 'present-day'])
+            if task == "Concordant [234U/238U]i":
+                self.A08Combo.addItems(['initial'])
+            else:
+                self.A08Combo.addItems(['initial', 'present-day'])
             self.A15Combo.addItems(['initial'])
 
         # Set back to original values (if legal)
@@ -475,6 +515,7 @@ class MainWindow(QMainWindow):
 
     def initialEqChange(self):
         self.setActivityRatioOpts()
+        self.setMcOpt()
         if self.initialEqOpt.isChecked():
             self.normPbCombo.model().item(1).setEnabled(False)
             self.normPbCombo.setCurrentIndex(0)
@@ -582,16 +623,32 @@ class MainWindow(QMainWindow):
     # =====================================================================
     # Plotting / calc. task options
     # =====================================================================
-    def taskEnd(self, error):
+    def taskEnd(self, exception):
         self.progressDialog.hide_and_reset()
-        if error:
-            msg = "Check the error log for details on what went wrong."
-            self.showErrorDialog(self, text="DQPB encountered an error...",
-                        informative_text=msg)
+
+        # check for returned messages
+        if self.retval is not None:
+            val = self.retval.split("::")
+            for msg in val[:-1]:
+                txt, inform_txt = msg.split("|")
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText(txt)
+                msg.setInformativeText(inform_txt)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec_()
+
+        if exception:
+            self.showErrorDialog(self, text="DQPB encountered an error",
+                    informative_text="Check the error log for details on what "
+                                     "went wrong.")
         else:
-            logger.info("completed")
+            logger.debug("completed")
             self.show()
             self.activateWindow()
+
+    def updateRetval(self, retval):
+        self.retval = retval
 
     def updateStatusBar(self, data):
         max_char = 60
@@ -636,21 +693,21 @@ class MainWindow(QMainWindow):
 
         try:
             # check activity ratio fields
-            if data_type in ("Pb6U8", "Pb7U5", "mod-207Pb"):
+            if data_type in ("206Pb*", "207Pb*", "cor207Pb"):
                 # initial equilibrium option not allowed for Modified 207Pb
                 # ages, and not yet implemented for Pb/u ages, so raise error.
                 if self.initialEqOpt.isChecked():
-                    self.inputError('Input error', 'Initial equilibrium age '
-                             'option not yet available for Pb/U agess.')
+                    self.inputError('Not yet implemented', 'Equilibrium single aliquot '
+                       'age calculations are not yet implemented in DQPB.')
             if task == 'forced_concordance':
                 # show forced-concordance dp selecion dialogue:
                 if not self.fcDialog.exec():
                     raise InputError()      # return to main window
                 # check each data selection
-                self.dp_iso86 = validateSelection(self, self.fcDialog.iso86_dp, 'iso-Pb6U8',
+                self.dp_iso86 = validateSelection(self, self.fcDialog.iso86_dp, 'iso-206Pb',
                                     data_name='data points', shape=None,
                                     check_dp_errors=True, dtype="double")
-                self.dp_iso57 = validateSelection(self, self.fcDialog.iso57_dp, "iso-Pb7U5",
+                self.dp_iso57 = validateSelection(self, self.fcDialog.iso57_dp, "iso-207Pb",
                                     data_name='data points', shape=None,
                                     check_dp_errors=True, dtype="double")
                 if not (self.dp_iso86.shape[0] == self.dp_iso57.shape[0]):
@@ -659,7 +716,7 @@ class MainWindow(QMainWindow):
             else:   # all other task types:
                 self.dp = validateSelection(self, self.selectDpWindow.range.value,
                                 data_type, data_name='data points', shape=None,
-                                check_dp_errors=False, dtype="double")
+                                check_dp_errors=True, dtype="double")
             # Show data label selection window:
             if self.dpLabelOpt.isChecked():
                 if not self.selectLabelsWindow.exec():
@@ -677,22 +734,22 @@ class MainWindow(QMainWindow):
             else:
                 self.dp_labels = None
             # Show Th/U_min dialog
-            if data_type in ("Pb6U8", "mod-207Pb"):
+            if data_type in ("206Pb*", "cor207Pb"):
                 if not self.DThU_const:
-                    if not self.minRatioDialog.exec():
+                    self.ThUminDialog.n = self.dp.shape[0]
+                    if not self.ThUminDialog.exec():
                         raise InputError()      # task cancelled
-                    self.ThU_min = validateSelection(self, self.minRatioDialog.data,
-                                                'ThU_min', data_name='Th/U min. ',
-                                                check_dp_errors=False,
-                                                shape=(self.dp.shape[0],),
-                                                dtype='double')
-
+                    else:
+                        self.ThUmin_data = validateSelection(
+                                self, self.ThUminDialog.range.value, "ThU_min",
+                                data_name='Th/U_min', check_dp_errors=False,
+                                shape=None, dtype='double')
             if not self.initialEqOpt.isChecked() and \
                     data_type not in ('other', 'other_xy'):
-                validateDiseqState(self, task)
+                validateDiseqState(self, data_type)
             validateInputs(self, task, data_type)
             # Show common Pb76 dialog
-            if data_type == 'mod-207Pb':
+            if data_type == 'cor207Pb':
                 if not self.comPb76Dialog.exec():
                     raise InputError()          # task cancelled
             # Show covariance matrix dialog.
@@ -731,27 +788,57 @@ class MainWindow(QMainWindow):
                 else:
                     self.axisLimsDialog.exec()
             # Get output address.
-            if task == "forced_concordance":
-                self.outputAddressDialog.setDefault(self.fcDialog.iso86_range.offset(
-                    row_offset=self.fcDialog.iso86_range.rows.count + 1).resize(1, 1))
-            else:
-                dp_range = self.selectDpWindow.range
-                self.outputAddressDialog.setDefault(dp_range.offset(
-                    row_offset=dp_range.rows.count + 1).resize(1, 1))
-            if not self.outputAddressDialog.exec():
-                raise InputError('task cancelled')
+            output_range_ok = False
+            while not output_range_ok:
+                if task == "forced_concordance":
+                    self.outputAddressDialog.setDefault(self.fcDialog.iso86_range.offset(
+                        row_offset=self.fcDialog.iso86_range.rows.count + 1).resize(1, 1))
+                else:
+                    dp_range = self.selectDpWindow.range
+                    self.outputAddressDialog.setDefault(dp_range.offset(
+                        row_offset=dp_range.rows.count + 1).resize(1, 1))
+                if not self.outputAddressDialog.exec():
+                    raise InputError('task cancelled')
+
+                output_range_ok = self.overwriteCheck()
 
             try:
                 task_opts = getTaskOpts(self, task, data_type)
             except Exception as e:
                 logger.exception(e.__traceback__)
-                self.inputError('Unexpected error.', 'Error compiling plot / '
-                                'calc. task options. See error log for '
+                self.inputError('Unexpected error', 'Error compiling plotting / '
+                                'calculation task options. See error log for '
                                 'further details.')
         except InputError:
             self.show()     # return to main window
         else:
+            self.retval = None          # reset retval
             runTask(self, task_opts)    # execute plot / calc task.
+
+    def overwriteCheck(self):
+        """
+        Check if printed results are likely to overwrite data, and if so, offer
+        to change output location.
+        """
+        output_range_ok = True
+        print_size = estimatePrintRange(self)
+        output_range = xw.Range(self.outputAddressDialog.range.get_address())
+        output_range = output_range.resize(row_size=print_size[0],
+                                           column_size=print_size[1])
+        empty = output_range.value is None or all([item is None for sublist 
+                    in output_range.value for item in sublist])
+        if not empty:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Excel data may be over-written by results")
+            msg.setInformativeText("Would you like to change "
+                                   "the output location?")
+            msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msg.setDefaultButton(QMessageBox.Yes)
+            retval = msg.exec_()
+            output_range_ok = (retval == QMessageBox.No)
+
+        return output_range_ok
 
 
 # =============================================================================
@@ -760,39 +847,73 @@ class MainWindow(QMainWindow):
 
 def validateDiseqState(main, data_type):
     """ """
-    if data_type in ('Pb6U8', 'Pb7U5', 'mod-207Pb'):
+    # if data_type in ('206Pb*', '207Pb*', 'cor207Pb'):
         # Get partition coefficient ratio data
-        if data_type in ('Pb6U8', 'mod-207Pb'):
-            if main.DThU_const:
-                validateSelection(main, main.selectDpWindow.range.value,
-                            'ThU_min', data_name='data point',
-                            check_dp_errors=False, shape=(main.n,), dtype='double')
-            # Check ThU min values are of correct type and size.
-            try:
-                main.ThU_min = np.array(main.minRatioDialog.ThU_min, dtype='double')
-            except:
-                main.inputError('Data selection error', "Error reading Th/U "
-                        "min. values from spreadsheet. Try "
-                        "double checking data selection.")
-
-    if data_type in ('tw', 'wc', 'Pb6U8', 'Pb7U5'):
-        # Check that no activity ratio fields are left blank.
+        # if data_type in ('206Pb*', 'cor207Pb'):
+        #     if main.DThU_const:
+        #         validateSelection(main, main.selectDpWindow.range.value,
+        #                     'ThU_min', data_name='data point',
+        #                     check_dp_errors=False, shape=(main.n,), dtype='double')
+        #     # Check ThU min values are of correct type and size.
+        #     try:
+        #         main.ThU_min = np.array(main.ThUminDialog.ThU_min, dtype='double')
+        #     except:
+        #         main.inputError('Data selection error', "Error reading Th/U "
+        #                 "min. values from spreadsheet. Try "
+        #                 "double checking data selection.")
+    
+    # Check that no activity ratio fields are left blank
+    if data_type in ('tw', 'wc', '206Pb*', '207Pb*'):    
         for x in (U238_ENTRIES + U238_ERR + U235_ENTRIES + U235_ERR):
             w = getattr(main, x)
             if w.text() == "":
                 main.inputError('Data selection error',
                     "Activity ratio fields cannot be left blank")
 
+    # check measured activity ratios are resolvable from equilibrium
+    if (data_type in ('tw', 'wc', 'iso-206Pb') and not
+        main.initialEqOpt.isChecked()):
+        diseq_234_238 = True
+        diseq_230_238 = True
+        if main.A48Combo.currentText() == 'present-day':
+            a234_238 = float(main.A48Entry.text())
+            a234_238_1s = float(main.A48ErrEntry.text())
+            diseq_234_238 = util.meas_diseq(a234_238, a234_238_1s)
+        if main.A08Combo.currentText() == 'present-day':
+            a230_238 = float(main.A08Entry.text())
+            a230_238_1s = float(main.A08ErrEntry.text())
+            diseq_230_238 = util.meas_diseq(a230_238, a230_238_1s, which='a230_238')
+
+        if not diseq_234_238 or not diseq_230_238:
+            ratio = 'ratio'
+            if diseq_230_238:
+                bad_ratio = '234U/238U activity ratio is'
+            elif diseq_234_238:
+                bad_ratio = '230Th/238U activity ratio is'
+            else:
+                bad_ratio = '234U/238U and 230Th/238U activity ratios are'
+                ratio = 'ratios'
+
+            txt = f"The input measured {bad_ratio} not resolvable from " \
+                  f"radioactive equilibrium with 95% confidence. Monte Carlo " \
+                  f"simulation will not proceed because the computed " \
+                  f"age uncertainties may be unreliable.\n\n " \
+                  f"Do you wish to continue with age calculation?"
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText(f"Measured activity {ratio} not resolvable from equilibrium")
+            msg.setInformativeText(txt)
+            msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            retval = msg.exec_()
+
+            if retval == QMessageBox.No:
+                raise InputError
+            
 
 def validateInputs(main, task, data_type):
-    """ Check other user plot / calc taks user options.
+    """ 
+    Check other calc options.
     """
-    # if data_type == 'mod-207Pb':
-    #     if main.prefsWindow.Pb76Entry.text() is '' \
-    #             or main.prefsWindow.Pb76ErrEntry.text() is '':
-    #         main.inputError('Data input error.', 'Common lead 207Pb/206Pb ratio and '
-    #             'error values must be set for a modified 207Pb age. '
-    #             '\n\nGo to the Numerical tab in the Preferences window.')
     if task == 'concordia_intercept_age' and not main.initialEqOpt.isChecked():
         min_age = float(main.prefsWindow.concintMinAgeEntry.text())
         max_age = float(main.prefsWindow.concintMaxAgeEntry.text())
@@ -804,13 +925,15 @@ def validateInputs(main, task, data_type):
                         'tab in the to set disequilbrium age guess options.')
 
 
+
 def validateSelection(main, data, array_type, data_name='data point',
             check_dp_errors=True, shape=None, dtype='double'):
     """
     Check data point selection includes appropriate number of rows and columns.
+    Returns data as an array.
     """
-    assert array_type in ("tw", "wc", "mod-207Pb", "iso-Pb7U5", "iso-Pb6U8",
-                         "Pb6U8", "Pb7U5", "other_xy", "other", "covmat",
+    assert array_type in ("tw", "wc", "cor207Pb", "iso-207Pb", "iso-206Pb",
+                         "206Pb*", "207Pb*", "other_xy", "other", "covmat",
                          "ThU_min", 'dp_labels')
     try:
         data = np.asarray(data, dtype=dtype)
@@ -819,7 +942,7 @@ def validateSelection(main, data, array_type, data_name='data point',
                        f'numeric array of type {dtype}. Check all elements are '
                        f'of appropriate data type.')
     if data.ndim == 0 and array_type in \
-            ("tw", "wc", "mod-207Pb", "iso-Pb7U5", "iso-Pb6U8"):
+            ("tw", "wc", "cor207Pb", "iso-207Pb", "iso-206Pb"):
         main.inputError("Data selection error", f"Date point selection must "
                     f"include more than one cell.")
 
@@ -830,7 +953,7 @@ def validateSelection(main, data, array_type, data_name='data point',
                                 f'{data_name.capitalize()} selection cannot '
                                 f'contain empty cells.')
 
-    if array_type in ("tw", "wc", "mod-207Pb", "iso-Pb6U8", "iso-Pb7U5",
+    if array_type in ("tw", "wc", "cor207Pb", "iso-206Pb", "iso-207Pb",
                      "other_xy"):
         if data.shape[0] < 2:
             main.inputError('Data selection error',
@@ -840,12 +963,12 @@ def validateSelection(main, data, array_type, data_name='data point',
             main.inputError('Data selection error',
                             f"4 or 5 columns must be included in a for a "
                             f"{array_type} selection.")
-    elif array_type in ('other', 'Pb6U8', 'Pb7U5'):
+    elif array_type in ('other', '206Pb*', '207Pb*'):
         if array_type == "other" and main.covOpt.isChecked():
                 if data.ndim != 1:
                     main.inputError("Data selection error", f"Data point selection "
-                                   f"must contain 1 column if inputting errors as covariance "
-                                   f"matrix.")
+                                   f"must contain 1 column if inputting errors "
+                                   f"as covariance matrix.")
         else:
             if data.ndim != 2 or data.shape[1] != 2:
                 # note: inputting errors as a covariance matrix not yet allowed...
@@ -864,10 +987,6 @@ def validateSelection(main, data, array_type, data_name='data point',
         if data.shape != shape:
             main.inputError("Data selection error", f"Number of "
                 f"data point labels must equal number of data points.")
-    elif array_type == 'ThU_min':
-        if data.shape != shape:
-            main.inputError("Data selection error", f"Number of Th/U min. values "
-                f"must equal number of data points.")
 
     if check_dp_errors and data.ndim > 1:
         # Check data point errors are reasonable
@@ -884,18 +1003,192 @@ def validateSelection(main, data, array_type, data_name='data point',
             a = 1. if error_type == 'abs.' else v
             b = 0.01 if 'per' in error_type else 1.
             sv = e * a * b / sigma
+
             if np.any(sv / v > DP_ERROR_WARNING_THRESHOLD):
                 dialog = QMessageBox(parent=main)
                 dialog.setIcon(QMessageBox.Warning)
-                dialog.setText("Data point errors seem quite large.")
+                dialog.setText("Data point uncertainties seem quite large.")
                 dialog.setInformativeText(
-                    f'Relative errors on one or more data points exceed expected threshold for '
-                    f'{array_type} data type. Are you sure you wish to continue?')
+                    f'Assigned uncertainties on one or more data points exceed '
+                    f'the expected threshold. Please ensure that the correct '
+                    f'input uncertainty type and sigma level was selected. '
+                    f'\nAre you sure you wish to continue?')
                 dialog.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
                 retval = dialog.exec()
                 if retval != QMessageBox.Yes:
-                    raise InputError('task cancelled')
+                    raise InputError
+
     return data
+
+
+def estimatePrintRange(parent):
+    """
+    Estimate the cell dimensions in spreadsheet that will be taken up by printed
+    results.
+
+    Notes
+    ------
+    Figures are not included since they always come at the end and do not
+    over-write Excel data.
+
+    """
+    task = SHORT_TASK_NAMES[parent.taskCombo.currentText()]
+    data_type = SHORT_DATA_TYPES[parent.dataTypeCombo.currentText()]
+    fit = SHORT_FITS[parent.fitCombo.currentText()]
+    print_settings = parent.printSettingsOpt.isChecked()
+    eq = parent.initialEqOpt.isChecked()
+    mc = parent.mcUncertOpt.isChecked()
+    mc_summary = parent.McSummaryOpt.isChecked()
+    meas_a234_238 = parent.A48Combo.currentText() == 'present-day'
+    meas_a230_238 = parent.A08Combo.currentText() == 'present-day'
+    save_plots = parent.savePlotsOpt.isChecked()
+
+    row = 0
+    col = 0
+
+    if task in ('concordia_intercept_age', 'isochron_age', 'plot_data'):
+        col = 2
+        # print opts
+        if print_settings:
+            row += 2
+            if fit is not None:
+                row += 4
+                if fit == 'rs':
+                    row += 1
+            if data_type in ('tw', 'wc'):
+                if eq:
+                    row += 3
+                else:
+                    row += 11
+            if data_type.startswith('iso'):
+                if '206Pb' in data_type:
+                    if eq:
+                        row += 2
+                    else:
+                        row += 8
+                else:
+                    if eq:
+                        row += 2
+                    else:
+                        row += 4
+            if task != 'plot_data':
+                if not eq:
+                    row += 2
+                if mc:
+                    row += 5
+            if fit is not None and save_plots:
+                row += 1
+        # fit results
+        if fit is not None:
+            row += 2
+            if fit.startswith('c'):
+                row += 12
+            else:
+                row += 9
+        # age
+        if eq:
+            row += 4
+            if mc:
+                row += 8
+                if mc_summary:
+                    row += 2
+        else:
+            if parent.outputEqOpt.isChecked():
+                row += 4
+            row += 9
+            if task == 'concordia_intercept_age' or data_type.endswith('206Pb'):
+                if meas_a234_238:
+                    row += 5
+                if meas_a230_238:
+                    row += 5
+            if mc_summary:
+                row += 4
+
+    # Single aliquot age results
+    elif task == 'pbu_age':
+        if print_settings:
+            row += 5
+            if not eq:
+                row += 1
+            if fit is not None:
+                if fit.startswith('rs'):
+                    row += 1
+            if data_type.startswith('cor'):
+                row += 2    # common Pb
+                row += 7    # upb const
+            elif data_type.startswith('206'):
+                row += 4    # upb const
+            elif data_type.startswith('207'):
+                row += 2    # upb const
+            if data_type.startswith(('cor', '206')):
+                if parent.DThU_const:
+                    row += 3
+                else:
+                    row += 4
+            if data_type.startswith(('cor', '207')):
+                row += 2
+            if mc:
+                row += 5    # mc opts
+            if save_plots:
+                row += 1
+
+        n = parent.dp.shape[0]
+
+        if eq:
+            # TODO: not yet implemented
+            pass
+        else:
+            if parent.outputEqOpt.isChecked():
+                # TODO: not yet implemented
+                pass
+            row += (2 + n)
+            col = 4
+            if mc:
+                col += 2
+                if mc_summary:
+                    col += 3
+
+        # wav
+        if fit is not None:
+            if fit.startswith('c'):
+                row += 10
+        else:
+            row += 8
+
+    
+    elif task == 'forced_concordance':
+        col = 2
+        # assumes classical fit for now
+        if print_settings:
+            row += 7
+            row += 4    # activity ratios
+            row += 5    # mc opts
+            row += 7    # upb const
+            if save_plots:
+                row += 1
+        # iso-207Pb fit
+        row += 2
+        row += 12
+        # iso-206Pb fit
+        row += 2
+        row += 12
+        if parent.outputEqOpt.isChecked():
+            row += 4
+        # results
+        row += 10
+        if mc_summary:
+            row += 4
+
+    elif task == 'wtd_average':
+        col = 2
+        if print_settings:
+            row += 4
+        if fit.startswith('c'):
+            row += 10
+        else:
+            row += 8
+
+    return row, col
 
 
 def getTaskOpts(main, task, data_type):
@@ -950,7 +1243,7 @@ def getTaskOpts(main, task, data_type):
     opts['x_label'] = main.axisLabelsDialog.x_label
     opts['y_label'] = main.axisLabelsDialog.y_label
     # Convert string to floats
-    if data_type == 'mod-207Pb':
+    if data_type == 'cor207Pb':
         opts['Pb76'] = float(opts['Pb76'])
         if opts['Pb76_1s'] == '':
             opts['Pb76_1s'] = 0.
@@ -959,13 +1252,43 @@ def getTaskOpts(main, task, data_type):
     else:
         opts['Pb76'] = None
         opts['Pb76_1s'] = None
-    # Add types to opts:
-    if data_type in ('Pb6U8', 'mod-207Pb'):
-        opts['DThU_const'] = main.DThU_const
+
+    # Get partition coefficient inputs:
+    opts['DThU_const'] = None
+    opts['ThU_melt'] = None
+    opts['ThU_melt_1s'] = None
+    opts['DThU'] = None
+    opts['DThU_1s'] = None
+    opts['DPaU'] = None
+    opts['DPaU_1s'] = None
+    opts['meas_Th232_U238'] = False
+    opts['Pb208_206'] = None
+    opts['Pb208_206_1s'] = None
+    opts['Th232_U238'] = None
+    opts['Th232_U238_1s'] = None
+
+    if data_type in ('206Pb*', 'cor207Pb'):
         if not main.DThU_const:
-            opts['ThU_min'] = np.array(main.minRatioDialog.data).ravel()
+            opts['DThU_const'] = False
+            opts['ThU_melt'] = opts['A08']
+            opts['ThU_melt_1s'] = opts['A08_err']
+            if opts['ThU_min_type'] == '232Th/238U':
+                opts['meas_Th232_U238'] = True
+                opts['Th232_U238'] = main.ThUmin_data[:, 0]
+                opts['Th232_U238_1s'] = main.ThUmin_data[:, 1]
+            else:
+                opts['meas_Th232_U238'] = False
+                opts['Pb208_206'] = main.ThUmin_data[:, 0]
+                opts['Pb208_206_1s'] = main.ThUmin_data[:, 1]
         else:
-            opts['ThU_min'] = None
+            opts['DThU_const'] = True
+            opts['DThU'] = opts['A08']
+            opts['DThU_1s'] = opts['A08_err']
+
+    if data_type in ('207Pb*', 'cor207Pb'):
+        opts['DPaU'] = opts['A15']
+        opts['DPaU_1s'] = opts['A15_err']
+
     # Add covariance matrix
     if main.cov is not None:
         opts['cov'] = main.cov
@@ -1055,6 +1378,7 @@ def runTask(parent, task_opts):
 
         parent.worker.msg_signal.connect(parent.progressDialog.updateMessage)
         parent.worker.progress_signal.connect(parent.progressDialog.updateProgress)
+        parent.worker.ret_signal.connect(parent.updateRetval)
 
         # start the thread
         parent.progressDialog.show()
@@ -1086,6 +1410,7 @@ class TaskWorker(QThread):
     finished = pyqtSignal(bool)
     msg_signal = pyqtSignal(str)
     progress_signal = pyqtSignal(int)
+    ret_signal = pyqtSignal(str)
 
     def __init__(self, parent, task_opts, progressDialog):
         super().__init__()
@@ -1098,12 +1423,12 @@ class TaskWorker(QThread):
         Run a plotting or computation task in a separate thread.
         """
         try:
-            task = tasks.Task(self.task_opts, self.msg_signal,
-                            self.progress_signal)
+            task = setup_calc.Task(self.task_opts, self.msg_signal,
+                            self.progress_signal, self.ret_signal)
             task.run()
         except:
-            logger.exception(f"error ecnountered while executing "
-                             f"{self.task_opts['task']}")
+            logger.exception(f"exception encountered while executing "
+                     f"{self.task_opts['task']}")
             if debug:
                 self.parent.taskEnd(True)
             else:
@@ -1230,7 +1555,7 @@ class RangeSelectDialog(QDialog):
             msg = 'Unable able to find data selection in an open Excel ' \
                   'workbook. This may mean that no cells have been ' \
                   'selected or it may be the result of a permissions error.'
-            self.showErrorDialog("Error getting spreadsheet error.",
+            self.showErrorDialog("Error accessing spreadsheet data",
                      informative_text=msg)
 
     def okEvent(self):
@@ -1242,28 +1567,28 @@ class RangeSelectDialog(QDialog):
             if any([x in ("", None) for x in (self.workbookEntry.text(),
                     self.worksheetEntry.text(), self.addressEntry.text())]):
                 msg = 'Selection fields cannot be left blank.'
-                self.showErrorDialog("Problem with spreadsheet data selection..",
+                self.showErrorDialog("Problem with spreadsheet data selection",
                                     informative_text=msg)
                 raise XlError
 
             # Check excel app is open
             if xw.apps.count < 1:
                 msg = 'No open instances of Excel could be found.'
-                self.showErrorDialog("Problem with spreadsheet data selection..",
+                self.showErrorDialog("Problem with spreadsheet data selection",
                                      informative_text=msg)
                 raise XlError
 
             if xw.books.count < 1 or self.workbookEntry.text() not in \
                     [x.fullname for x in xw.books] + [x.name for x in xw.books]:
                 msg = f'Could not find open workbook: {self.workbookEntry.text()}.'
-                self.showErrorDialog("Problem with spreadsheet data selection..",
+                self.showErrorDialog("Problem with spreadsheet data selection",
                             informative_text=msg)
                 raise XlError
 
             if self.worksheetEntry.text() not in \
                     [x.name for x in xw.Book(self.workbookEntry.text()).sheets]:
                 self.showErrorDialog(
-                    "Problem with spreadsheet data selection..",
+                    "Problem with spreadsheet data selection",
                     informative_text=f'Could not find sheet named '
                     f'{self.worksheetEntry.text()} in workbook: '
                     f'{self.workbookEntry.text()}.')
@@ -1280,26 +1605,170 @@ class RangeSelectDialog(QDialog):
                     self.data = self.range.value
             except:
                 msg = ('Ensure field entries are correct, and that the workbook is open, '
-                    'not being used by another program, and is not passwored protected.')
-                self.showErrorDialog("Problem with spreadsheet data selection..", informative_text=msg)
+                    'is not being used by another program, and is not passwored protected.')
+                self.showErrorDialog("Problem with spreadsheet data selection", informative_text=msg)
             else:
+                # TODO: why does this reference covariance matrix specifically? Is it a copy-paste error?
                 shape = self.range.shape
                 if self.nrow is not None and shape[0] != self.nrow:
                     msg = (f'Mismatch between number of data points ({self.nrow}) '
                            f'and size of covariance matrix ({shape[0]} x '
                            f'{shape[1]}).')
-                    self.showErrorDialog("Problem with spreadsheet data selection..",
+                    self.showErrorDialog("Problem with spreadsheet data selection",
                                          informative_text=msg)
                 if self.ncol is not None and shape[1] != self.ncol:
                     msg = (f'Mismatch between number of data points ({self.nrow}) and '
                            f'size of covariance matrix ({shape[0]} x '
                            f'{shape[1]}).')
-                    self.showErrorDialog("Problem with spreadsheet data selection..",
+                    self.showErrorDialog("Problem with spreadsheet data selection",
                                          informative_text=msg)
 
         except XlError:
             pass
         
+        else:
+            # update local attributes:
+            self.wb = self.workbookEntry.text()
+            self.ws = self.worksheetEntry.text()
+            self.address = self.addressEntry.text()
+            self.accept()
+
+    def closeEvent(self, event):
+        # save settings?
+        self.reject()
+        self.parent.show()
+
+    def showErrorDialog(self, text, informative_text=None,
+                        icon=QMessageBox.Warning):
+        # Show error dialog
+        self.dialog = QMessageBox(parent=self, text=text, icon=icon)
+        self.dialog.setInformativeText(informative_text)
+        self.dialog.setStandardButtons(QMessageBox.Ok)
+        self.dialog.exec()
+
+    def setDefault(self, default):
+        # Set defaults.
+        try:
+            rng = default
+        except:
+            logger.debug('could not set default range for range select dialog')
+        else:
+            self.workbookEntry.setText(rng.sheet.book.fullname)
+            self.worksheetEntry.setText(rng.sheet.name)
+            self.addressEntry.setText(rng.address)
+
+
+# =============================================================================
+# Th/U_min data selection dialog
+# =============================================================================
+class ThUminSelectDialog(QDialog):
+    """
+
+    """
+    def __init__(self, parent):
+        super(ThUminSelectDialog, self).__init__(parent)
+
+        self.parent = parent
+
+        # Local attributes
+        self.n = None
+        self.wb = None
+        self.ws = None
+        self.address = None
+
+        self.range = None
+        self.data = None
+
+        uiPath = os.path.join("uis", "ThU_select.ui")
+        loadUi(resourceAbsolutePath(uiPath), baseinstance=self,
+               package="dqpb")
+
+        self.Label.setText('Select measured data for each aliquot in spreadsheet. '
+                           '\nUncertainties should be 1\u03C3 (abs.)')
+        self.ThUminCombo.addItems(['232Th/238U',
+                                   'radiogenic 208Pb/206Pb'])
+
+        self.getSelectionButton.clicked.connect(self.getSelection)
+        self.okButton.clicked.connect(self.okEvent)
+        self.cancelButton.clicked.connect(self.close)
+
+        # Add pyqtconfig widget handlers
+        bind_pyqtconfig_handlers(self)
+
+    def getSelection(self):
+        """ Check spreadsheet selection is accessible.
+        """
+        try:
+            wb, ws, address, range = get_xl_selection()
+            self.workbookEntry.setText(wb)
+            self.worksheetEntry.setText(ws)
+            self.addressEntry.setText(address)
+        except XlError:
+            msg = 'Unable able to find data selection in an open Excel ' \
+                  'workbook. This may mean that no cells have been ' \
+                  'selected or it may be the result of a permissions error.'
+            self.showErrorDialog("Error getting spreadsheet error.",
+                     informative_text=msg)
+
+    def okEvent(self):
+        """ When OK is clicked, check data and call accept() if all good, or
+        else show error and call reject().
+        """
+        try:
+            # If no selection has been made, then return.
+            if any([x in ("", None) for x in (self.workbookEntry.text(),
+                    self.worksheetEntry.text(), self.addressEntry.text())]):
+                msg = 'Selection fields cannot be left blank.'
+                self.showErrorDialog("Problem with spreadsheet data selection",
+                                    informative_text=msg)
+                raise XlError
+
+            # Check excel app is open
+            if xw.apps.count < 1:
+                msg = 'No open instances of Excel could be found.'
+                self.showErrorDialog("Problem with spreadsheet data selection",
+                                     informative_text=msg)
+                raise XlError
+
+            if xw.books.count < 1 or self.workbookEntry.text() not in \
+                    [x.fullname for x in xw.books] + [x.name for x in xw.books]:
+                msg = f'Could not find open workbook: {self.workbookEntry.text()}.'
+                self.showErrorDialog("Problem with spreadsheet data selection",
+                            informative_text=msg)
+                raise XlError
+
+            if self.worksheetEntry.text() not in \
+                    [x.name for x in xw.Book(self.workbookEntry.text()).sheets]:
+                self.showErrorDialog(
+                    "Problem with spreadsheet data selection",
+                    informative_text=f'Could not find sheet named '
+                    f'{self.worksheetEntry.text()} in workbook: '
+                    f'{self.workbookEntry.text()}.')
+                raise XlError
+
+            # Read data from spreadsheet
+            try:
+                self.range = xw.Book(self.workbookEntry.text())\
+                                .sheets[self.worksheetEntry.text()]\
+                                .range(self.addressEntry.text())
+            except:
+                msg = ('Ensure field entries are correct, and that the workbook is open, '
+                    'is not being used by another program, and is not passwored protected.')
+                self.showErrorDialog("Problem with spreadsheet data selection", informative_text=msg)
+            else:
+                shape = self.range.shape
+                if shape != (self.n, 2):
+                    msg = (f'Mismatch between the number of data points '
+                           f'and the shape of the selected range. The selection '
+                           f'should be ({self.n} x 2), with uncertainties '
+                           f'(1\u03C3 abs.) in the second column.')
+                    self.showErrorDialog("Problem with spreadsheet data selection",
+                                         informative_text=msg)
+                    return
+
+        except XlError:
+            pass
+
         else:
             # update local attributes:
             self.wb = self.workbookEntry.text()
@@ -1376,20 +1845,20 @@ class FcDataDialog(QDialog):
 
             if w.text() in (None, ""):
                 self.showErrorDialog(
-                    "Problem with spreadsheet data selection..",
+                    "Problem with spreadsheet data selection",
                     informative_text='Selection field cannot be left blank.')
                 return
 
         # Check excel app is open
         if xw.apps.count < 1:
             self.showErrorDialog(
-                "Problem with spreadsheet data selection..",
+                "Problem with spreadsheet data selection",
                 informative_text='No open instances of Excel could be found.')
             return
 
         if xw.books.count < 1:
             self.showErrorDialog(
-                "Problem with spreadsheet data selection..",
+                "Problem with spreadsheet data selection",
                 informative_text='No open Excel workbooks could be found.')
             return
 
@@ -1399,7 +1868,7 @@ class FcDataDialog(QDialog):
                 in [x.fullname for x in xw.books] + [x.name for x in xw.books]:
 
                 self.showErrorDialog(
-                    "Problem with spreadsheet data selection..",
+                    "Problem with spreadsheet data selection",
                     informative_text=f'Could not find open workbook: '
                                      f'{self.workbookEntry.text()}.')
                 return
@@ -1410,7 +1879,7 @@ class FcDataDialog(QDialog):
                  .sheets]:
 
                 self.showErrorDialog(
-                    "Problem with spreadsheet data selection..",
+                    "Problem with spreadsheet data selection",
                     informative_text=f'Could not find sheet named '
                     f'{self.worksheetEntry.text()} in workbook: '
                     f'{self.workbookEntry.text()}.')
@@ -1424,7 +1893,7 @@ class FcDataDialog(QDialog):
                 setattr(self, f'{diagram}_dp', range_.value)
             except:
                 self.showErrorDialog(
-                    "Problem with spreadsheet data selection..",
+                    "Problem with spreadsheet data selection",
                     informative_text='Error reading Excel address. Ensure '
                     'field entries are correct and that the workbook is open, and '
                     'not being used by another program nor passwored protected.')
@@ -1533,7 +2002,7 @@ class AxisLimsDialog(QDialog):
     """
     User inputs will be retained for session but not stored in settings file.
     """
-    widget_map = {
+    axis_widgets = {
         'dpp_xmin': 'dpXminEntry',
         'dpp_xmax': 'dpXmaxEntry',
         'dpp_ymin': 'dpYminEntry',
@@ -1558,11 +2027,11 @@ class AxisLimsDialog(QDialog):
         self.cancelButton.clicked.connect(self.reject)
 
         # Set defaults to empty string. This will be converted to None later.
-        for v in self.widget_map.keys():
+        for v in self.axis_widgets.keys():
             setattr(self, v, '')
 
     def okEvent(self):
-        for k, v in self.widget_map.items():
+        for k, v in self.axis_widgets.items():
             w = getattr(self, v)
             setattr(self, k, w.text())
         self.accept()
@@ -1668,7 +2137,7 @@ class ErrorDialog(QMessageBox):
 
 
 class TaskErrorDialog(ErrorDialog):
-    def __init__(self, text="DQPB encountered an error..."):
+    def __init__(self, text="DQPB encountered an error"):
         super().__init__(text, icon_type=QMessageBox.Critical)
         # Would be good to add a button to show log here...
 
@@ -1696,11 +2165,6 @@ class PreferencesWindow(QMainWindow):
         # Populate combo boxes.
         self.figFileTypeCombo.addItems(get_mpl_filetypes())
         self.spreadsheetFontCombo.addItems(['none'] + get_mpl_fonts()[0])
-        self.pbuEquationsCombo.addItems(PBU_EQUATION_TYPES)
-
-        # Add PbU equations callback
-        self.pbuEquationsCombo.currentIndexChanged.connect(
-                self.parent.setActivityRatioOpts)
 
         # Add pyqtconfig widget handlers
         bind_pyqtconfig_handlers(self)
