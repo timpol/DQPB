@@ -690,7 +690,7 @@
                <item row="2" column="0">
                 <widget class="QCheckBox" name="rnArvOpt">
                  <property name="text">
-                  <string>Reject negative activity / atomic ratio trials</string>
+                  <string>Reject negative activity / abundance ratio trials</string>
                  </property>
                 </widget>
                </item>
