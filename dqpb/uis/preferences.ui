@@ -285,50 +285,10 @@
              <x>0</x>
              <y>0</y>
              <width>433</width>
-             <height>706</height>
+             <height>638</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_9">
-            <item>
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="title">
-               <string>Age calculation options</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <layout class="QGridLayout" name="gridLayout_11">
-                 <item row="0" column="1">
-                  <widget class="QComboBox" name="pbuEquationsCombo">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <spacer name="horizontalSpacer_38">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_29">
-                   <property name="text">
-                    <string>Pb/U age equations</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
             <item>
              <widget class="QGroupBox" name="groupBox_4">
               <property name="title">
