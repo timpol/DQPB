@@ -10,7 +10,7 @@ Facility and released under an MIT licence.
 see: https://github.com/mretegan/crispy
 
 """
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import os
 import sys
