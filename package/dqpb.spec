@@ -20,7 +20,7 @@ import subprocess
 # from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 # from DQPB import version
-version = "0.1.0"
+version = "0.1.1a"
 
 logger = logging.getLogger("pyinstaller")
 
@@ -50,13 +50,6 @@ hooksconfig = {
                       "backends": ["Agg", "pdf", "pgf", "svg", "ps"],
                   },
               }
-# version 5.4.1 has bug that precludes use of list, so just include all.
-# hooksconfig={
-#     "matplotlib": {
-#         "backends": "all"
-#     }
-# }
-
 
 a = Analysis(
     [os.path.join(package_path, "__main__.py")],
