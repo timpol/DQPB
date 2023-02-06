@@ -3,10 +3,10 @@
 
 """
 
-import warnings
 import logging
 import numpy as np
 
+import pysoplot
 from pysoplot import cfg
 from pysoplot import concordia
 from pysoplot import isochron
@@ -14,8 +14,10 @@ from pysoplot import plotting
 from pysoplot import regression
 from pysoplot import wtd_average
 from pysoplot import transform
+from pysoplot import misc
 from pysoplot import upb
-from pysoplot import uxpb
+from pysoplot import dqpb
+from pysoplot import exceptions
 
 from dqpb import spreadsheet
 from dqpb import combo
@@ -43,21 +45,25 @@ def plot_data(task):
         opts += [f'assume initial eq.: {task.eq}']
         opts += [f'regression algorithm: {combo.LONG_FITS[task.fit]}']
         if task.fit is not None:
-            if task.fit.startswith('sp'):
+            if task.fit.startswith('rs'):
                 # Spines model
                 opts += [f'Spines h-value: {cfg.h}']
+        if task.data_type.startswith('iso'):
+            opts += ['normalising isotope: %s' % task.norm_isotope]
         if task.data_type in ('tw', 'wc'):
             if not task.eq:
-                append_arv(opts, task, series='both', fcA48i=False)
+                append_ratios(opts, task, series='both', fcA48i=False)
             append_upb_const(opts, task, series='both', eq=task.eq)
-        elif task.data_type == 'iso-Pb6U8':
+        elif task.data_type == 'iso-206Pb':
             if not task.eq:
-                append_arv(opts, task, series='238U', fcA48i=False)
+                append_ratios(opts, task, series='238U', fcA48i=False)
             append_upb_const(opts, task, series='238U', eq=task.eq)
-        elif task.data_type == 'iso-Pb7U5':
+        elif task.data_type == 'iso-207Pb':
             if not task.eq:
-                append_arv(opts, task, series='235U', fcA48i=False)
+                append_ratios(opts, task, series='235U', fcA48i=False)
             append_upb_const(opts, task, series='235U', eq=task.eq)
+        if task.fit is not None and task.save_plots:
+            opts.append('figure save location: %s' % task.fig_export_dir)
         opts_frame.add_table([opts], title='Plot options:')
 
     # Initialise main print frame and add to printer stack:
@@ -78,12 +84,20 @@ def plot_data(task):
     # fit regression
     if task.fit is not None:
         set_plot_config(task, plot_type='data_point')
-        if task.fit.startswith('c'):
-            fit = regression.classical_fit(*dp, model=task.fit, isochron=False,
-                        plot=False, diagram=task.data_type)
-        else:
-            fit = regression.robust_fit(*dp, model=task.fit, plot=False,
-                        diagram=task.data_type)
+        try:
+            if task.fit.startswith('c'):
+                fit = regression.classical_fit(*dp, model=task.fit, isochron=False,
+                            plot=False, diagram=task.data_type)
+            else:
+                fit = regression.robust_fit(*dp, model=task.fit, plot=False,
+                            diagram=task.data_type)
+
+        except exceptions.ConvergenceError:
+            task.retval += "Linear regression fitting routine did not converge|This " \
+                           "may be because the data is too scattered, or is otherwise " \
+                           "unsuitable for the fit type chosen. Double check your data " \
+                           "selection or consider trying a different fit type.::"
+            raise
 
         results, formats = results_for_fit(fit)
         print_frame.add_table(results, title='Linear regression results:',
@@ -172,17 +186,15 @@ def diagram_age(task):
         if not task.eq and task.data_type.startswith('tw'):
             opts += ['disequilibrium age guess: %s' % task.age_guess]
             if not any(task.init):
-                opts += ['disequilibrium age range: %s' % (
-                            cfg.concint_age_min, cfg.concint_age_max)
-                         ]
+                opts += ['disequilibrium age range: %s' % cfg.conc_age_bounds]
         if task.concordia_intercept:
             series = 'both'
-        elif task.data_type == 'iso-Pb6U8':
+        elif task.data_type == 'iso-206Pb':
             series = '238U'
         else:
             series = '235U'
         if not task.eq:
-            append_arv(opts, task, series=series)
+            append_ratios(opts, task, series=series)
         append_upb_const(opts, task, series=series, U=True, eq=False)
         append_mc_opts(opts, task)
         if task.save_plots:
@@ -197,30 +209,47 @@ def diagram_age(task):
     sA = [task.A48_err, task.A08_err, task.A68_err, task.A15_err]
     init = task.init
 
+    # Check for resolvable disequilibrium
+    uncert = task.uncert
+    if not task.eq:
+        if not init[0]:
+            if not util.meas_diseq(A[0], sA[0]):
+                uncert = 'none'
+        if not init[1]:
+            if not util.meas_diseq(A[1], sA[1]):
+                uncert = 'none'
+
     dp = np.array(task.dp, dtype=np.double)
     dp = transform.dp_errors(dp, in_error_type=task.error_type, row_wise=True)
 
     set_plot_config(task, 'data_point')
 
     # fit model
-    if task.fit.startswith('c'):
-        fit = regression.classical_fit(
-            *dp, model=task.fit, plot=True,
-            diagram=task.data_type,
-            dp_labels=task.dp_labels,
-            xlim=(task.dpp_xmin, task.dpp_xmax),
-            ylim=(task.dpp_ymin, task.dpp_ymax),
-            isochron=not task.concordia_intercept,
-            norm_isotope=task.norm_isotope
-        )
-    else:
-        fit = regression.robust_fit(
-            *dp, model=task.fit, plot=True,
-            diagram=task.data_type, xlim=(task.dpp_xmin,
-            task.dpp_xmax), ylim=(task.dpp_ymin, task.dpp_ymax),
-            norm_isotope=task.norm_isotope,
-            dp_labels=task.dp_labels
-        )
+    try:
+        if task.fit.startswith('c'):
+            fit = regression.classical_fit(
+                *dp, model=task.fit, plot=True,
+                diagram=task.data_type,
+                dp_labels=task.dp_labels,
+                xlim=(task.dpp_xmin, task.dpp_xmax),
+                ylim=(task.dpp_ymin, task.dpp_ymax),
+                isochron=not task.concordia_intercept,
+                norm_isotope=task.norm_isotope
+            )
+        else:
+            fit = regression.robust_fit(
+                *dp, model=task.fit, plot=True,
+                diagram=task.data_type, xlim=(task.dpp_xmin,
+                task.dpp_xmax), ylim=(task.dpp_ymin, task.dpp_ymax),
+                norm_isotope=task.norm_isotope,
+                dp_labels=task.dp_labels
+            )
+    except exceptions.ConvergenceError:
+        task.retval += "Linear regression fitting routine did not converge|This " \
+                       "may be because the data is too scattered, or is otherwise " \
+                       "unsuitable for the fit type chosen. Double check your data " \
+                       "selection or consider trying a different fit type.::"
+        raise
 
     task.update_progress(20, "Plotting data... ")
 
@@ -282,9 +311,9 @@ def diagram_age(task):
             print_frame.add_table(results, title='Equilibrium age results:',
                                   formats=formats)
 
-        if task.eq and task.do_mc:
+        if task.eq and uncert == 'mc':
             if task.data_type == 'tw':
-                mcr = upb.mc_concint(
+                mc = upb.mc_concint(
                     eqAge['age'], fit, diagram='tw',
                     trials=task.mc_trials,
                     dc_errors=task.dc_errors,
@@ -306,7 +335,7 @@ def diagram_age(task):
                 )
 
             else:
-                mcr = isochron.mc_uncert(
+                mc = isochron.mc_uncert(
                     fit, age_type=task.data_type,
                     dc_errors=task.dc_errors,
                     norm_isotope=task.norm_isotope,
@@ -316,88 +345,107 @@ def diagram_age(task):
 
             # print concordia intercept plot
             if task.concordia_intercept and task.show_int_plot:
-                fig_int = mcr['fig']
+                fig_int = mc['fig']
                 task.printer.stack_figure(fig_int, yorder=2)
 
             # print Monte Carlo histograms
-            if 'age_hist' in mcr.keys():
-                task.printer.stack_figure(mcr['age_hist'], yorder=3)
+            if 'age_hist' in mc.keys():
+                task.printer.stack_figure(mc['age_hist'], yorder=3)
 
-            results, formats = results_for_mc(mcr, summary=task.mc_summary)
+            results, formats = results_for_mc(mc, summary=task.mc_summary)
             print_frame.add_table(results, title='Monte Carlo age uncertainties:',
                                   formats=formats)
 
     if not task.eq:
         t0 = eqAge['age'] if task.eq_guess else task.age_guess
 
-        if task.concordia_intercept:
-            conc_kw = dict(env=task.int_concordia_envelope,
-                           age_ellipses=task.int_age_ellipse_markers,
-                           marker_max=task.int_marker_max_age,
-                           marker_ages=task.int_manual_age_markers,
-                           auto_markers= not task.int_use_manual_age_markers,
-                           remove_overlaps=task.int_avoid_label_overlaps,
-                           env_trials=1_000, spaghetti=task.int_conc_spaghetti,
-                           age_prefix=task.int_age_prefix
-                           )
-            int_plot_kw = dict(ylim=(task.int_ymin, task.int_ymax),
-                               xlim=(task.int_xmin, task.int_xmax),
-                               intercept_ellipse=task.conc_intercept_ellipse,
-                               intercept_points=task.conc_intercept_points,
+        try:
+            if task.concordia_intercept:
+                conc_kw = dict(env=task.int_concordia_envelope,
+                               age_ellipses=task.int_age_ellipse_markers,
+                               marker_max=task.int_marker_max_age,
+                               marker_ages=task.int_manual_age_markers,
+                               auto_markers= not task.int_use_manual_age_markers,
+                               remove_overlaps=task.int_avoid_label_overlaps,
+                               env_trials=1_000, spaghetti=task.int_conc_spaghetti,
+                               age_prefix=task.int_age_prefix
                                )
-            diseqAge = uxpb.dqpb.concint_age(
-                fit, A, sA, init, t0,
-                conc_kw=conc_kw,
-                intercept_plot_kw=int_plot_kw,
-                diagram=task.data_type,
-                age_lim=(task.concint_age_min,
-                    task.concint_age_max),
-                A48i_lim=(task.concint_A48i_min,
-                    task.concint_A48i_max),
-                A08i_lim=(task.concint_A08i_min,
-                    task.concint_A08i_max),
-                trials=task.mc_trials,
-                dc_errors=task.dc_errors,
-                u_errors=task.u_errors,
-                negative_ar=not task.mc_rnar,
-                negative_ages=not task.mc_rnages,
-                hist=(task.age_hist, task.ar_hist)
-            )
-        else:
-            if task.data_type == 'iso-Pb6U8':
-                A = A[:-1]
-                sA = sA[:-1]
+                int_plot_kw = dict(ylim=(task.int_ymin, task.int_ymax),
+                                   xlim=(task.int_xmin, task.int_xmax),
+                                   intercept_ellipse=task.conc_intercept_ellipse,
+                                   intercept_points=task.conc_intercept_points,
+                                   )
+                diseqAge = dqpb.concint_age(
+                    fit, A, sA, init, t0,
+                    uncert=uncert,
+                    conc_kw=conc_kw,
+                    intercept_plot_kw=int_plot_kw,
+                    diagram=task.data_type,
+                    age_lim=(task.concint_age_min,
+                        task.concint_age_max),
+                    A48i_lim=(task.concint_A48i_min,
+                        task.concint_A48i_max),
+                    A08i_lim=(task.concint_A08i_min,
+                        task.concint_A08i_max),
+                    trials=task.mc_trials,
+                    dc_errors=task.dc_errors,
+                    u_errors=task.u_errors,
+                    negative_ratios=not task.mc_rnar,
+                    negative_ages=not task.mc_rnages,
+                    hist=(task.age_hist, task.ratio_hist)
+                )
             else:
-                A = A[-1]
-                sA = sA[-1]
-            diseqAge = uxpb.dqpb.isochron_age(
-                fit, A, sA, t0, init=init,
-                age_type=task.data_type,
-                norm_isotope=task.norm_isotope,
-                hist = (task.age_hist, task.ar_hist),
-                trials=task.mc_trials,
-                dc_errors=task.dc_errors,
-                negative_ar=not task.mc_rnar,
-                negative_ages=not task.mc_rnages
-            )
+                if task.data_type == 'iso-206Pb':
+                    A = A[:-1]
+                    sA = sA[:-1]
+                else:
+                    A = A[-1]
+                    sA = sA[-1]
+                diseqAge = dqpb.isochron_age(
+                    fit, A, sA, t0, init=init,
+                    age_type=task.data_type,
+                    norm_isotope=task.norm_isotope,
+                    hist = (task.age_hist, task.ratio_hist),
+                    trials=task.mc_trials,
+                    dc_errors=task.dc_errors,
+                    negative_ratios=not task.mc_rnar,
+                    negative_ages=not task.mc_rnages
+                )
+        except pysoplot.exceptions.ConvergenceError:
+            task.retval += "No disequilibrium age solution found|Double " \
+                           "check your data selection, activity ratio inputs " \
+                           "and initial age guess. If these are all OK, " \
+                           "there may be no age solution for this combination " \
+                           "of inputs.::"
+            raise
 
-        results, formats = results_for_diseq(diseqAge, mc_summary=task.mc_summary)
+        results, formats = results_for_diseq(diseqAge, mc_summary=task.mc_summary,
+                                             uncert=uncert)
         print_frame.add_table(results, title='Disequilibrium age results:',
                               formats=formats)
 
-        # print concordia intercept plot
-        if task.concordia_intercept and task.show_int_plot:
-            fig_int = diseqAge['mc']['fig']
-            task.printer.stack_figure(fig_int, yorder=2)
+        # check number of failed Monte Carlo iterations
+        if uncert == 'mc':
+            if diseqAge['mc']['fails'] / diseqAge['mc']['trials'] > 0.025:
+                task.retval += 'Less than 97.5% of Monte Carlo trials were ' \
+                       'successful|A large number of failed trials can bias ' \
+                       'calculated age uncertainties and make results unreliable. ' \
+                       'These results should not be used without careful consideration.::'
 
-        # print Monte Carlo histograms
-        if task.eq and task.do_mc:
-            if 'age_hist' in eqAge['mc'].keys():
-                task.printer.stack_figure(eqAge['mc']['age_hist'], yorder=3)
-        else:
-            for hist in ['age_hist', 'ar_hist', 'bcar_hist']:
-                if hist in diseqAge['mc'].keys():
-                    task.printer.stack_figure(diseqAge['mc'][hist], yorder=3)
+        # print concordia intercept plot
+        if uncert == 'mc':
+            if task.concordia_intercept and task.show_int_plot:
+                fig_int = diseqAge['mc']['fig']
+                task.printer.stack_figure(fig_int, yorder=2)
+
+            # print Monte Carlo histograms
+            if task.eq:
+                if 'age_hist' in eqAge['mc'].keys():
+                    task.printer.stack_figure(eqAge['mc']['age_hist'], yorder=3)
+            else:
+                for hist in ['age_hist', 'ratio_hist', 'bcratio_hist']:
+                    if hist in diseqAge['mc'].keys():
+                        task.printer.stack_figure(diseqAge['mc'][hist], yorder=3)
 
     # Save plots to disk:
     if task.save_plots:
@@ -453,7 +501,7 @@ def wav_other(task):
         opts.append('task: wtd. average')
         opts.append(f'wtd. average type: {combo.LONG_FITS[task.fit]}')
         if task.fit.startswith('c'):
-            opts.append(f'MSWD conf. limits: {cfg.mswd_wav_thresholds}')
+            opts.append(f'MSWD conf. limits: {cfg.mswd_wav_ci_thresholds}')
         elif task.fit == 'Spine':
             opts.append(f'h-value: {cfg.h}')
         opts_frame.add_table([opts], title='Calc. options:')
@@ -478,9 +526,9 @@ def wav_other(task):
     set_plot_config(task, plot_type='wav')
 
     if task.fit.startswith('c'):
-        wav = wtd_average.classical_wav(x, sx=sx, cov=cov, method='ca')
+        wav = wtd_average.classical_wav(x, sx=sx, V=cov, method='ca')
     else:
-        wav = wtd_average.robust_wav(x, sx=sx, cov=cov, method='ra')
+        wav = wtd_average.robust_wav(x, sx=sx, V=cov, method='ra')
 
     results, formats = results_for_wav(wav, age=False)
     print_frame.add_table(results, title='Wtd. average results:',
@@ -531,19 +579,22 @@ def pbu_age(task):
         opts.append(f'assume initial eq.: {task.eq}')
         if not task.eq:
             opts.append(f'initial disequilibrium age guess: {task.age_guess}')
-        if task.fit == 'sp':
+        if task.fit == 'rs':
             opts.append('Huber h-value: %s' % task.spines_h)
         if task.data_type.startswith('mod'):
             opts.append(f'207Pb/206Pb: {task.Pb76}')
             opts.append(f'207Pb/206Pb 1σ errors: {task.Pb76_1s}')
             series = 'both'
-        elif task.data_type.startswith('Pb6'):
+            show_u = True
+        elif task.data_type.startswith('206'):
             series = '238U'
+            show_u = False
         else:
             series = '235U'
+            show_u = False
         if not task.eq:
-            append_arv(opts, task, series=series, fcA48i=False)
-        append_upb_const(opts, task, series=series, U=False, eq=task.eq)
+            append_dist_coef(opts, task)
+        append_upb_const(opts, task, series=series, U=show_u, eq=task.eq)
         append_mc_opts(opts, task)
         if task.save_plots:
             opts.append('figure save location: %s' % task.fig_export_dir)
@@ -554,108 +605,94 @@ def pbu_age(task):
     task.printer.stack_frame(print_frame)
 
     wav = True if task.fit is not None else False
+    uncert = task.uncert
 
-    # Get partition coefficient data:
-    if task.data_type in ('Pb6U8', 'mod-207Pb'):
-        if task.DThU_const:
-            DThU_const = True
-            DThU = task.A08
-            DThU_1s = task.A08_err
-            ThU_melt = None
-            ThU_melt_1s = None
-            ThU_min = None
-        else:
-            DThU_const = False
-            ThU_melt = task.A08
-            ThU_melt_1s = task.A08_err
-            ThU_min = task.ThU_min
-            DThU = None
-            DThU_1s = None
-    else:
-        DThU_const = True
-        ThU_melt = None
-        ThU_melt_1s = None
-        ThU_min = None
-        DThU = None
-        DThU_1s = None
-
-    DPaU = task.A15
-    DPaU_1s = task.A15_err
-
-    dim = 2 if task.data_type == 'mod-207Pb' else 1
+    dim = 2 if task.data_type == 'cor207Pb' else 1
     dp = transform.dp_errors(task.dp, in_error_type=task.error_type, dim=dim)
 
     task.update_progress(25, 'Computing ages and errors...')
-
     set_plot_config(task, plot_type='wav')
 
     if task.eq:
-        raise ValueError('Equilibrium Pb/U and modified 207Pb age calculations '
-                         'are not currently implemented in DQPB.')
+        # Not yet implemented. A warning is raised during parsing of user
+        # inputs.
+        pass
 
     else:   # diseq. ages
         if task.age_guess == 'eq' or task.eq:
-            eqAges = upb.pbu_ages(dp, age_type=task.data_type, wav=False, Pb76=task.Pb76)
+            eqAges = upb.pbu_ages(dp, age_type=task.data_type, wav=False,
+                                  alpha=task.Pb76)
             if task.output_eq_age:
-                logger.warning('Output equilbrium age results not yet implemented.')
+
+                logger.warning('Output equilibrium age results not yet implemented '
+                               'for single aliquot ages.')
             t0 = eqAges['age']
         else:
             t0 = task.age_guess
 
-        if any((task.age_hist, task.ar_hist)):
-            logger.error('Age and activity ratio histograms not yet implemented '
-                         'for Pb/U ages.')
-
-        if task.data_type == 'mod-207Pb':
-            diseqAges = uxpb.dqpb.mod207_age(
-                dp, task.Pb76, task.Pb76_1s, t0,
-                ThU_min=ThU_min, ThU_melt=ThU_melt,
-                ThU_melt_1s=ThU_melt_1s,
-                DThU=DThU, DThU_1s=DThU_1s,
-                DThU_const=DThU_const,
-                DPaU=DPaU, DPaU_1s=DPaU_1s,
-                wav=wav,
-                wav_method=task.fit,
-                method='Ludwig',
-                sorted=task.wav_sort_ages,
-                rand=True,
-                cov=task.wav_cov,
-                ylim=(task.wav_ymin, task.wav_ymax),
-                wav_plot_prefix=task.wav_age_prefix,
-                dp_labels=task.dp_labels,
-                negative_ages = not task.mc_rnar,
-                negative_ar = not task.mc_rnages,
-            )
+        if task.data_type == 'cor207Pb':
+            x, sx, y, sy, r_xy = dp
+            Vx = misc.compile_vxy(x, sx, y, sy, r_xy)
+            x = np.array((x, y))
         else:
-            diseqAges = uxpb.dqpb.pbu_age(
-                *dp, t0,
-                ThU_min=ThU_min, ThU_melt=ThU_melt,
-                ThU_melt_1s=ThU_melt_1s,
-                DThU=DThU, DThU_1s=DThU_1s,
-                DThU_const=DThU_const,
-                DPaU=DPaU, DPaU_1s=DPaU_1s,
-                age_type=task.data_type,
-                method='Ludwig',
-                wav=wav,
-                wav_method=task.fit,
-                trials=task.mc_trials,
-                sorted=task.wav_sort_ages,
-                rand=True,
-                cov=task.wav_cov,
-                hist=(False, False),
-                negative_ages=not task.mc_rnar,
-                negative_ar=not task.mc_rnages,
-                ylim=(task.wav_ymin, task.wav_ymax),
-                wav_plot_prefix=task.wav_age_prefix,
-                dp_labels=task.dp_labels
-            )
+            x = dp[0]
+            sx = dp[1]
+            Vx = np.diag(sx ** 2)
+
+        wav_opts = dict(wav_method=task.fit, cov=task.wav_cov, plot=True,
+                        plot_prefix=task.wav_age_prefix, sorted=task.wav_sort_ages,
+                        ylim=(task.wav_ymin, task.wav_ymax), dp_labels=task.dp_labels)
+        mc_opts = dict(trials=task.mc_trials, negative_ages=not task.mc_rnages,
+                       negative_ratios=not task.mc_rnar)
+
+        if task.data_type.startswith('207') or task.DThU_const:
+            diseqAges = dqpb.pbu_age(x, Vx, t0, DThU=task.DThU, DThU_1s=task.DThU_1s,
+                            DPaU=task.DPaU, DPaU_1s=task.DPaU_1s, alpha=task.Pb76,
+                            alpha_1s=task.Pb76_1s, age_type=task.data_type, uncert=uncert,
+                            rand=True, wav=wav, wav_opts=wav_opts, mc_opts=mc_opts)
+        else:
+            if task.meas_Th232_U238:
+                Th232_U238 = task.Th232_U238
+                V_Th232_U238 = np.diag(task.Th232_U238_1s ** 2)
+                Pb208_206 = None
+                V_Pb208_206 = None
+            else:
+                Th232_U238 = None
+                V_Th232_U238 = None
+                Pb208_206 = task.Pb208_206
+                V_Pb208_206 = np.diag(task.Pb208_206_1s ** 2)
+
+            diseqAges = dqpb.pbu_iterative_age(x, Vx, task.ThU_melt, task.ThU_melt_1s,
+                            t0, Pb208_206=Pb208_206, V_Pb208_206=V_Pb208_206, Th232_U238=Th232_U238,
+                            V_Th232_U238=V_Th232_U238, DPaU=task.DPaU, DPaU_1s=task.DPaU_1s,
+                            alpha=task.Pb76, alpha_1s=task.Pb76_1s, age_type=task.data_type,
+                            uncert=uncert, rand=True, wav=wav, wav_opts=wav_opts,
+                            mc_opts=mc_opts)
+
+        # check number of failed Monte Carlo iterations
+        if uncert == 'mc':
+            if any([fails / diseqAges['mc']['trials'] > 0.025 for fails in
+                    diseqAges['mc']['fails']]):
+                task.retval += 'Less than 97.5% of Monte Carlo trials were ' \
+                   'successful for some or all aliquots|A large number of failed ' \
+                   'trials can bias calculated age uncertainties and make results ' \
+                   'unreliable. These results should not be used without careful ' \
+                   'consideration::'
 
         # print age results
-        results, formats = results_for_diseq_pbu(diseqAges, mc_summary=task.mc_summary)
+        results, formats = results_for_diseq_pbu(diseqAges, uncert=uncert,
+                    mc_summary=task.mc_summary, DThU_const=task.DThU_const,
+                    meas_Th232_U238=task.meas_Th232_U238)
         print_frame = spreadsheet.PrintFrame(n_col=len(results), yorder=1)
         print_frame.add_table(results, title=None, formats=formats,
                               add_line_sep=False)
         task.printer.stack_frame(print_frame)
+
+        if any((task.age_hist, task.ratio_hist)):
+            task.retval += 'Histograms could not be plotted|Age and activity ' \
+                           'ratio histograms are not yet implemented for Pb/U ages.::'
+        logger.error('Age and activity ratio histograms not yet implemented '
+                     'for Pb/U ages.')
 
         if wav and task.show_wav_plot:
             results, formats = results_for_wav(diseqAges['wav'], age=True)
@@ -667,7 +704,7 @@ def pbu_age(task):
             task.printer.stack_figure(fig_wav, yorder=2)
 
         # plot data points
-        if task.data_type.startswith('mod') and task.dp_plot:
+        if task.data_type.startswith('cor') and task.dp_plot:
             set_plot_config(task, plot_type='intercept')
             fig_dp = plotting.plot_dp(*dp, labels=task.dp_labels)
             plotting.apply_plot_settings(
@@ -678,31 +715,30 @@ def pbu_age(task):
             )
             ax = fig_dp.get_axes()[0]
 
-            if not DThU_const:
+            if not task.DThU_const:
                 logger.warning('cannot plot concordia curve if DThU values are '
-                                'not constant')
+                               'not constant')
             else:
                 concordia.plot_diseq_concordia(
                     ax,
-                    [cfg.A48_eq, DThU, cfg.A68_eq, DPaU],
+                    [cfg.a234_238_eq, task.DThU, cfg.a226_238_eq, task.DPaU],
                     [True, True],
-                    sA=[0.0, DThU_1s, 0.0, DPaU_1s],
+                    sA=[0.0, task.DThU_1s, 0.0, task.DPaU_1s],
                     diagram='tw',
                     env=task.int_concordia_envelope,
                     age_ellipses=task.int_age_ellipse_markers,
                     marker_ages=task.int_manual_age_markers,
                     auto_markers=not task.int_use_manual_age_markers,
                     remove_overlaps=task.int_avoid_label_overlaps,
-                    negative_ar=not task.mc_rnar
                 )
-            plotting.plot_mod207_projection(ax, *dp, task.Pb76)
+            plotting.plot_cor207_projection(ax, *dp, task.Pb76)
             task.printer.stack_figure(fig_dp, yorder=3)
 
             if task.output_plot_data:
                 spreadsheet.print_plot_data(
                     fig_dp.get_axes()[0],
                     sheet_name='Plot data',
-                    header='Mod. 207Pb data point plot',
+                    header='207Pb-cor. data point plot',
                     ws_main=task.ws, next_col=1,
                     labels=task.dp_labels
                 )
@@ -748,15 +784,14 @@ def forced_concordance(task):
         task.printer.stack_frame(opts_frame, yorder=999)
         opts = []
         opts += ['task: forced-concordance [234U/238U]i']
-        opts += [f'Pb7U5 regression algorithm: {combo.LONG_FITS[task.fit_iso57]}']
-        opts += [f'Pb6U8 regression algorithm: {combo.LONG_FITS[task.fit_iso86]}']
+        opts += [f'iso-207Pb regression algorithm: {combo.LONG_FITS[task.fit_iso57]}']
+        opts += [f'iso-206Pb regression algorithm: {combo.LONG_FITS[task.fit_iso86]}']
         if task.fit_iso57.startswith('rs') or task.fit_iso86.startswith('rs'):
             opts += ['Spines h-value: %s' % task.spines_h]
         opts += ['normalising isotope: %s' % task.norm_isotope]
-        opts += ['207Pb age guess: %s' % task.age_guess]
-        append_arv(opts, task, series='both')
+        opts += ['iso-207Pb age guess: %s' % task.age_guess]
+        append_ratios(opts, task, series='both')
         append_mc_opts(opts, task)
-        opts += ['use secular eq. equations: %s' % task.secular_eq]
         append_upb_const(opts, task, series='both', U=True, eq=False)
         if task.save_plots:
             opts.append('figure save location: %s' % task.fig_export_dir)
@@ -768,20 +803,19 @@ def forced_concordance(task):
 
     A = [np.nan, task.A08, task.A68, task.A15]
     sA = [np.nan, task.A08_err, task.A68_err, task.A15_err]
-    init = [True, task.init[1]]
-
+        
     dp57 = transform.dp_errors(task.dp_iso57, in_error_type=task.error_type)
     dp86 = transform.dp_errors(task.dp_iso86, in_error_type=task.error_type)
 
-    # iso-Pb7U5 regression
+    # iso-207Pb regression
     task.update_progress(25, "Fitting regression models... ")
     if task.fit_iso57.startswith('c'):
         fit57 = regression.classical_fit(*dp57, model=task.fit_iso57, plot=True,
-                    diagram='iso-Pb7U5', dp_labels=task.dp_labels,
+                    diagram='iso-207Pb', dp_labels=task.dp_labels,
                     norm_isotope=task.norm_isotope)
     else:
         fit57 = regression.robust_fit(*dp57, model=task.fit_iso57, plot=True,
-                    diagram='iso-Pb7U5', dp_labels=task.dp_labels,
+                    diagram='iso-207Pb', dp_labels=task.dp_labels,
                     norm_isotope=task.norm_isotope)
 
     fig_iso57 = fit57['fig']
@@ -790,14 +824,14 @@ def forced_concordance(task):
                           formats=formats)
     task.printer.stack_figure(fig_iso57, yorder=2)
 
-    # iso-Pb6U8 regression
+    # iso-206Pb regression
     if task.fit_iso86.startswith('c'):
         fit86 = regression.classical_fit(*dp86, model=task.fit_iso86, plot=True,
-                    diagram='iso-Pb6U8', dp_labels=task.dp_labels,
+                    diagram='iso-206Pb', dp_labels=task.dp_labels,
                     norm_isotope=task.norm_isotope)
     else:
         fit86 = regression.robust_fit(*dp86, model=task.fit_iso86, plot=True,
-                    diagram='iso-Pb6U8', dp_labels=task.dp_labels,
+                    diagram='iso-206Pb', dp_labels=task.dp_labels,
                     norm_isotope=task.norm_isotope)
     fig_iso86 = fit86['fig']
     results, formats = results_for_fit(fit86)
@@ -810,7 +844,7 @@ def forced_concordance(task):
     task.update_progress(50, "Computing [234U/238]i and uncertainty... ")
     # calculate "concordant" 234U/238U activity ratio and age
     if task.eq_guess:
-        eqAge = upb.isochron_age(fit57, age_type='iso-Pb7U5')
+        eqAge = upb.isochron_age(fit57, age_type='iso-207Pb')
         if task.output_eq_age:
             results, formats = results_for_eq(eqAge)
             print_frame.add_table(results, title='Equilibrium age results:',
@@ -819,29 +853,36 @@ def forced_concordance(task):
     else:
         t0 = task.age_guess
 
-    concA48i =  uxpb.dqpb.fc_A48i(
+    conc_a234_238 =  dqpb.forced_concordance(
         fit57, fit86, A, sA, t0=t0,
         norm_isotope='204Pb',
-        negative_ar=not task.mc_rnar,
+        negative_ratios=not task.mc_rnar,
         negative_ages=not task.mc_rnages,
-        hist=(task.age_hist, task.ar_hist),
+        hist=(task.age_hist, task.ratio_hist),
         trials=task.mc_trials
     )
-    results, formats = results_for_fcA48i(concA48i)
+    results, formats = results_for_fcA48i(conc_a234_238)
     print_frame.add_table(results, title='Forced-concordance results:',
                           formats=formats)
+    
+    # check number of failed Monte Carlo iterations
+    if conc_a234_238['mc']['fails'] / conc_a234_238['mc']['trials'] > 0.025:
+        task.retval += 'Less than 97.5% of Monte Carlo trials were ' \
+               'successful|A large number of failed trials can bias ' \
+               'calculated age uncertainties and make results unreliable. ' \
+               'These results should not be used without careful consideration::'
 
     # set plot settings to hist for gridlines etc.
     set_plot_config(task, 'histogram')
 
     # plot Monte Carlo histograms
-    if task.ar_hist:
-        fig = concA48i['mc']['age_hist']
+    if task.ratio_hist:
+        fig = conc_a234_238['mc']['age_hist']
         plotting.apply_plot_settings(fig, plot_type='hist')
         task.printer.stack_figure(fig, yorder=2)
 
     if task.age_hist:
-        fig = concA48i['mc']['ar_hist']
+        fig = conc_a234_238['mc']['ratio_hist']
         plotting.apply_plot_settings(fig, plot_type='hist')
         task.printer.stack_figure(fig, yorder=2)
 
@@ -902,23 +943,23 @@ def results_for_wav(wav, age=False):
     cov_bool = 'TRUE' if wav['cov'] else 'FALSE'
 
     if wav['type'] == 'classical':
-        name += ['type'];     value += ['classical'];      format += [None]
+        name += ['type'];         value += ['classical'];      format += [None]
         name += ['n'];            value += [wav['n']];         format += ["#"]
         name += ['covariance'];   value += [cov_bool];         format += [None]
         name += ['ave'];          value += [wav['ave']];       format += [fx]
         name += [f'{s} 1σ'];      value += [wav['ave_1s']];    format += [fsx]
         name += [f'{s} 95% conf.'];  value += [wav['ave_95pm']];  format += [fsx]
         name += ['mswd'];         value += [wav['mswd']];      format += ["#0.00"]
-        name += ['p'];        value += [wav['p']];     format += ["#0.00"]
+        name += ['p'];            value += [wav['p']];         format += ["#0.00"]
         name += ['excess scatter']; value += [str(wav['excess_scatter']).upper()]; format += [None]
     else:
-        name += ['type'];     value += [wav['model']];           format += [None]
-        name += ['n'];            value += [wav['n']];         format += ["#"]
-        name += ['covariance'];   value += [cov_bool];         format += [None]
-        name += ['ave'];          value += [wav['ave']];       format += [fx]
-        name += [f'{s} 95% conf.'];  value += [wav['ave_95pm']];  format += [fsx]
-        name += ['s'];            value += [wav['s']];         format += ["#0.00"]
-        name += ['s upper 95% CL']; value += [wav['s_upper_95ci']]; format += ["#0.00"]
+        name += ['type'];             value += [wav['model']];     format += [None]
+        name += ['n'];                value += [wav['n']];         format += ["#"]
+        name += ['covariance'];       value += [cov_bool];         format += [None]
+        name += ['ave'];              value += [wav['ave']];       format += [fx]
+        name += [f'{s} 95% conf.'];   value += [wav['ave_95pm']];  format += [fsx]
+        name += ['s'];                value += [wav['s']];         format += ["#0.00"]
+        name += ['slim (95% conf.)']; value += [wav['slim']];      format += ["#0.00"]
 
     return [name, value], format
 
@@ -949,7 +990,7 @@ def results_for_fit(fit):
         name += ['mswd'];          value += [fit['mswd']];          format += ["#0.00"]
         name += ['p'];             value += [fit['p']];             format += ["#0.00"]
         if fit['model'] == 'model 3':
-            name += ['initial Pb/Pb var. (2σ)']; value += [2. * fit['sy_excess_1s']];
+            name += ['initial Pb/Pb var. (2σ)']; value += [2. * fit['sy_excess_1s']]
             format += [fsa]
     else:
         name += ['fit type'];       value += [fit['model']];         format += [None]
@@ -992,7 +1033,7 @@ def results_for_fcA48i(results):
 
     mc = results['mc']
 
-    t = results['207Pb_age'];
+    t = results['207Pb_age']
     st = mc['207Pb_age_1sd']
     ft, fst = util.vep_format(t, 2. * st, plims=(-3, 5))
 
@@ -1002,14 +1043,14 @@ def results_for_fcA48i(results):
     fA, fsA = util.vep_format(A48i, 2. * sA48i, plims=(-3, 5))
 
     mc = results['mc']
-    name += ['age (Ma)'];     value += [results['207Pb_age']];     format += [ft]
-    name += ['1σ (Ma)'];      value += [mc['207Pb_age_1sd']];      format += [fst]
+    name += ['age (Ma)'];     value += [results['207Pb_age']];    format += [ft]
+    name += ['1σ (Ma)'];      value += [mc['207Pb_age_1sd']];     format += [fst]
     name += ['lower 95% CI']; value += [mc['207Pb_age_95ci'][0]]; format += [ft]
     name += ['upper 95% CI']; value += [mc['207Pb_age_95ci'][1]]; format += [ft]
-    name += ['init. [234U/238U]']; value += [results[ark]]; format += [fA]
-    name += ['1σ'];           value += [mc[f'{ark}_1sd']];     format += [fsA]
-    name += ['lower 95% CI']; value += [mc[f'{ark}_95ci'][0]]; format += [fA]
-    name += ['upper 95% CI']; value += [mc[f'{ark}_95ci'][1]]; format += [fA]
+    name += ['init. [234U/238U]']; value += [results[ark]];       format += [fA]
+    name += ['1σ'];           value += [mc[f'{ark}_1sd']];        format += [fsA]
+    name += ['lower 95% CI']; value += [mc[f'{ark}_95ci'][0]];    format += [fA]
+    name += ['upper 95% CI']; value += [mc[f'{ark}_95ci'][1]];    format += [fA]
 
     name += ['trials']; value += [mc['trials']]; format += ["#"]
     name += ['failed']; value += [mc['fails']]; format += ["#,##0"]
@@ -1017,7 +1058,7 @@ def results_for_fcA48i(results):
     return [name, value], format
 
 
-def results_for_diseq(results, mc_summary=False):
+def results_for_diseq(results, mc_summary=False, uncert='mc'):
     """
     'Diagram' disequilibrium ages.
     """
@@ -1025,52 +1066,70 @@ def results_for_diseq(results, mc_summary=False):
     value = []
     format = []
 
-    t = results['age']
-    st = results['age_1s']
-    ft, fst = util.vep_format(t, 2. * st, plims=(-3, 5))
-
     A48_init = True if results['[234U/238U]i'] is not None else False
     A08_init = True if results['[230Th/238U]i'] is not None else False
 
-    mcr = results['mc']
-    name += ['age (Ma)'];     value += [results['age']];     format += [ft]
-    name += ['1σ (Ma)'];      value += [mcr['age_1s']];      format += [fst]
-    name += ['lower 95% CI']; value += [mcr['age_95ci'][0]]; format += [ft]
-    name += ['upper 95% CI']; value += [mcr['age_95ci'][1]]; format += [ft]
+    if uncert == 'mc':
+        t = results['age']
+        st = results['age_1s']
+        ft, fst = util.vep_format(t, 2. * st, plims=(-3, 5))
 
-    if A48_init:
-        ark = '[234U/238U]i'  # key
-        A = results[ark]; sA = mcr[f'{ark}_1sd']
-        fA48, fsA48 = util.vep_format(A, 2. * sA, plims=(-3, 5))
-        name += ['init. [234U/238U]']; value += [results[ark]]; format += [fA48]
-        name += ['1σ'];           value += [mcr[f'{ark}_1sd']];     format += [fsA48]
-        name += ['lower 95% CI']; value += [mcr[f'{ark}_95ci'][0]]; format += [fA48]
-        name += ['upper 95% CI']; value += [mcr[f'{ark}_95ci'][1]]; format += [fA48]
+        mcr = results['mc']
+        name += ['age (Ma)'];     value += [results['age']];     format += [ft]
+        name += ['1σ (Ma)'];      value += [mcr['age_1s']];      format += [fst]
+        name += ['lower 95% CI']; value += [mcr['age_95ci'][0]]; format += [ft]
+        name += ['upper 95% CI']; value += [mcr['age_95ci'][1]]; format += [ft]
 
-    if A08_init:
-        ark = '[230Th/238U]i'  # key
-        A = results[ark]; sA = mcr[f'{ark}_1sd']
-        fA08, fsA08 = util.vep_format(A, 2. * sA, plims=(-3, 5))
-        name += ['1σ'];           value += [mcr[f'{ark}_1sd']];     format += [fsA08]
-        name += ['lower 95% CI']; value += [mcr[f'{ark}_95ci'][0]]; format += [fA08]
-        name += ['upper 95% CI']; value += [mcr[f'{ark}_95ci'][1]]; format += [fA08]
+        if A48_init:
+            ark = '[234U/238U]i'  # key
+            A = results[ark]; sA = mcr[f'{ark}_1sd']
+            fA48, fsA48 = util.vep_format(A, 2. * sA, plims=(-3, 5))
+            name += ['init. [234U/238U]']; value += [results[ark]]; format += [fA48]
+            name += ['1σ'];           value += [mcr[f'{ark}_1sd']];     format += [fsA48]
+            name += ['lower 95% CI']; value += [mcr[f'{ark}_95ci'][0]]; format += [fA48]
+            name += ['upper 95% CI']; value += [mcr[f'{ark}_95ci'][1]]; format += [fA48]
 
-    # other Monte Carlo stats
-    name += ['median age (Ma)']; value += [mcr['median_age']];    format += [ft]
-    if A48_init:
-        name += [f'median [234U/238U]']; value += [mcr['median_[234U/238U]_i']]; format += [fA48]
-    if A08_init:
-        name += [f'median [230Th/238U]']; value += [mcr['median_[230Th/238U]_i']]; format += [fA08]
+        if A08_init:
+            ark = '[230Th/238U]i'  # key
+            A = results[ark]; sA = mcr[f'{ark}_1sd']
+            fA08, fsA08 = util.vep_format(A, 2. * sA, plims=(-3, 5))
+            name += ['1σ'];           value += [mcr[f'{ark}_1sd']];     format += [fsA08]
+            name += ['lower 95% CI']; value += [mcr[f'{ark}_95ci'][0]]; format += [fA08]
+            name += ['upper 95% CI']; value += [mcr[f'{ark}_95ci'][1]]; format += [fA08]
 
-    name += ['MC trials']; value += [mcr['trials']]; format += ["#,##0"]
-    name += ['MC failed']; value += [mcr['fails']]; format += ["#,##0"]
+        # other Monte Carlo stats
+        name += ['median age (Ma)']; value += [mcr['median_age']];    format += [ft]
+        if A48_init:
+            name += [f'median [234U/238U]']; value += [mcr['median_[234U/238U]_i']]; format += [fA48]
+        if A08_init:
+            name += [f'median [230Th/238U]']; value += [mcr['median_[230Th/238U]_i']]; format += [fA08]
 
-    if mc_summary:
-        name += ['MC not converged']; value += [mcr['not_converged']]; format += ["#,##0"]
-        name += ['MC negative age']; value += [mcr['negative_ages']]; format += ["#,##0"]
-        name += ['MC negative ar']; value += [mcr['negative_ar']]; format += ["#,##0"]
-        name += ['MC negative ar solution']; value += [mcr['negative_ar_soln']]; format += ["#,##0"]
+        name += ['MC trials']; value += [mcr['trials']]; format += ["#,##0"]
+        name += ['MC failed']; value += [mcr['fails']]; format += ["#,##0"]
 
+        if mc_summary:
+            name += ['Not converged']; value += [mcr['not_converged']]; format += ["#,##0"]
+            name += ['Negative age']; value += [mcr['negative_ages']]; format += ["#,##0"]
+            name += ['Negative activity']; value += [mcr['negative_ratios']]; format += ["#,##0"]
+            name += ['Negative activity solution']; value += [mcr['negative_ratio_soln']]; format += ["#,##0"]
+
+    else:
+        name += ['age (Ma)'];     value += [results['age']]; format += ["#.000"]
+        name += ['age_1s (Ma)'];  value += [results['age']]; format += ["#.000"]
+        name += ['lower 95% CI']; value += ['undef.'];       format += [None]
+        name += ['upper 95% CI']; value += ['undef.'];       format += [None]
+
+        if A48_init:
+            name += ['init. [234U/238U]']; value += [results['[234U/238U]i']]; format += ["#.000"]
+            name += ['1σ'];           value += ['undef.']; format += [None]
+            name += ['lower 95% CI']; value += ['undef.']; format += [None]
+            name += ['upper 95% CI']; value += ['undef.']; format += [None]
+
+        if A08_init:
+            name += ['init. [230Th/238U]']; value += [results['[230Th/238U]i']]; format += ["#.000"]
+            name += ['1σ'];           value += ['undef.']; format += [None]
+            name += ['lower 95% CI']; value += ['undef.']; format += [None]
+            name += ['upper 95% CI']; value += ['undef.']; format += [None]
 
     return [name, value], format
 
@@ -1093,88 +1152,129 @@ def results_for_mc(mcr, summary=False):
     name += ['failed']; value += [mcr['fails']]; format += ["#,##0"]
 
     if summary:
-        name += ['MC not converged']
+        name += ['not converged']
         value += [mcr['not_converged']]
         format += ["#,##0"]
-        name += ['MC negative ages']
+        name += ['negative age']
         value += [mcr['negative_ages']]
         format += ["#,##0"]
 
     return [name, value], format
 
 
-def results_for_bcar(mcr, arv='[234U/238U]_i'):
+def results_for_diseq_pbu(results, mc_summary=False, uncert='mc',
+            DThU_const=True, meas_Th232_U238=True):
     """ """
-    assert arv in ('[234U/238U]_i', '[230Th/238U]_i')
-    name = []
-    value = []
-    format = []
+    n = len(results['age'])
+    age_type = results['age_type']
 
-    A = mcr[f'mean_{arv}']
-    sA = mcr[f'1sd_{arv}']
-    ft, fst = util.vep_format(A, 2. * sA, plims=(-3, 5))
-    name += ['1σ'];      value += [mcr[f'1sd_{arv}']];      format += [fst]
-    name += ['lower 95% CI']; value += [mcr[f'95ci_{arv}'][0]]; format += [ft]
-    name += ['upper 95% CI']; value += [mcr[f'95ci_{arv}'][1]]; format += [ft]
-    name += [f'mean {arv}']; value += [mcr[f'mean_{arv}']];    format += [ft]
-
-    return [name, value], format
-
-
-def results_for_diseq_pbu(results, mc_summary=False):
-    """ """
-    if results['age_type'] == 'mod-207Pb':
-        age = ['Mod. 207Pb ages (Ma)']
+    if results['age_type'] == 'cor207Pb':
+        age = ['207Pb-corr. age (Ma)']
     else:
-        age = [f"Diseq. {combo.LONG_DATA_TYPES[results['age_type']]} age (Ma)"]
-
+        age = [f"{combo.LONG_DATA_TYPES[age_type]} diseq. age (Ma)"]
     age_1s = ['1σ (Ma)']
     upper_95ci = ['Lower 95% CI']
     lower_95ci = ['Upper 95% CI']
-
     format = [[None], [None], [None], [None]]
-    n = len(results['age'])
 
-    trials = ['MC trials']
-    fails = ['MC fails']
-    format += [[None], [None]]
-
-    if mc_summary:
-        num_cf = ['MC non-converged']
-        num_rf = ['MC negative arv']
-        num_af = ['MC negative age']
-        format += [[None], [None], [None]]
+    j = 0
 
     for i in range(n):
+        fa, fe = util.vep_format(results['age'][i], 2. * results['age_1s'][i],
+                                 plims=(-3, 5))
         age += [results['age'][i]]
         age_1s += [results['age_1s'][i]]
         upper_95ci += [results['age_95ci'][i][0]]
         lower_95ci += [results['age_95ci'][i][1]]
 
-        fa, fe = util.vep_format(results['age'][i], 2. * results['age_1s'][i],
-                                 plims=(-3, 5))
-        format[0] += [fa]
-        format[1] += [fe]
-        format[2] += [fa]
-        format[3] += [fa]
+        format[j] += [fa]
+        format[j+1] += [fe]
+        format[j+2] += [fa]
+        format[j+3] += [fa]
 
-        trials += [results['mc']['trials']]
-        fails += [results['mc']['fails'][i]]
-        format[4] += ["#,##0"]
-        format[5] += ["#,##0"]
+    out = [age, age_1s, upper_95ci, lower_95ci]
+    j += 4
+
+    if uncert == 'mc':
+
+        if age_type in ('206Pb*', '207Pb-corrected') and not DThU_const:
+
+            if not meas_Th232_U238:
+                ThU_min = ['Th/U min.']
+                ThU_min_1s = ['1σ']
+                ThU_min_upper_95ci = ['Lower 95% CI']
+                ThU_min_lower_95ci = ['Upper 95% CI']
+                format += [[None], [None], [None], [None]]
+
+                for i in range(n):
+                    fv, fe = util.vep_format(results['age'][i], 2. * results['age_1s'][i],
+                            plims=(-3, 5))
+                    ThU_min += [results['ThU_min'][i]]
+                    ThU_min_1s += [results['ThU_min_1s'][i]]
+                    ThU_min_upper_95ci += [results['ThU_min_95ci'][i][0]]
+                    ThU_min_lower_95ci += [results['ThU_min_95ci'][i][0]]
+
+                    format[j] += [fv]
+                    format[j+1] += [fe]
+                    format[j+2] += [fe]
+                    format[j+3] += [fe]
+
+                out += [ThU_min, ThU_min_1s, ThU_min_upper_95ci,
+                        ThU_min_lower_95ci]
+                j += 4
+
+        trials = ['MC trials']
+        fails = ['MC fails']
+        format += [[None], [None]]
+
+        for i in range(n):
+            trials += [results['mc']['trials']]
+            fails += [results['mc']['fails'][i]]
+            format[j] += ["#,##0"]
+            format[j+1] += ["#,##0"]
+
+        out += [trials, fails]
+        j += 2
 
         if mc_summary:
-            num_cf += [results['mc']['not_converged'][i]]
-            num_rf += [results['mc']['negative_ages'][i]]
-            num_af += [results['mc']['negative_distr_coeff'][i]]
-            format[6] += ["#,##0"]
-            format[7] += ["#,##0"]
-            format[8] += ["#,##0"]
+            num_cf = ['Not converged']
+            num_af = ['Negative age']
+            num_rf = ['Negative ratio']
+            num_rif = ['Negative ratio soln']
+            format += [[None], [None], [None], [None]]
 
-    if mc_summary:
-        return [age, age_1s, upper_95ci, lower_95ci, trials, fails,
-                num_cf, num_rf, num_af], format
-    return [age, age_1s, upper_95ci, lower_95ci, trials, fails], format
+            for i in range(n):
+                num_cf += [results['mc']['not_converged'][i]]
+                num_af += [results['mc']['negative_ages'][i]]
+                num_rf += [results['mc']['negative_ratios'][i]]
+                num_rif += [results['mc']['negative_ratio_soln'][i]]
+                format[j] += ["#,##0"]
+                format[j+1] += ["#,##0"]
+                format[j+2] += ["#,##0"]
+                format[j+3] += ["#,##0"]
+
+            out += [num_cf, num_af, num_rf, num_rif]
+
+    else:
+        # TODO: upper and lower CI uncessary for analytical uncertainties
+        if age_type in ('206Pb*', '207Pb-corrected') and not DThU_const:
+
+            if not meas_Th232_U238:
+                ThU_min = ['Th/U min.']
+                ThU_min_1s = ['1σ']
+                format += [[None], [None]]
+
+                for i in range(n):
+                    # fa, fte = util.vep_format(results['age'][i], 2. * results['age_1s'][i],
+                    #              plims=(-3, 5))
+                    ThU_min += [None]
+                    ThU_min_1s += [None]
+                    format[j] += [None]
+                    format[j+1] += [None]
+
+            out += [ThU_min, ThU_min_1s]
+
+    return out, format
 
 
 #==============================================================================
@@ -1197,7 +1297,7 @@ def append_upb_const(opts, task_obj, series='both', U=True, eq=False):
             opts.append('𝝀231: %s (%s)' % (task_obj.lam231, task_obj.s231))
 
 
-def append_arv(opts, task_obj, series='both', fcA48i=False):
+def append_ratios(opts, task_obj, series='both', fcA48i=False):
     """
     """
     if series in ('238U', 'both'):
@@ -1207,12 +1307,30 @@ def append_arv(opts, task_obj, series='both', fcA48i=False):
         if fcA48i:
              ar[0] = err[0] = types[0] = 'n/a'
         opts.append(f'[234U/238U], [230Th/238U], [226Ra/238U]: {tuple(ar)}')
-        opts.append(f'[X/238U] 1σ errors: {tuple(err)}')
+        opts.append(f'[X/238U] (1σ abs.): {tuple(err)}')
         opts.append(f"[234U/238U], [230Th/238U] types: (" + "".join(['initial '
                     if x == 'initial' else 'present ' for x in list(types)]) + ")")
     if series in ('[231Pa/235U]', 'both'):
         opts.append('[231Pa/235U]: %s' % task_obj.A15)
-        opts.append('[231Pa/235U] 1σ error: %s' % task_obj.A15_err)
+        opts.append('[231Pa/235U] (1σ abs.): %s' % task_obj.A15_err)
+
+
+def append_dist_coef(opts, task_obj):
+    """
+    """
+    age_type = task_obj.data_type
+    if age_type in ('206Pb*', 'cor207Pb'):
+        opts.append(f'D_Th/U constant: {task_obj.DThU_const}')
+        if task_obj.DThU_const:
+            opts.append(f'D_Th/U: {task_obj.DThU}')
+            opts.append(f'D_Th/U 1σ uncert.: {task_obj.DThU_1s}')
+        else:
+            opts.append(f'Measured 232Th/238U: {task_obj.meas_Th232_U238}')
+            opts.append(f'Th/U_melt: {task_obj.ThU_melt}')
+            opts.append(f'Th/U_melt (1σ abs.): {task_obj.ThU_melt_1s}')
+    if age_type in ('207Pb*', 'cor207Pb'):
+        opts.append(f'D_Pa/U: {task_obj.DPaU}')
+        opts.append(f'D_Pa/U (1σ abs.): {task_obj.DPaU_1s}')
 
 
 def append_mc_opts(opts, task_handler):
@@ -1432,6 +1550,7 @@ def set_dqpb_config(obj, plot_type='data_point'):
         'alpha': obj.regression_env_line_alpha,
         'color': obj.regression_env_line_color,
         'linewidth': obj.regression_env_line_line_width,
+        'linestyle': obj.regression_env_line_line_style,
         'zorder': obj.regression_env_line_z,
     }
 
@@ -1476,12 +1595,16 @@ def set_dqpb_config(obj, plot_type='data_point'):
     cfg.wav_markers_kw = {
         'alpha': obj.wav_marker_alpha,
         'color': obj.wav_marker_face_color,
+        'edgecolor': obj.wav_marker_edge_color,
+        'linewidth': obj.wav_marker_linewidth,
         'zorder': obj.wav_marker_z,
     }
 
     cfg.wav_markers_rand_kw = {
         'alpha': obj.wav_rand_marker_alpha,
         'color': obj.wav_rand_marker_face_color,
+        'edgecolor': obj.wav_rand_marker_edge_color,
+        'linewidth': obj.wav_rand_marker_linewidth,
         'zorder': obj.wav_marker_z,
     }
 
@@ -1572,3 +1695,7 @@ def set_plot_config(obj, plot_type='data_point'):
 
     else:
         raise ValueError('plot type not recognised')
+
+
+
+
