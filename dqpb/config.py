@@ -8,7 +8,6 @@ import logging
 from dqpb import version
 from dqpb.pyqtconfig import QSettingsManager
 
-# from dqpb.data import GuiSettingsMap
 
 logger = logging.getLogger("dqpb.config")
 
@@ -19,6 +18,8 @@ logger = logging.getLogger("dqpb.config")
 GuiSettingsMap = {
     'one_sigma':               {'default': True,       'widget': 'err1sOpt'},
     'two_sigma':               {'default': False,      'widget': 'err2sOpt'},
+    'mc_uncert':               {'default': True,       'widget': 'mcUncertOpt'},
+    'an_uncert':               {'default': False,      'widget': 'anUncertOpt'},
     'task':                    {'default': 'Concordia-intercept age',
                                                        'widget': 'taskCombo'},
     'data_type':               {'default': 'Tera-Wasserburg',
@@ -28,17 +29,17 @@ GuiSettingsMap = {
     'age_guess':               {'default': '1.00',     'widget': 'ageGuessEntry'},
     'eq_guess':                {'default': True,       'widget': 'eqGuessOpt'},
     'output_eq_age':           {'default': False,      'widget': 'outputEqOpt'},
-    'do_mc':                   {'default': False,      'widget': 'McOpt'},
     'mc_summary':              {'default': False,      'widget': 'McSummaryOpt'},
     'dc_errors':               {'default': False,      'widget': 'dcErrOpt'},
     'u_errors':                {'default': False,      'widget': 'uratErrOpt'},
-    'mc_rnages':               {'default': False,      'widget': 'rnAgesOpt'},
-    'mc_rnar':                 {'default': False,      'widget': 'rnArvOpt'},
-    'mc_trials':               {'default': '30000',    'widget': 'nTrialsEntry'},
+    'mc_rnages':               {'default': True,       'widget': 'rnAgesOpt'},
+    'mc_rnar':                 {'default': True,       'widget': 'rnArvOpt'},
+    'mc_trials':               {'default': '50000',    'widget': 'nTrialsEntry'},
     'age_hist':                {'default': False,      'widget': 'ageHistOpt'},
-    'ar_hist':                 {'default': False,      'widget': 'arHistOpt'},
+    'ratio_hist':                 {'default': False,      'widget': 'arHistOpt'},
     'input_cov':               {'default': False,      'widget': 'covOpt'},
     'norm_isotope':            {'default': '204Pb',    'widget': 'normPbCombo'},
+    'ThU_min_type':            {'default': '232Th/238U', 'widget': 'ThUminCombo'},
 
     'A48':                     {'default': '1.0',      'widget': 'A48Entry'},
     'A48_err':                 {'default': '0.0',      'widget': 'A48ErrEntry'},
@@ -57,8 +58,7 @@ GuiSettingsMap = {
     'fig_export_dir':          {'default': '',         'widget': 'figDirEntry'},
     'fig_extension':           {'default': 'pdf',      'widget': 'figFileTypeCombo'},
     'fig_background_color':    {'default': 'white',    'widget': 'figBackgroundColorCombo'},
-    'fig_border_color':        {'default': 'whitesmoke',
-                                                       'widget': 'figBorderColorCombo'},
+    'fig_border_color':        {'default': 'white',    'widget': 'figBorderColorCombo'},
     'xl_font':                 {'default': 'none',     'widget': 'spreadsheetFontCombo'},
     'xl_bold_headings':        {'default': False,      'widget': 'spreadsheetBoldOpt'},
     'xl_number_formats':       {'default': True,       'widget': 'spreadsheetNumberFormatOpt'},
@@ -191,7 +191,7 @@ GuiSettingsMap = {
     'wav_height':                       {'default': '4.012',  'widget': 'wavHeightEntry'},
     'wav_hide_spines':                  {'default': False,    'widget': 'wavHideSpinesOpt'},
     'wav_lower_exp':                    {'default': '-2',     'widget': 'wavLowerExpEntry'},
-    'wav_major_gridlines':              {'default': False,    'widget': 'wavMajorGridlinesOpt'},
+    'wav_major_gridlines':              {'default': True,    'widget': 'wavMajorGridlinesOpt'},
     'wav_minor_gridlines':              {'default': False,    'widget': 'wavMinorGridlinesOpt'},
     'wav_minor_ticks':                  {'default': False,    'widget': 'wavMinorTicksOpt'},
     'wav_sort_ages':                    {'default': False,    'widget': 'wavSortAgesOpt'},
@@ -209,26 +209,26 @@ GuiSettingsMap = {
     'conc_age_ellipse_edge_color':       {'default': 'black',   'widget': 'ageEllipseEdgeColorCombo'},
     'conc_age_ellipse_face_color':       {'default': 'white',   'widget': 'ageEllipseFillColorCombo'},
     'conc_age_ellipse_edge_width':       {'default': '0.5',     'widget': 'ageEllipseEdgeWidthEntry'},
-    'conc_age_ellipse_z':                {'default': '20',      'widget': 'ageEllipseZEntry'},
+    'conc_age_ellipse_z':                {'default': '10',      'widget': 'ageEllipseZEntry'},
 
     'conc_env_alpha':                    {'default': '0.8',     'widget': 'concEnvAlphaEntry'},
     'conc_env_edge_color':               {'default': 'none',    'widget': 'concEnvLineColorCombo'},
-    'conc_env_face_color':               {'default': '#FFFFC0', 'widget': 'concEnvFaceColorCombo'},
-    'conc_env_line_style':               {'default': '--',      'widget': 'concEnvLineStyleCombo'},
+    'conc_env_face_color':               {'default': 'none',   'widget': 'concEnvFaceColorCombo'},
+    'conc_env_line_style':               {'default': '-',       'widget': 'concEnvLineStyleCombo'},
     'conc_env_line_width':               {'default': '0.0',     'widget': 'concEnvLineWidthEntry'},
-    'conc_env_z':                        {'default': '18',      'widget': 'concEnvZEntry'},
+    'conc_env_z':                        {'default': '8',      'widget': 'concEnvZEntry'},
 
     'conc_env_line_alpha':               {'default': '1.0',     'widget': 'concEnvLineAlphaEntry'},
     'conc_env_line_color':               {'default': 'black',   'widget': 'concEnvLineColorCombo'},
     'conc_env_line_line_style':          {'default': '--',      'widget': 'concEnvLineLineStyleCombo'},
-    'conc_env_line_line_width':          {'default': '0.80',    'widget': 'concEnvLineLineWidthEntry'},
-    'conc_env_line_z':                   {'default': '19',      'widget': 'concEnvLineZEntry'},
+    'conc_env_line_line_width':          {'default': '1.0',    'widget': 'concEnvLineLineWidthEntry'},
+    'conc_env_line_z':                   {'default': '8',      'widget': 'concEnvLineZEntry'},
 
     'conc_intercept_ellipse_alpha':      {'default': '0.60',    'widget': 'interceptEllipseAlphaEntry'},
     'conc_intercept_ellipse_edge_color': {'default': 'black',   'widget': 'interceptEllipseEdgeColorCombo'},
-    'conc_intercept_ellipse_face_color': {'default': '#C5F7C5', 'widget': 'interceptEllipseFillColorCombo'},
+    'conc_intercept_ellipse_face_color': {'default': 'lightgrey', 'widget': 'interceptEllipseFillColorCombo'},
     'conc_intercept_ellipse_line_width': {'default': '1.0',     'widget': 'interceptEllipseEdgeWidthEntry'},
-    'conc_intercept_ellipse_z':          {'default': '25',      'widget': 'interceptEllipseZEntry'},
+    'conc_intercept_ellipse_z':          {'default': '30',      'widget': 'interceptEllipseZEntry'},
 
     'conc_intercept_marker_alpha':      {'default': '0.5',      'widget': 'mcMarkerAlphaEntry'},
     'conc_intercept_marker_edge_color': {'default': 'none',     'widget': 'mcMarkerEdgeColorCombo'},
@@ -236,13 +236,13 @@ GuiSettingsMap = {
     'conc_intercept_marker_edge_width': {'default': '0.0',      'widget': 'mcMarkerEdgeWidthEntry'},
     'conc_intercept_marker_type':       {'default': ',',        'widget': 'mcMarkerTypeCombo'},
     'conc_intercept_marker_size':       {'default': '4',        'widget': 'mcMarkerSizeEntry'},
-    'conc_intercept_marker_z':          {'default': '25',       'widget': 'mcMarkerZEntry'},
+    'conc_intercept_marker_z':          {'default': '30',       'widget': 'mcMarkerZEntry'},
 
     'conc_line_alpha':            {'default': '1.0',      'widget': 'concLineAlphaEntry'},
     'conc_line_color':            {'default': 'black',    'widget': 'concLineColorCombo'},
     'conc_line_style':            {'default': '-',        'widget': 'concLineStyleCombo'},
     'conc_line_width':            {'default': '0.80',     'widget': 'concLineWidthEntry'},
-    'conc_line_z':                {'default': '19',       'widget': 'concLineZEntry'},
+    'conc_line_z':                {'default': '9',       'widget': 'concLineZEntry'},
 
     'conc_marker_alpha':          {'default': '1.0',      'widget': 'concMarkerAlphaEntry'},
     'conc_marker_edge_color':     {'default': 'black',    'widget': 'concMarkerEdgeColorCombo'},
@@ -250,7 +250,7 @@ GuiSettingsMap = {
     'conc_marker_face_color':     {'default': 'white',    'widget': 'concMarkerFillColorCombo'},
     'conc_marker_size':           {'default': '4',        'widget': 'concMarkerSizeEntry'},
     'conc_marker_type':           {'default': 'o',        'widget': 'concMarkerTypeCombo'},
-    'conc_marker_z':              {'default': '20',       'widget': 'concMarkerZEntry'},
+    'conc_marker_z':              {'default': '10',       'widget': 'concMarkerZEntry'},
 
     'conc_text_color':            {'default': 'black',         'widget': 'concLabelFontColorCombo'},
     'conc_text_font_size':        {'default': '8',             'widget': 'concLabelFontSizeCombo'},
@@ -259,13 +259,13 @@ GuiSettingsMap = {
     'conc_text_v_alignment':      {'default': 'center',        'widget': 'concLabelVAlignmentCombo'},
     'conc_text_x_offset':         {'default': "-5",            'widget': 'concLabelXoffsetEntry'},
     'conc_text_y_offset':         {'default': "2",             'widget': 'concLabelYoffsetEntry'},
-    'conc_text_z':                {'default': '21',            'widget': 'concLabelZEntry'},
+    'conc_text_z':                {'default': '11',            'widget': 'concLabelZEntry'},
 
-    'data_ellipse_alpha':         {'default': '0.8',           'widget': 'ellipseAlphaEntry'},
+    'data_ellipse_alpha':         {'default': '1.0',           'widget': 'ellipseAlphaEntry'},
     'data_ellipse_edge_color':    {'default': 'black',         'widget': 'ellipseEdgeColorCombo'},
-    'data_ellipse_face_color':    {'default': '#1FB714',       'widget': 'ellipseFillColorCombo'},
-    'data_ellipse_edge_width':    {'default': '1.0',           'widget': 'ellipseEdgeWidthEntry'},
-    'data_ellipse_z':             {'default': '30',            'widget': 'ellipseZEntry'},
+    'data_ellipse_face_color':    {'default': 'white',       'widget': 'ellipseFillColorCombo'},
+    'data_ellipse_edge_width':    {'default': '0.8',           'widget': 'ellipseEdgeWidthEntry'},
+    'data_ellipse_z':             {'default': '40',            'widget': 'ellipseZEntry'},
 
     'data_label_font_color':      {'default': 'black',         'widget': 'dpLabelFontColorCombo'},
     'data_label_font_size':       {'default': '8',             'widget': 'dpLabelFontSizeEntry'},
@@ -309,21 +309,22 @@ GuiSettingsMap = {
 
     'regression_env_alpha':           {'default': '0.3',   'widget': 'regressionEnvelopeAlphaEntry'},
     'regression_env_edge_color':      {'default': 'none',  'widget': 'regressionEnvelopeLineColorCombo'},
-    'regression_env_face_color':      {'default': 'blue',  'widget': 'regressionEnvelopeFaceColorCombo'},
+    'regression_env_face_color':      {'default': 'none',  'widget': 'regressionEnvelopeFaceColorCombo'},
     'regression_env_line_width':      {'default': '0.',    'widget': 'regressionEnvelopeLineWidthEntry'},
-    'regression_env_line_style':      {'default': '-',     'widget': 'regressionEnvelopeLineStyleCombo'},
-    'regression_env_z':               {'default': '9',     'widget': 'regressionEnvelopeZEntry'},
+    'regression_env_line_style':      {'default': '--',    'widget': 'regressionEnvelopeLineStyleCombo'},
+    'regression_env_z':               {'default': '20',     'widget': 'regressionEnvelopeZEntry'},
 
     'regression_env_line_alpha':      {'default': '1.0',   'widget': 'regressionEnvLineAlphaEntry'},
-    'regression_env_line_color':      {'default': 'blue',  'widget': 'regressionEnvLineColorCombo'},
-    'regression_env_line_line_width': {'default': '0.0',   'widget': 'regressionEnvLineLineWidthEntry'},
-    'regression_env_line_z':          {'default': '9',     'widget': 'regressionEnvLineZEntry'},
+    'regression_env_line_color':      {'default': 'red',   'widget': 'regressionEnvLineColorCombo'},
+    'regression_env_line_line_width': {'default': '0.8',   'widget': 'regressionEnvLineLineWidthEntry'},
+    'regression_env_line_line_style': {'default': '--',     'widget': 'regressionEnvLineLineStyleCombo'},
+    'regression_env_line_z':          {'default': '20',     'widget': 'regressionEnvLineZEntry'},
 
     'regression_line_alpha':          {'default': '1.0',   'widget': 'regressionLineAlphaEntry'},
-    'regression_line_color':          {'default': 'blue',  'widget': 'regressionLineColorCombo'},
+    'regression_line_color':          {'default': 'red',  'widget': 'regressionLineColorCombo'},
     'regression_line_style':          {'default': '-',     'widget': 'regressionLineStyleCombo'},
-    'regression_line_width':          {'default': '0.80',  'widget': 'regressionLineWidthEntry'},
-    'regression_line_z':              {'default': '10',    'widget': 'regressionLineZEntry'},
+    'regression_line_width':          {'default': '1.0',  'widget': 'regressionLineWidthEntry'},
+    'regression_line_z':              {'default': '21',    'widget': 'regressionLineZEntry'},
 
     'scatter_plot_marker_alpha':      {'default': '0.3',   'widget': 'scatterPlotMarkerAlphaEntry'},
     'scatter_plot_marker_edge_color': {'default': 'none',  'widget': 'scatterPlotMarkerEdgeColorCombo'},
@@ -334,9 +335,9 @@ GuiSettingsMap = {
     'scatter_plot_marker_z':          {'default': '1',     'widget': 'scatterPlotMarkerZEntry'},
 
     'wav_envelope_alpha':         {'default': '0.80',      'widget': 'wavEnvAlphaEntry'},
-    'wav_envelope_face_color':    {'default': '#C5F7C5',   'widget': 'wavEnvFaceColorCombo'},
+    'wav_envelope_face_color':    {'default': 'lightgrey',   'widget': 'wavEnvFaceColorCombo'},
     'wav_envelope_edge_color':    {'default': 'none',      'widget': 'wavEnvEdgeColorCombo'},
-    'wav_envelope_line_style':    {'default': '--',        'widget': 'wavEnvStyleCombo'},
+    'wav_envelope_line_style':    {'default': '-',        'widget': 'wavEnvStyleCombo'},
     'wav_envelope_line_width':    {'default': '0.0',       'widget': 'wavEnvLineWidthEntry'},
     'wav_envelope_z':             {'default': '19',        'widget': 'wavEnvZEntry'},
 
@@ -344,16 +345,21 @@ GuiSettingsMap = {
     'wav_line_color':             {'default': 'black',     'widget': 'wavLineColorCombo'},
     'wav_line_style':             {'default': '-',         'widget': 'wavLineStyleCombo'},
     'wav_line_width':             {'default': '1.0',       'widget': 'wavLineWidthEntry'},
-    'wav_line_z':                 {'default': '10',        'widget': 'wavLineZEntry'},
+    'wav_line_z':                 {'default': '20',        'widget': 'wavLineZEntry'},
 
     'wav_marker_alpha':           {'default': '1.0',       'widget': 'wavMarkerAlphaEntry'},
-    'wav_marker_face_color':      {'default': 'lightblue', 'widget': 'wavMarkerFaceColorCombo'},
+    'wav_marker_face_color':      {'default': 'white',     'widget': 'wavMarkerFaceColorCombo'},
+    'wav_marker_edge_color':      {'default': 'blue',      'widget': 'wavMarkerEdgeColor'},
     'wav_marker_width':           {'default': '0.8' ,      'widget': 'wavMarkerWidthEntry'},
-    'wav_marker_z':               {'default': '31',        'widget': 'wavMarkerZEntry'},
+    'wav_marker_linewidth':       {'default': '0.8',       'widget': 'wavMarkerLineWidth'},
+    'wav_marker_z':               {'default': '41',        'widget': 'wavMarkerZEntry'},
 
     'wav_rand_marker_alpha':      {'default': '1.0',       'widget': 'wavRandMarkerAlphaEntry'},
     'wav_rand_marker_face_color': {'default': 'blue',      'widget': 'wavRandMarkerFaceColorCombo'},
-    'wav_rand_marker_z':          {'default': '30',        'widget': 'wavRandMarkerZEntry'},
+    'wav_rand_marker_edge_color': {'default': 'blue',      'widget': 'wavRandMarkerEdgeColor'},
+    'wav_rand_marker_linewidth':  {'default': '0.8',         'widget': 'wavRandMarkerLineWidth'},
+    'wav_rand_marker_z':          {'default': '40',        'widget': 'wavRandMarkerZEntry'},
+
 }
 
 
@@ -374,7 +380,6 @@ class QConfig:
 
             # TODO: set defaults for all so that data is read from settings
             #  file as appropriate dtype?
-
             # TODO: implement custom user options properly:
             # add container to store user colors
             settings.set_default('user_colors', ['a', 'b'])
