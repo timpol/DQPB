@@ -11,7 +11,7 @@ While DQPB is executing tasks, the Excel screen is locked in order to increase t
 
 Overwriting old results
 ------------------------
-Numerical results output to Excel will overwrite any pre-existing cell data if the calculation/plotting task is re-run. To avoid any potential confusion, it is best to delete old results and plots before re-running a task. Also, note that new figures output to Excel will be stacked on top of old figures. If too many figures accumulate this may slow down Excel, so it is a good idea to delete old figures as you go.
+Numerical results output to Excel may overwrite any pre-existing cell data if the calculation/plotting task is re-run and an inappropriate output location is selected. To avoid this happening, it is best to delete old results and plots before re-running a task. Also, note that new figures output to Excel will be stacked on top of old figures. If too many figures accumulate this may slow down Excel, so it is a good idea to delete old figures as you go.
 
 Crowded concordia markers
 --------------------------

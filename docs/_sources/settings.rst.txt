@@ -8,9 +8,13 @@ Main window settings
 
 The following options are available in the first tab of the main window:
 
-:Account for covariance in wav.: If true, uncertainty covrrelations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and modified |207Pb| ages only).
+:Account for covariance in wav.: If true, uncertainty correlations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and |207Pb|-corrected ages only).
 
 :Norm. isotope:	Normalising isotope (|204Pb| or |208Pb|) for isochron isotope ratios. Only affects plot axis labels, since |208Pb| is treated as a stable isotope (and thus should only be used for young samples).
+
+:Covariance matrix:	Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.
+
+:Age uncertainties: Approach used to calculate age uncertainties. Select `analytical` to calculate age uncertainties using first-order analytical uncertainty propagation (only available for some age types). Select `Monte Carlo`` to propagate uncertainties by Monte Carlo methods. 
 
 :Autoscale axis limits:	If checked, plot axis limits will be determined automatically. If not, a dialog will pop up after clicking ``Ok``, allowing the user to specify axis limits for relevant plot types.
 
@@ -22,7 +26,6 @@ The following options are available in the first tab of the main window:
 
 :Save plots to disk:	Save figures to disk (e.g., to obtain figures in a specific size and/or file type). The save location and file type can be set in the :ref:`I/O <io-settings>` tab of the 'Preferences' window. Figure sizes are set in the :ref:`type-specific plot options <type-settings>` window.
 
-:Covariance matrix:	Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.
 
 .. _mc-settings:
 
@@ -30,18 +33,18 @@ Monte Carlo settings
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-    By default, age uncertainties are computed by Monte Carlo simulation for all **dis**\equilibrium U-Pb ages.  For **eq**\uilibrium U-Pb ages, uncertainties will only be computed by Monte Carlo simulation if the ``Equilibrium age Monte Carlo errors`` option is checked in the main window.
+    These settings will be applied if the `Monte Carlo` age uncertainty option is checked on the first tab of the main window.
 
 The following options are available in the ‘Monte Carlo’ tab of the main window:
 
 :Show full Monte Carlo results summary:	Include information on cause of failed trials in Monte Carlo results, and additional summary statistics.
 
-:Number of trials:	Number of age simulations to attempt. For single-analysis Pb/U and modified |207Pb| ages, this is the number of trials for each individual age.
+:Number of trials:	Number of age simulations to attempt. For single aliquot Pb/U and |207Pb|-corrected ages, this is the number of trials for each individual age.
 
 :Include decay constant errors:	Include the effects of decay constant errors (set in the ‘Constants’ tab of the ‘Preferences’ window). These effects are typically negligible when computing disequilibrium ages for young samples.
 
   .. Note::
-    This option does not yet apply to single-analysis Pb/U or modified |207Pb| ages.
+    This option does not yet apply to single-analysis Pb/U or |207Pb|-corrected ages.
 
 :Include |238U|/|235U| errors:	As above, but for the natural present-day |238U|/|235U| ratio value. These effects are also typically negligible for young samples.
 
@@ -65,11 +68,11 @@ The following options are available in the ‘Preferences’ window:
 Plotting
 ^^^^^^^^^
 
-:Output weighted average plot:	Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and modified |207Pb| ages.
+:Output weighted average plot:	Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and |207Pb|-corrected ages.
 
-:Output data ellipse plot for mod. |207Pb| ages:	Plot modified |207Pb| data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant |DTh/U|  value.
+:Output data ellipse plot for mod. |207Pb| ages:	Plot |207Pb|-corrected data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant |DTh/U|  value.
 
-:plot projected lines through modified |207Pb| data points:	Show lines projected from common |207Pb|/|206Pb| value through each data point for modified |207Pb| data point plots.
+:Plot projected lines through |207Pb|-corrected data points:	Show lines projected from common |207Pb|/|206Pb| value through each data point for |207Pb|-corrected data point plots.
 
 :Equilibrium concordia curve limits:	The equilibrium concordia curve will not extend beyond these age limits.
 
@@ -120,7 +123,7 @@ Type-specific plot settings
 Type-specific plot settings that are only applied to plots of a given type:
 
   .. note::
-     The "Isochron" settings apply to: isochron diagrams, concordia-intercept age "regression plots", modified |207Pb| data plots, and other x-y plots
+     The "Isochron" settings apply to: isochron diagrams, concordia-intercept age "regression plots", |207Pb|-corrected data plots, and other x-y plots
 
 
 All plot types

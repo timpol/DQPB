@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age uncertainties &mdash; DQPB: software for calculating disequilibrium U-Pb ages</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Other calculation and plotting functionality" href="other_tasks.html" />
+    <link rel="prev" title="Age calculations" href="age_calcs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DQPB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Age uncertainties</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#monte-carlo-uncertainties">Monte Carlo uncertainties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disequilibrium-ages-calculated-with-near-equilibrium-234u-238u-m-values">Disequilibrium ages calculated with near equilibrium [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]<sub>m</sub> values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#isochron-ages-calculated-with-near-equilibrium-234u-238u-m-values">Isochron ages calculated with near equilibrium [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]<sub>m</sub> values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DQPB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Age uncertainties</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="age-uncertainties">
+<h1>Age uncertainties<a class="headerlink" href="#age-uncertainties" title="Permalink to this heading"></a></h1>
+<section id="monte-carlo-uncertainties">
+<h2>Monte Carlo uncertainties<a class="headerlink" href="#monte-carlo-uncertainties" title="Permalink to this heading"></a></h2>
+<section id="disequilibrium-ages-calculated-with-near-equilibrium-234u-238u-m-values">
+<h3>Disequilibrium ages calculated with near equilibrium [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]<sub>m</sub> values<a class="headerlink" href="#disequilibrium-ages-calculated-with-near-equilibrium-234u-238u-m-values" title="Permalink to this heading"></a></h3>
+<p>When a disequilibrium age is computed using a measured [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] activity ratio with an assigned uncertainty that significantly overlaps the radioactive equilibrium value (i.e., ~1.00005), it’s likely that a large number of Monte Carlo trials will fail to return convergent age solutions. This makes the calculated uncertainties unreliable (or at least, difficult to interpret). This may be demonstrated using a synthetic Tera-Wasserburg data set. If we begin by assuming a true age of 1.80 Ma, an initial <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]\)</span> value of 1.5, and an common <span class="math notranslate nohighlight">\([^{207}\mathrm{Pb}/^{206}\mathrm{Pb}]\)</span> value of 0.83, the true slope of the discordia line will be -0.0002275. We can generate 5 simulated data points along this line, and perturb them according to assigned measurement uncertainties (ignoring uncertainty correlations here for simplicity). Performing linear regression using the York algorithm, results in a fit with MSWD = 0.89 (see Fig. <a class="reference internal" href="#regression-fit"><span class="std std-numref">Fig. 6</span></a>) Note, the exact MSWD obtained here is not important here.</p>
+<figure class="align-center" id="regression-fit">
+<a class="reference internal image-reference" href="_images/mc_reg_1400ka.png"><img alt="Data selection example screenshot" src="_images/mc_reg_1400ka.png" style="width: 360px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Linear regression of simulated data set with a true age = 1.80 Ma and <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> = 1.5.</span><a class="headerlink" href="#regression-fit" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The present [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value can be calculated from the known age and initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] as <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}} = 1.0031\)</span>. To this value, we may assign an arbitrary (but realistic) measurement uncertainty of 0.0014 (<span class="math notranslate nohighlight">\(2\sigma\)</span>), and perturb this value according to this assigned uncertainty to simulate a measured value. Performing a Monte Carlo simulation with 10 000 trials using these inputs, gives an age of 1.810 (95% CI) (1.754, 1.878) ka and a <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> solution of 1.514 (95% CI) (1.343, 1.658). The results of the Monte Carlo simulation are shown in Fig. <a class="reference internal" href="#mc-histograms"><span class="std std-numref">Fig. 7</span></a>. Only 1 of the 10,000 trials failed. Such a small number will not affect results, and so we may consider the uncertainties calculated from this simulation to be reliable.</p>
+<figure class="align-center" id="mc-histograms">
+<a class="reference internal image-reference" href="_images/mc_hist_1400ka.png"><img alt="Data selection example screenshot" src="_images/mc_hist_1400ka.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Monte Carlo simulation results for simulated data set with true age = 1.800 Ma and measured <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}] = 1.0031 \pm 0.0014 (2\sigma)\)</span>. Red bars indicate values for all trials, and blue bars indicate values for successful trials only. Note that the blue bars overlay the red bars, which are not visible in this plot because virtually all Monte Carlo trials were successful.</span><a class="headerlink" href="#mc-histograms" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>We can repeat this simulation using a true age of 2.4 Ma, but keeping the initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] and common [<span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>] values the same. This yields a measured [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value of <span class="math notranslate nohighlight">\(1.00057 \pm 0.0014 (2\sigma)\)</span>, which now overlaps the radioactive equilibrium value significantly. If we repeat the data point simulation and re-fit the linear regression (for the slope corresponding to 2.40 Ma), we obtain a model 1 fit with MSWD = 0.99 (see Fig. <a class="reference internal" href="#regression-fit-two"><span class="std std-numref">Fig. 8</span></a>). Again the exact MSWD value obtained here is not important.</p>
+<figure class="align-center" id="regression-fit-two">
+<a class="reference internal image-reference" href="_images/mc_reg_2400ka.png"><img alt="Data selection example screenshot" src="_images/mc_reg_2400ka.png" style="width: 360px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Linear regression of simulated data set with a true age of 2.40 Ma and <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> = 1.5.</span><a class="headerlink" href="#regression-fit-two" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Performing 10,000 Monte Carlo trials with these new inputs, gives an age of 2.390 (95% CI) (2.199, 2.714) ka and a <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> solution of 1.49 (95% CI) (0.62, 2.0). The results of the Monte Carlo simulation are shown in Fig. <a class="reference internal" href="#mc-histograms-two"><span class="std std-numref">Fig. 9</span></a>.</p>
+<figure class="align-center" id="mc-histograms-two">
+<a class="reference internal image-reference" href="_images/mc_hist_2400ka.png"><img alt="Data selection example screenshot" src="_images/mc_hist_2400ka.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Monte Carlo simulation results for simulated data set with true age = 2.0 Ma and measured <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}] = 1.00057 \pm 0.0014 (2\sigma)\)</span>. Again, red bars indicate values for all trials, and blue bars indicate values for successful trials only. Note that the blue bars overlay the red bars.</span><a class="headerlink" href="#mc-histograms-two" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This time 1198 of the 10 000 trials failed. This is a significant number, which may bias uncertainties calculated from this simulation. Note that these “failed” trials were not rejected by the algorithm because they returned a negative initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value, but rather because there was no convergent age solution available (i.e., the simulated discordia line did not intercept the simulated concordia curve). This can be demonstrated by plotting the concordia curves for the failed trials as Fig. <a class="reference internal" href="#concordia-intercept"><span class="std std-numref">Fig. 10</span></a>.</p>
+<figure class="align-center" id="concordia-intercept">
+<a class="reference internal image-reference" href="_images/mc_conc_2400ka.png"><img alt="Concordia intercept for failed trials of 2.40 Ma simulation." src="_images/mc_conc_2400ka.png" style="width: 360px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Linear regression of simulated data set with a true age = 2.40 Ma and <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> = 1.5, with the simulated concordia curves for failed trials plotted as the rainbow lines.</span><a class="headerlink" href="#concordia-intercept" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To confirm that simulated regression lines do not intercept the corresponding concordia curve for each trial, we plot the simulated discordia lines and zoom in (see Fig. Fig. <a class="reference internal" href="#concordia-intercept-zoom"><span class="std std-numref">Fig. 11</span></a>). Because the resulting plot becomes very cluttered, we only include the first 10 failed trials, but the same thing is observed for all failed trials of the simulation. For further clarity, these simulated concordia curves have been truncated where the age and <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}}\)</span> returns a physically impossible negative <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> value. We see that the simulated regression lines for these failed trials do not intercept the corresponding concordia curve, meaning that no intercept age solution is available for this combination of inputs to the age equation.</p>
+<figure class="align-center" id="concordia-intercept-zoom">
+<a class="reference internal image-reference" href="_images/mc_conc_zoom_2400ka.png"><img alt="Zoomed in on the concordia intercept region for failed trials of 1.8 Ma simulation." src="_images/mc_conc_zoom_2400ka.png" style="width: 360px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The same plot as above, but zoomed in. Simulated concordia curves and regression lines for the first 10 failed trials that enter this zoomed in part of the plot are shown. The concordia curves are truncated where age and <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}}\)</span> returns a physically impossible negative <span class="math notranslate nohighlight">\([^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}\)</span> value. Note that regression lines do not intercept the corresponding concordia curve for these trials (indicated by the concordia curve of the same colour).</span><a class="headerlink" href="#concordia-intercept-zoom" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To address this problem, DQPB implements two checks when calculating Monte Carlo uncertainties.</p>
+<ol class="arabic simple">
+<li><p>Measured activity ratio values are checked before age calculation to ensure that they are analytically resolvable from radioactive equilibrium with 95% confidence. Where this criterion is not met, a warning is displayed, and the Monte Carlo simulation does not proceed. The age is still reported, but the uncertainties are listed as ‘undef.’ (i.e., undefined).</p></li>
+<li><p>After a Monte Carlo simulation is completed, as second check is performed to verify that a minimum proprtion of trials were successful (the default value is set to 97.5%). Where this second criterion is not met, the software displays a warning that Monte Carlo simulation results may be biased by excessive failed trials and should not be used. This second warning may also be triggered if the PDF of an initial activity ratio value significantly overlaps negative values (e.g., if the value of an initial activity ratio significantly overlaps zero within its uncertainty).</p></li>
+</ol>
+</section>
+<section id="isochron-ages-calculated-with-near-equilibrium-234u-238u-m-values">
+<h3>Isochron ages calculated with near equilibrium [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]<sub>m</sub> values<a class="headerlink" href="#isochron-ages-calculated-with-near-equilibrium-234u-238u-m-values" title="Permalink to this heading"></a></h3>
+<p>The same issue may be encountered when computing <span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span> isochron ages using measured [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] activity ratios that are not clearly analytically resolvable from radioactive equilibrium, although this is not as easy to demonstrate graphically. Therefore, the same checks as described above are performed here too.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="age_calcs.html" class="btn btn-neutral float-left" title="Age calculations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="other_tasks.html" class="btn btn-neutral float-right" title="Other calculation and plotting functionality" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Timothy Pollard.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

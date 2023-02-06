@@ -1,47 +1,103 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>Settings &#8212; DQPB: software for calculating disequilibrium U-Pb ages</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings &mdash; DQPB: software for calculating disequilibrium U-Pb ages</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
     <link rel="prev" title="Weighted average algorithms" href="wtd_average.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="troubleshooting.html" title="Troubleshooting"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="wtd_average.html" title="Weighted average algorithms"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DQPB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="age_uncertainties.html">Age uncertainties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-window-settings">Main window settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#monte-carlo-settings">Monte Carlo settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#preferences-window">Preferences window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plotting">Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical">Numerical</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-o">I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#type-specific-plot-settings">Type-specific plot settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#all-plot-types">All plot types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concordia-intercept-plots">Concordia-intercept plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-format-settings">Plot format settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matplotlib-named-colors">Matplotlib named colors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DQPB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Settings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="settings">
 <h1>Settings<a class="headerlink" href="#settings" title="Permalink to this heading"></a></h1>
 <section id="main-window-settings">
@@ -49,10 +105,16 @@
 <p>The following options are available in the first tab of the main window:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Account for covariance in wav.</dt>
-<dd class="field-odd"><p>If true, uncertainty covrrelations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and modified <sup>207</sup>Pb ages only).</p>
+<dd class="field-odd"><p>If true, uncertainty correlations are accounted for when computing weighted average ages from Monte Carlo simulation results (applies to Pb/U and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages only).</p>
 </dd>
 <dt class="field-even">Norm. isotope</dt>
-<dd class="field-even"><p>Normalising isotope (<sup>204</sup>Pb or <sup>208</sup>Pb) for isochron isotope ratios. Only affects plot axis labels, since <sup>208</sup>Pb is treated as a stable isotope (and thus should only be used for young samples).</p>
+<dd class="field-even"><p>Normalising isotope (<span class="math notranslate nohighlight">\(^{204}\mathrm{Pb}\)</span> or <span class="math notranslate nohighlight">\(^{208}\mathrm{Pb}\)</span>) for isochron isotope ratios. Only affects plot axis labels, since <span class="math notranslate nohighlight">\(^{208}\mathrm{Pb}\)</span> is treated as a stable isotope (and thus should only be used for young samples).</p>
+</dd>
+<dt class="field-odd">Covariance matrix</dt>
+<dd class="field-odd"><p>Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.</p>
+</dd>
+<dt class="field-even">Age uncertainties</dt>
+<dd class="field-even"><p>Approach used to calculate age uncertainties. Select <cite>analytical</cite> to calculate age uncertainties using first-order analytical uncertainty propagation (only available for some age types). Select <cite>Monte Carlo`</cite> to propagate uncertainties by Monte Carlo methods.</p>
 </dd>
 <dt class="field-odd">Autoscale axis limits</dt>
 <dd class="field-odd"><p>If checked, plot axis limits will be determined automatically. If not, a dialog will pop up after clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>, allowing the user to specify axis limits for relevant plot types.</p>
@@ -69,15 +131,12 @@
 <dt class="field-odd">Save plots to disk</dt>
 <dd class="field-odd"><p>Save figures to disk (e.g., to obtain figures in a specific size and/or file type). The save location and file type can be set in the <a class="reference internal" href="#io-settings"><span class="std std-ref">I/O</span></a> tab of the ‘Preferences’ window. Figure sizes are set in the <a class="reference internal" href="#type-settings"><span class="std std-ref">type-specific plot options</span></a> window.</p>
 </dd>
-<dt class="field-even">Covariance matrix</dt>
-<dd class="field-even"><p>Allows data uncertainties to be specified as a covariance matrix when computing weighted averages for arbitrary data. If checked, a dialog will pop up allowing the user to select the covariance matrix data from Excel.</p>
-</dd>
 </dl>
 <section id="monte-carlo-settings">
 <span id="mc-settings"></span><h3>Monte Carlo settings<a class="headerlink" href="#monte-carlo-settings" title="Permalink to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>By default, age uncertainties are computed by Monte Carlo simulation for all <strong>dis</strong>equilibrium U-Pb ages.  For <strong>eq</strong>uilibrium U-Pb ages, uncertainties will only be computed by Monte Carlo simulation if the <code class="docutils literal notranslate"><span class="pre">Equilibrium</span> <span class="pre">age</span> <span class="pre">Monte</span> <span class="pre">Carlo</span> <span class="pre">errors</span></code> option is checked in the main window.</p>
+<p>These settings will be applied if the <cite>Monte Carlo</cite> age uncertainty option is checked on the first tab of the main window.</p>
 </div>
 <p>The following options are available in the ‘Monte Carlo’ tab of the main window:</p>
 <dl class="field-list">
@@ -85,17 +144,17 @@
 <dd class="field-odd"><p>Include information on cause of failed trials in Monte Carlo results, and additional summary statistics.</p>
 </dd>
 <dt class="field-even">Number of trials</dt>
-<dd class="field-even"><p>Number of age simulations to attempt. For single-analysis Pb/U and modified <sup>207</sup>Pb ages, this is the number of trials for each individual age.</p>
+<dd class="field-even"><p>Number of age simulations to attempt. For single aliquot Pb/U and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages, this is the number of trials for each individual age.</p>
 </dd>
 <dt class="field-odd">Include decay constant errors</dt>
 <dd class="field-odd"><p>Include the effects of decay constant errors (set in the ‘Constants’ tab of the ‘Preferences’ window). These effects are typically negligible when computing disequilibrium ages for young samples.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This option does not yet apply to single-analysis Pb/U or modified <sup>207</sup>Pb ages.</p>
+<p>This option does not yet apply to single-analysis Pb/U or <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages.</p>
 </div>
 </dd>
-<dt class="field-even">Include <sup>238</sup>U/<sup>235</sup>U errors</dt>
-<dd class="field-even"><p>As above, but for the natural present-day <sup>238</sup>U/<sup>235</sup>U ratio value. These effects are also typically negligible for young samples.</p>
+<dt class="field-even">Include <span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span> errors</dt>
+<dd class="field-even"><p>As above, but for the natural present-day <span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span> ratio value. These effects are also typically negligible for young samples.</p>
 </dd>
 <dt class="field-odd">Reject negative activity ratio trials</dt>
 <dd class="field-odd"><p>Reject any trial encountering a negative activity ratio value, both at the initial randomisation stage or as an initial activity ratio solution where a present-day value is input.</p>
@@ -119,13 +178,13 @@
 <span id="plotting-settings"></span><h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading"></a></h3>
 <dl class="field-list">
 <dt class="field-odd">Output weighted average plot</dt>
-<dd class="field-odd"><p>Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and modified <sup>207</sup>Pb ages.</p>
+<dd class="field-odd"><p>Output a plot showing age points with uncertainties, along with the weighted average line and uncertainty envelope, for Pb/U and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages.</p>
 </dd>
-<dt class="field-even">Output data ellipse plot for mod. <sup>207</sup>Pb ages</dt>
-<dd class="field-even"><p>Plot modified <sup>207</sup>Pb data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant D <sub>Th/U</sub>  value.</p>
+<dt class="field-even">Output data ellipse plot for mod. <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span> ages</dt>
+<dd class="field-even"><p>Plot <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected data points on a Tera-Wasserburg diagram. A disequilibrium concordia curve is also plotted if the initial disequilibrium Th/U state is specified as a constant <span class="math notranslate nohighlight">\(\mathrm{Th}/\mathrm{U}\)</span>  value.</p>
 </dd>
-<dt class="field-odd">plot projected lines through modified <sup>207</sup>Pb data points</dt>
-<dd class="field-odd"><p>Show lines projected from common <sup>207</sup>Pb/<sup>206</sup>Pb value through each data point for modified <sup>207</sup>Pb data point plots.</p>
+<dt class="field-odd">Plot projected lines through <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected data points</dt>
+<dd class="field-odd"><p>Show lines projected from common <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span> value through each data point for <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected data point plots.</p>
 </dd>
 <dt class="field-even">Equilibrium concordia curve limits</dt>
 <dd class="field-even"><p>The equilibrium concordia curve will not extend beyond these age limits.</p>
@@ -134,7 +193,7 @@
 <dd class="field-odd"><p>The disequilibrium concordia curve on concordia-intercept plots will not extend beyond these age limits.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Different limits are used for (a) curves constructed based on initial activity ratio values only, (b) curves constructed based on a present-day [<sup>234</sup>U/<sup>238</sup>U] value but initial [<sup>230</sup>Th/<sup>238</sup>U] value, and (c) curves based on a present-day [<sup>230</sup>Th/<sup>238</sup>U] value. The disequilibrium concordia envelope plotting routine will likely fail if limits (b) and (c) are set too high.</p>
+<p>Different limits are used for (a) curves constructed based on initial activity ratio values only, (b) curves constructed based on a present-day [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value but initial [<span class="math notranslate nohighlight">\(^{230}\mathrm{Th}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value, and (c) curves based on a present-day [<span class="math notranslate nohighlight">\(^{230}\mathrm{Th}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value. The disequilibrium concordia envelope plotting routine will likely fail if limits (b) and (c) are set too high.</p>
 </div>
 </dd>
 </dl>
@@ -142,7 +201,7 @@
 <section id="numerical">
 <span id="numerical-settings"></span><h3>Numerical<a class="headerlink" href="#numerical" title="Permalink to this heading"></a></h3>
 <dl class="field-list simple">
-<dt class="field-odd">Min / max age, [<sup>234</sup>U/<sup>238</sup>U]i, and [<sup>230</sup>Th/<sup>238</sup>U]i</dt>
+<dt class="field-odd">Min / max age, [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]i, and [<span class="math notranslate nohighlight">\(^{230}\mathrm{Th}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>]i</dt>
 <dd class="field-odd"><p>Reject disequilibrium concordia-intercept age solutions (where present-day activity ratio(s) are input) if numerical solutions are outside these limits. See Sect. 4.2 of this document for further explanation.</p>
 </dd>
 <dt class="field-even">Classical linear regression fit MSWD thresholds</dt>
@@ -192,7 +251,7 @@
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The “Isochron” settings apply to: isochron diagrams, concordia-intercept age “regression plots”, modified <sup>207</sup>Pb data plots, and other x-y plots</p>
+<p>The “Isochron” settings apply to: isochron diagrams, concordia-intercept age “regression plots”, <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected data plots, and other x-y plots</p>
 </div>
 </div></blockquote>
 <section id="all-plot-types">
@@ -289,19 +348,19 @@
 <figure class="align-default" id="id1">
 <img alt="Matplotlib base colors" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_001.png" />
 <figcaption>
-<p><span class="caption-text">Matplotlib base colors</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Matplotlib base colors</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id2">
 <img alt="Matplotlib named css colors" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_003.png" />
 <figcaption>
-<p><span class="caption-text">Matplotlib css colors</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Matplotlib css colors</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id3">
 <img alt="Matplotlib tableau palette" src="https://matplotlib.org/stable/_images/sphx_glr_named_colors_002.png" />
 <figcaption>
-<p><span class="caption-text">Matplotlib tableau colors</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Matplotlib tableau colors</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -309,76 +368,34 @@
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h3><a href="index.html">Table of Contents</a></h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="age_calcs.html">Age calculations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#main-window-settings">Main window settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#preferences-window">Preferences window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-specific-plot-settings">Type-specific plot settings</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wtd_average.html" class="btn btn-neutral float-left" title="Weighted average algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="wtd_average.html"
-                          title="previous chapter">Weighted average algorithms</a></p>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Timothy Pollard.</p>
   </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="troubleshooting.html"
-                          title="next chapter">Troubleshooting</a></p>
-  </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="troubleshooting.html" title="Troubleshooting"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="wtd_average.html" title="Weighted average algorithms"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2022, Timothy Pollard.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

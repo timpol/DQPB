@@ -8,9 +8,9 @@ This routine allows arbitrary 2-dimensional data points to be plotted as 95% con
 
 Data point columns should be arranged as:
 
-   ======  ==========  ======  ==========  ==============
-   x        x uncert.   y       y uncert.  corr.
-   ======  ==========  ======  ==========  ==============
+:math:`x`, :math:`u(x)`, :math:`y`, :math:`u(y)`, |rho| (optional))
+
+where :math:`{u}` denotes uncertainty (at given |sigma| level), and |rho| denotes correlation coefficient.
 
 If the ``Data type`` is set to ``Tera-Wasserburg``, then an equilibrium or disequilibrium concordia curve may also be plotted by setting the activity ratios as for a disequilibrium :ref:`age calculation <concordia-intercept>`, and setting concordia plot options in the ``Isochron`` tab of the :ref:`type-specific plot options <type-settings>` window.
 

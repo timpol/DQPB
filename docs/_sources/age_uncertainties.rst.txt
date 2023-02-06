@@ -1,0 +1,81 @@
+Age uncertainties
+=================
+
+Monte Carlo uncertainties
+--------------------------
+
+Disequilibrium ages calculated with near equilibrium [|234U|/|238U|]\ :sub:`m`\  values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When a disequilibrium age is computed using a measured [|234U|/|238U|] activity ratio with an assigned uncertainty that significantly overlaps the radioactive equilibrium value (i.e., ~1.00005), it’s likely that a large number of Monte Carlo trials will fail to return convergent age solutions. This makes the calculated uncertainties unreliable (or at least, difficult to interpret). This may be demonstrated using a synthetic Tera-Wasserburg data set. If we begin by assuming a true age of 1.80 Ma, an initial :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]` value of 1.5, and an common :math:`[^{207}\mathrm{Pb}/^{206}\mathrm{Pb}]` value of 0.83, the true slope of the discordia line will be -0.0002275. We can generate 5 simulated data points along this line, and perturb them according to assigned measurement uncertainties (ignoring uncertainty correlations here for simplicity). Performing linear regression using the York algorithm, results in a fit with MSWD = 0.89 (see Fig. :numref:`regression-fit`) Note, the exact MSWD obtained here is not important here.
+
+.. figure:: assets/mc_reg_1400ka.png
+    :name: regression-fit
+    :width: 360
+    :align: center
+    :alt: Data selection example screenshot
+
+    Linear regression of simulated data set with a true age = 1.80 Ma and :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` = 1.5.
+
+The present [|234U|/|238U|] value can be calculated from the known age and initial [|234U|/|238U|] as :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}} = 1.0031`. To this value, we may assign an arbitrary (but realistic) measurement uncertainty of 0.0014 (:math:`2\sigma`), and perturb this value according to this assigned uncertainty to simulate a measured value. Performing a Monte Carlo simulation with 10 000 trials using these inputs, gives an age of 1.810 (95% CI) (1.754, 1.878) ka and a :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` solution of 1.514 (95% CI) (1.343, 1.658). The results of the Monte Carlo simulation are shown in Fig. :numref:`mc-histograms`. Only 1 of the 10,000 trials failed. Such a small number will not affect results, and so we may consider the uncertainties calculated from this simulation to be reliable. 
+
+.. figure:: assets/mc_hist_1400ka.png
+    :name: mc-histograms
+    :width: 500
+    :align: center
+    :alt: Data selection example screenshot
+
+    Monte Carlo simulation results for simulated data set with true age = 1.800 Ma and measured :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}] = 1.0031 \pm 0.0014 (2\sigma)`. Red bars indicate values for all trials, and blue bars indicate values for successful trials only. Note that the blue bars overlay the red bars, which are not visible in this plot because virtually all Monte Carlo trials were successful.
+
+We can repeat this simulation using a true age of 2.4 Ma, but keeping the initial [|234U|/|238U|] and common [|207Pb|/|206Pb|] values the same. This yields a measured [|234U|/|238U|] value of :math:`1.00057 \pm 0.0014 (2\sigma)`, which now overlaps the radioactive equilibrium value significantly. If we repeat the data point simulation and re-fit the linear regression (for the slope corresponding to 2.40 Ma), we obtain a model 1 fit with MSWD = 0.99 (see Fig. :numref:`regression-fit-two`). Again the exact MSWD value obtained here is not important.
+
+.. figure:: assets/mc_reg_2400ka.png
+    :name: regression-fit-two
+    :width: 360
+    :align: center
+    :alt: Data selection example screenshot
+
+    Linear regression of simulated data set with a true age of 2.40 Ma and :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` = 1.5. 
+
+Performing 10,000 Monte Carlo trials with these new inputs, gives an age of 2.390 (95% CI) (2.199, 2.714) ka and a :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` solution of 1.49 (95% CI) (0.62, 2.0). The results of the Monte Carlo simulation are shown in Fig. :numref:`mc-histograms-two`.
+
+.. figure:: assets/mc_hist_2400ka.png
+    :name: mc-histograms-two
+    :width: 500
+    :align: center
+    :alt: Data selection example screenshot
+
+    Monte Carlo simulation results for simulated data set with true age = 2.0 Ma and measured :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}] = 1.00057 \pm 0.0014 (2\sigma)`. Again, red bars indicate values for all trials, and blue bars indicate values for successful trials only. Note that the blue bars overlay the red bars.
+
+
+This time 1198 of the 10 000 trials failed. This is a significant number, which may bias uncertainties calculated from this simulation. Note that these “failed” trials were not rejected by the algorithm because they returned a negative initial [|234U|/|238U|] value, but rather because there was no convergent age solution available (i.e., the simulated discordia line did not intercept the simulated concordia curve). This can be demonstrated by plotting the concordia curves for the failed trials as Fig. :numref:`concordia-intercept`.
+
+.. figure:: assets/mc_conc_2400ka.png
+    :name: concordia-intercept
+    :width: 360
+    :align: center
+    :alt: Concordia intercept for failed trials of 2.40 Ma simulation.
+
+    Linear regression of simulated data set with a true age = 2.40 Ma and :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` = 1.5, with the simulated concordia curves for failed trials plotted as the rainbow lines.
+
+To confirm that simulated regression lines do not intercept the corresponding concordia curve for each trial, we plot the simulated discordia lines and zoom in (see Fig. Fig. :numref:`concordia-intercept-zoom`). Because the resulting plot becomes very cluttered, we only include the first 10 failed trials, but the same thing is observed for all failed trials of the simulation. For further clarity, these simulated concordia curves have been truncated where the age and :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}}` returns a physically impossible negative :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` value. We see that the simulated regression lines for these failed trials do not intercept the corresponding concordia curve, meaning that no intercept age solution is available for this combination of inputs to the age equation.
+
+.. figure:: assets/mc_conc_zoom_2400ka.png
+    :name: concordia-intercept-zoom
+    :width: 360
+    :align: center
+    :alt: Zoomed in on the concordia intercept region for failed trials of 1.8 Ma simulation.
+
+    The same plot as above, but zoomed in. Simulated concordia curves and regression lines for the first 10 failed trials that enter this zoomed in part of the plot are shown. The concordia curves are truncated where age and :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{m}}` returns a physically impossible negative :math:`[^{234}\mathrm{U}/^{238}\mathrm{U}]_{\mathrm{i}}` value. Note that regression lines do not intercept the corresponding concordia curve for these trials (indicated by the concordia curve of the same colour).
+
+To address this problem, DQPB implements two checks when calculating Monte Carlo uncertainties. 
+
+1. Measured activity ratio values are checked before age calculation to ensure that they are analytically resolvable from radioactive equilibrium with 95% confidence. Where this criterion is not met, a warning is displayed, and the Monte Carlo simulation does not proceed. The age is still reported, but the uncertainties are listed as 'undef.' (i.e., undefined). 
+
+2. After a Monte Carlo simulation is completed, as second check is performed to verify that a minimum proprtion of trials were successful (the default value is set to 97.5%). Where this second criterion is not met, the software displays a warning that Monte Carlo simulation results may be biased by excessive failed trials and should not be used. This second warning may also be triggered if the PDF of an initial activity ratio value significantly overlaps negative values (e.g., if the value of an initial activity ratio significantly overlaps zero within its uncertainty).
+
+
+Isochron ages calculated with near equilibrium [|234U|/|238U|]\ :sub:`m`\  values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The same issue may be encountered when computing |206Pb|/|238U| isochron ages using measured [|234U|/|238U|] activity ratios that are not clearly analytically resolvable from radioactive equilibrium, although this is not as easy to demonstrate graphically. Therefore, the same checks as described above are performed here too.
+

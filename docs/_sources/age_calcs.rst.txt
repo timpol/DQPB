@@ -6,21 +6,15 @@ Concordia-intercept U-Pb ages
 
 .. _concordia-intercept:
 
-Concordia-intercept ages are computed using Tera-Wasserburg diagram variables only (i.e., spreadsheet columns ordered as:
+Concordia-intercept ages are computed using Tera-Wasserburg diagram variables only. I.e., spreadsheet columns ordered as:
 
-   ======  ========  ======  =======  ======
-   |tw-x|  |tw-sx|   |tw-y|  |tw-sy|  |cor|
-   ======  ========  ======  =======  ======
+|206Pb|/|238U|, :math:`{u(^{238}\mathrm{U}/^{206}\mathrm{U})}`, |207Pb|/|206Pb|, :math:`{u(^{207}\mathrm{Pb}/^{206}\mathrm{U})}`, |rho| (optional))
 
-
-.. |tw-x| replace:: |206Pb|/|238U|
-.. |tw-sx| replace:: |206Pb|/|238U| uncert.
-.. |tw-y| replace:: |207Pb|/|206Pb|
-.. |tw-sy| replace:: |207Pb|/|206Pb| uncert.
-.. |cor| replace:: corr.
+where :math:`{u}` denotes uncertainty (at given |sigma| level), and |rho| denotes correlation coefficient.
 
 .. Caution::
    If the data point error correlation coefficients column is not provided, these correlations will be assumed equal to 0. This is not a good general assumption for young samples!
+
 
 Disequilibrium concordia-intercept ages are calculated by solving Eq. (15) in the |manuscript|_ using Newton’s method. The initial guess for the numerical age solution can either be entered directly (under the 'Disequilibrium' tab of the main window) or set to the lower intercept equilibrium age by selecting the ``Use equilibrium age`` option.
 
@@ -46,44 +40,35 @@ U-Pb isochron ages
 
 To compute U-Pb isochron ages the data points should be arranged with columns ordered as:
 
-   ======  ========  ======  =======  ======
-   |i6-x|  |i6-sx|   |i6-y|  |i6-sy|  |cor|
-   ======  ========  ======  =======  ======
+|206Pb|/|20xPb|, :math:`{u(^{206}\mathrm{Pb}/^{20x}\mathrm{Pb})}`, |23yU|/|20xPb|, :math:`{u(^{23y}\mathrm{U}/^{20x}\mathrm{Pb})}`, |rho| (optional)
 
-.. |i6-x| replace:: |206Pb|/|20xPb|
-.. |i6-sx| replace:: |206Pb|/|20xPb| uncert.
-.. |i6-y| replace:: |23yU|/|20xPb|
-.. |i6-sy| replace:: |23yU|/|20xPb| uncert.
+where |23yU| is the primordial uranium isotope (either |238U| or |235U|), and |20xPb| is the normalising isotope (either |204Pb| or |208Pb|, with |208Pb| assumed to be a stable isotope and therefore, applicable to young ages only), :math:`{u}` denotes uncertainty (at given |sigma| level), and |rho| denotes correlation coefficient. Disequilibrium U-Pb isochron ages are calculated by solving the equations given in Sect. 3.2 of the |manuscript|_ using Newton's method. As for concordia-intercept ages, the initial age guess can either be entered directly (under the `Disequilibrium` tab of the main window) or set to the equilibrium age. Again, age uncertainties may optionally be computed using Monte Carlo methods for equilibrium ages but are always implemented for disequilibrium ages.
 
-where |23yU| is the primordial uranium isotope (either |238U| or |235U|), and |20xPb| is the normalising isotope (either |204Pb| or |208Pb|, with |208Pb| assumed to be a stable isotope and therefore, applicable to young ages only). Disequilibrium U-Pb isochron ages are calculated by solving the equations given in Sect. 3.2 of the |manuscript|_ using Newton’s method. As for concordia-intercept ages, the initial age guess can either be entered directly (under the `Disequilibrium` tab of the main window) or set to the equilibrium age. Again, age uncertainties may optionally be computed using Monte Carlo methods for equilibrium ages but are always implemented for disequilibrium ages.
+Single aliquot Pb/U and |207Pb|-corrected ages
+-----------------------------------------------
 
-Pb/U and modified |207Pb| ages
----------------------------------------------
+Typically, multiple co-genetic single aliquot Pb/U ages will be computed at once. For Pb/U ages, data points should be arranged with columns ordered as:
 
-Typically, multiple single-analyses Pb/U ages will be computed in one go. For Pb/U ages, data points should be arranged with columns ordered as:
+|206Pb*|/|238U|, :math:`{u(^{206}\mathrm{Pb}^*/^{238}\mathrm{U})}`
 
-   =======  ========
-   |pb-x|   |pb-sx|
-   =======  ========
+or,
 
-.. |pb-x| replace:: |206Pb|/|238U| or |207Pb|/|235U|
-.. |pb-sx| replace:: |206Pb|/|235U| or |207Pb|/|235U| uncert.
+|207Pb*|/|235U|, :math:`{u(^{207}\mathrm{Pb}^*/^{235}\mathrm{U})}`
 
+where :math:`{u}` denotes uncertainty (at given |sigma| level). Each row relates to a separate aliquot (i.e., a separate mineral grain or spot analysis). For |207Pb|-corrected-corrected ages, data points should be arranged as Tera-Wasserburg diagram variables (i.e., columns ordered as :ref:`above <concordia-intercept>`).
 
-and each row as a separate analysis (i.e., a separate mineral grain or spot analysis).
+|206Pb|/|238U| and |207Pb|-corrected ages are either computed by assuming that (i) the partition coefficient ratio (i.e. |DTh/U|) is constant for all mineral grains, but Th/U of the melt may be heterogenous, or (ii) Th/|Umelt| value is constant for all aliquots, but the partition coefficients may vary. For single aliquot |207Pb|/|235U| ages, only approach (i) is available. To implement approach i, ensure that ``Single aliquot ages`` is selected in the first tab of the main window along with the correct data type. Then under the 'Disequilibrium' tab, select ```DThU const.``` in the active combo box. The value and its uncertainty may then be set in the fields to the left. 
 
-For modified |207Pb| ages, data points should be input as Tera-Wasserburg diagram variables (i.e., columns ordered as :ref:`above <concordia-intercept>`).
+To implement approach ii, select ``Th/U melt const`` from the combo box. The Th/U value of the melt and its uncertainty may then be entered in the fields to the left. After clicking ``OK``, a separate dialog pops up allowing either measured :math:`{\mathrm{^{232}Th/^{238}U}}` or :math:`{\mathrm{^{208}Pb^*/^{206}Pb^*}}` values and uncertainties to be selected from the spreadsheet. With this approach, Th/U of the mineral is inferred from these measured values and aliquot age, using an iterative procedure. 
 
-To output a plot of data points on a Tera-Wasserburg diagram, select the ``Output data point plot for mod. 207Pb ages`` option in 'Plotting' tab of the :ref:`Preferences<prefs-window>` window. A disequilibrium concordia may also be plotted if the Th/U disequilibrium state is input as a constant |DTh/U|  value for all data points, depending on the settings in the :ref:`Type-specific plot settings <type-settings>` window.
+As for other age types, a single age guess can either be entered directly (under the 'Disequilibrium' tab of the main window) or set to the lower intercept equilibrium age solution(s).
 
-For |206Pb|/|238U| and modified |207Pb| ages where initial Th/|Umelt| value is assumed constant, the Th/|Umelt| values are set in the 'Disequilibrium' tab of the main window, and the Th/|Umin| values for each data point are selected via a separate dialog that pops up after clicking ``Ok``.
-
-As for other age types, a single initial age guess can either be entered directly (under the 'Disequilibrium' tab of the main window) or set to the lower intercept equilibrium age solution(s).
+To output a plot of data points on a Tera-Wasserburg diagram, select the ``Output data point plot for 207Pb-corrected ages`` option in 'Plotting' tab of the :ref:`Preferences<prefs-window>` window. A disequilibrium concordia may also be plotted if the Th/U disequilibrium state is input as a constant |DTh/U|  value for all data points, depending on the settings in the :ref:`Type-specific plot settings <type-settings>` window.
 
 To compute a weighted average age from multiple single-analysis ages, select either ``spine`` or ``classical`` from the Fit type combo box on the main window. To output a plot of the weighted average, ensure ``Output weighted average plot`` is checked in the Plotting tab of the :ref:`Preferences <prefs-window>` window.
 
 .. note::
-   The ``Assume initial equilibrium`` option is not yet implemented for single-analysis Pb/U ages.
+   The ``Assume initial equilibrium`` option is not yet implemented for single aliquot Pb/U ages.
 
 
 Concordant initial [|234U|/|238U|] routine

@@ -1,3 +1,12 @@
+.. raw:: latex
+
+   \cleardoublepage
+   \begingroup
+   \renewcommand\chapter[1]{\endgroup}
+   \phantomsection
+
+.. _refs:
+
 References
 ==========
 
@@ -49,7 +58,7 @@ References
 .. [TITT1979] Titterington, D.M., Halliday, A.N., 1979. On the fitting of parallel
     isochrons and the method of maximum likelihood. Chemical Geology 26, 183–195.
 
-.. [YORK2004] York, D., Evensen, N.M., Martı́nez, M.L., De Basabe Delgado, J., 2004. Unified
+.. [YORK2004] York, D., Evensen, N.M., Martıinez, M.L., De Basabe Delgado, J., 2004. Unified
     equations for the slope, intercept, and standard errors of the best
     straight line. American Journal of Physics 72, 367–375.
     https://doi.org/10.1119/1.1632486

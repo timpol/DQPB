@@ -1,37 +1,39 @@
-.. DQPB documentation master file, created by
-   sphinx-quickstart on Sat Oct  1 18:36:54 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 DQPB: software for calculating disequilibrium U-Pb ages
 ==================================================================
 
-DQPB is a standalone GUI application for geochronology focused on calculating disequilibrium U-Pb ages and plotting results, however, it can also be used for computing standard equilibrium U-Pb ages, performing linear regression and computing weighted averages. The software allows isotopic data to be read directly from open Microsoft Excel spreadsheets, and results (both graphical and numerical) printed back to the same worksheet once computations are completed. In this way, it aims to emulate the ease of use of Ken Ludwig’s popular Isoplot/Ex program. The program is distributed on Windows and macOS as a stand-alone application that does not require a pre-existing Python installation to run.
+DQPB is a stand-alone GUI application for geochronology that focusses on calculating disequilibrium U-Pb ages and plotting results. It can also be used for computing standard (equilibrium) U-Pb ages, performing linear regression and computing weighted averages. 
+
+The software allows isotopic data to be read directly from open Microsoft Excel spreadsheets, and results (both graphical and numerical) printed back to the same worksheet once computations are completed. In this way, it aims to emulate the ease of use of Ken Ludwig’s popular Isoplot/Ex program. The program is distributed on Windows and macOS as a stand-alone application that does not require a pre-existing Python installation to run.
 
 DQPB can be used to:
 
 * Calculate disequilibrium U-Pb concordia-intercept ages on a Tera-Wasserburg diagram
 * Calculate disequilibrium |238U|-|206Pb| and |235U|-|207Pb| isochron ages
-* Calculate disequilibrium |206Pb|/|238U| and |207Pb|/|235U| (single analysis) ages
-* Calculate modified |207Pb| ages using an approach similar to [SAKATA2018]_
+* Calculate disequilibrium radiogenic |206Pb|/|238U| and |207Pb|/|235U| (single aliquot) ages
+* Calculate disequilibrium |207Pb|-corrected ages 
 * Calculate initial equilibrium U-Pb ages using the above approaches.
 * Compute “concordant” initial [|234U|/|238U|] values from U-Pb isochron data using the routine described in [ENGEL2019]_
 * Perform linear regression using algorithms that are based on classical statistics (i.e., the model 1, 2, and 3 popularised by Isoplot [LUDWIG2012]_, or robust statistics (i.e., the spine algorithm of [POWELL2020]_ and a new “robust model 2” algorithm).
-* Compute weighted averages that optionally account for data point uncertainty covariances using both classical and robust algorithms
+* Compute weighted averages that optionally account for uncertainty covariances using both classical and robust algorithms
 * Plot data points and disequilibrium concordia curves on a Tera-Wasserburg diagram
 
 The functionality of DQPB is also available as part of a pure Python package for more experienced Python users. For this version, see the `Pysoplot`_ GitHub page.
 
+.. note::
+    The most up to date version of the DQPB documentation can be found at the DQPB `GitHub`_ page.
+
 .. _pysoplot: https://www.github.com/timpol/pysoplot
+.. _github: https://timpol.github.io/DQPB/ 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
    citing.rst
    installation.rst
    usage.rst
    age_calcs.rst
+   age_uncertainties.rst
    other_tasks.rst
    regression.rst
    wtd_average.rst

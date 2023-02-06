@@ -7,19 +7,22 @@ All tasks are invoked via the main window, which is displayed when the applicati
 
     .. figure:: /assets/main_window.png
       :alt: Main window screenshot
-      :width: 500
+      :width: 400
+      :align: left
 
-  Main window on Mac.
+      Main window on Mac.
 
   .. caution::
      It is recommended that you save and backup your Excel workbook before running DQPB for the first time in case something unexpected happens (e.g., spreadsheet data cells are accidentally overwritten).
 
 #. Choose an age calculation or plotting task from the task drop-down menu at the top-left.
 #. Select the appropriate data type from the 'Data Type' drop-down menu.
-#. Select the input data points from an open Microsoft Excel spreadsheet, by clicking the ``select`` button in the 'Data range' group box. This will hide the main window and launch a smaller data selection dialog. The easiest way to select data is to navigate to the worksheet containting your data and highlight the data with the keyboard or mouse in the normal Excel way (excluding headings). Then click ``Get selection`` on the data selection dialog.
+#. Select the input data points from an open Microsoft Excel spreadsheet, by clicking the ``select`` button in the 'Data range' group box. This will hide the main window and launch a smaller data selection dialog. The easiest way to select data is to navigate to the worksheet containing your data and highlight the data with the keyboard or mouse in the normal Excel way (excluding headings). Then click ``Get selection`` on the data selection dialog.
 
 
    .. figure:: assets/data_selection.png
+      :width: 550
+      :align: center
       :alt: Data selection example screenshot
 
       Data selection dialog on Mac
@@ -46,6 +49,8 @@ All tasks are invoked via the main window, which is displayed when the applicati
 #. When the task is complete, results and figures (in .jpg format) will be printed back to the Excel worksheet.
 
    .. figure:: assets/progress_bar.png
+      :width: 550
+      :align: center
       :alt: Progress bar screenshot
 
       Progress bar on Mac with results printed to the Excel workbook
@@ -53,6 +58,8 @@ All tasks are invoked via the main window, which is displayed when the applicati
 #. If an error occurs during the computation (e.g., if no disequilibrium age solution is found), the task will be aborted, and an error dialog will be displayed. If this happens, check the log console  for information on what went wrong (in the file menu go to ``Window`` -> ``Log console...``.
 
    .. figure:: assets/console_log.png
+      :width: 600
+      :align: left
       :alt: Log console screenshot
 
       Example of the log console window on Mac

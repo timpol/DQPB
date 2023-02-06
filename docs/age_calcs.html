@@ -1,82 +1,108 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>Age calculations &#8212; DQPB: software for calculating disequilibrium U-Pb ages</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age calculations &mdash; DQPB: software for calculating disequilibrium U-Pb ages</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Other calculation and plotting functionality" href="other_tasks.html" />
+    <link rel="next" title="Age uncertainties" href="age_uncertainties.html" />
     <link rel="prev" title="Basic usage" href="usage.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="other_tasks.html" title="Other calculation and plotting functionality"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="usage.html" title="Basic usage"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Age calculations</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DQPB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Age calculations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#concordia-intercept-u-pb-ages">Concordia-intercept U-Pb ages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#u-pb-isochron-ages">U-Pb isochron ages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#single-aliquot-pb-u-and-207pb-corrected-ages">Single aliquot Pb/U and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#concordant-initial-234u-238u-routine">Concordant initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] routine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="age_uncertainties.html">Age uncertainties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DQPB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Age calculations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="age-calculations">
 <h1>Age calculations<a class="headerlink" href="#age-calculations" title="Permalink to this heading"></a></h1>
 <section id="concordia-intercept-u-pb-ages">
 <h2>Concordia-intercept U-Pb ages<a class="headerlink" href="#concordia-intercept-u-pb-ages" title="Permalink to this heading"></a></h2>
-<p id="concordia-intercept">Concordia-intercept ages are computed using Tera-Wasserburg diagram variables only (i.e., spreadsheet columns ordered as:</p>
-<blockquote>
-<div><table class="docutils align-default">
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 24%" />
-<col style="width: 18%" />
-<col style="width: 21%" />
-<col style="width: 18%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><sup>206</sup>Pb/<sup>238</sup>U</p></td>
-<td><p><sup>206</sup>Pb/<sup>238</sup>U uncert.</p></td>
-<td><p><sup>207</sup>Pb/<sup>206</sup>Pb</p></td>
-<td><p><sup>207</sup>Pb/<sup>206</sup>Pb uncert.</p></td>
-<td><p>corr.</p></td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
+<p id="concordia-intercept">Concordia-intercept ages are computed using Tera-Wasserburg diagram variables only. I.e., spreadsheet columns ordered as:</p>
+<p><span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>, <span class="math notranslate nohighlight">\({u(^{238}\mathrm{U}/^{206}\mathrm{U})}\)</span>, <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>, <span class="math notranslate nohighlight">\({u(^{207}\mathrm{Pb}/^{206}\mathrm{U})}\)</span>, <span class="math notranslate nohighlight">\(\rho\)</span> (optional))</p>
+<p>where <span class="math notranslate nohighlight">\({u}\)</span> denotes uncertainty (at given <span class="math notranslate nohighlight">\(\sigma\)</span> level), and <span class="math notranslate nohighlight">\(\rho\)</span> denotes correlation coefficient.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>If the data point error correlation coefficients column is not provided, these correlations will be assumed equal to 0. This is not a good general assumption for young samples!</p>
 </div>
 <p>Disequilibrium concordia-intercept ages are calculated by solving Eq. (15) in the <a class="reference external" href="https://gchron.copernicus.org/preprints/gchron-2022-24/gchron-2022-24.pdf">manuscript</a> using Newton’s method. The initial guess for the numerical age solution can either be entered directly (under the ‘Disequilibrium’ tab of the main window) or set to the lower intercept equilibrium age by selecting the <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">equilibrium</span> <span class="pre">age</span></code> option.</p>
-<p>In cases where present-day [<sup>234</sup>U/<sup>238</sup>U] or [<sup>230</sup>Th/<sup>238</sup>U] values are entered, it is possible to have two intercept age solutions in close proximity. In such cases, the algorithm uses a brute force method to search for all age solutions between user defined upper and lower age and activity ratio limits (set in set in the ‘Numerical’ tab of the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a> window). Typically, the upper intercept will have a physically implausible initial activity ratio solution, and so the lower intercept is always selected by default, however, the brute force method is implemented to guard against the numerical solution converging to the wrong intercept age.</p>
+<p>In cases where present-day [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] or [<span class="math notranslate nohighlight">\(^{230}\mathrm{Th}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] values are entered, it is possible to have two intercept age solutions in close proximity. In such cases, the algorithm uses a brute force method to search for all age solutions between user defined upper and lower age and activity ratio limits (set in set in the ‘Numerical’ tab of the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a> window). Typically, the upper intercept will have a physically implausible initial activity ratio solution, and so the lower intercept is always selected by default, however, the brute force method is implemented to guard against the numerical solution converging to the wrong intercept age.</p>
 <blockquote>
 <div><figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="assets/disequilibrium_tab.png"><img alt="Disequilibrium tab" src="assets/disequilibrium_tab.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/disequilibrium_tab.png"><img alt="Disequilibrium tab" src="_images/disequilibrium_tab.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Disequilibrium tab of the main window on Mac</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Disequilibrium tab of the main window on Mac</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -87,132 +113,61 @@
 <section id="u-pb-isochron-ages">
 <span id="isochron-ages"></span><h2>U-Pb isochron ages<a class="headerlink" href="#u-pb-isochron-ages" title="Permalink to this heading"></a></h2>
 <p>To compute U-Pb isochron ages the data points should be arranged with columns ordered as:</p>
-<blockquote>
-<div><table class="docutils align-default">
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 24%" />
-<col style="width: 18%" />
-<col style="width: 21%" />
-<col style="width: 18%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><sup>206</sup>Pb/<sup>20x</sup>Pb</p></td>
-<td><p><sup>206</sup>Pb/<sup>20x</sup>Pb uncert.</p></td>
-<td><p><sup>23y</sup>U/<sup>20x</sup>Pb</p></td>
-<td><p><sup>23y</sup>U/<sup>20x</sup>Pb uncert.</p></td>
-<td><p>corr.</p></td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>where <sup>23y</sup>U is the primordial uranium isotope (either <sup>238</sup>U or <sup>235</sup>U), and <sup>20x</sup>Pb is the normalising isotope (either <sup>204</sup>Pb or <sup>208</sup>Pb, with <sup>208</sup>Pb assumed to be a stable isotope and therefore, applicable to young ages only). Disequilibrium U-Pb isochron ages are calculated by solving the equations given in Sect. 3.2 of the <a class="reference external" href="https://gchron.copernicus.org/preprints/gchron-2022-24/gchron-2022-24.pdf">manuscript</a> using Newton’s method. As for concordia-intercept ages, the initial age guess can either be entered directly (under the <cite>Disequilibrium</cite> tab of the main window) or set to the equilibrium age. Again, age uncertainties may optionally be computed using Monte Carlo methods for equilibrium ages but are always implemented for disequilibrium ages.</p>
+<p><span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{20x}\mathrm{Pb}\)</span>, <span class="math notranslate nohighlight">\({u(^{206}\mathrm{Pb}/^{20x}\mathrm{Pb})}\)</span>, <span class="math notranslate nohighlight">\(^{23y}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{20x}\mathrm{Pb}\)</span>, <span class="math notranslate nohighlight">\({u(^{23y}\mathrm{U}/^{20x}\mathrm{Pb})}\)</span>, <span class="math notranslate nohighlight">\(\rho\)</span> (optional)</p>
+<p>where <span class="math notranslate nohighlight">\(^{23y}\mathrm{U}\)</span> is the primordial uranium isotope (either <span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span> or <span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span>), and <span class="math notranslate nohighlight">\(^{20x}\mathrm{Pb}\)</span> is the normalising isotope (either <span class="math notranslate nohighlight">\(^{204}\mathrm{Pb}\)</span> or <span class="math notranslate nohighlight">\(^{208}\mathrm{Pb}\)</span>, with <span class="math notranslate nohighlight">\(^{208}\mathrm{Pb}\)</span> assumed to be a stable isotope and therefore, applicable to young ages only), <span class="math notranslate nohighlight">\({u}\)</span> denotes uncertainty (at given <span class="math notranslate nohighlight">\(\sigma\)</span> level), and <span class="math notranslate nohighlight">\(\rho\)</span> denotes correlation coefficient. Disequilibrium U-Pb isochron ages are calculated by solving the equations given in Sect. 3.2 of the <a class="reference external" href="https://gchron.copernicus.org/preprints/gchron-2022-24/gchron-2022-24.pdf">manuscript</a> using Newton’s method. As for concordia-intercept ages, the initial age guess can either be entered directly (under the <cite>Disequilibrium</cite> tab of the main window) or set to the equilibrium age. Again, age uncertainties may optionally be computed using Monte Carlo methods for equilibrium ages but are always implemented for disequilibrium ages.</p>
 </section>
-<section id="pb-u-and-modified-207pb-ages">
-<h2>Pb/U and modified <sup>207</sup>Pb ages<a class="headerlink" href="#pb-u-and-modified-207pb-ages" title="Permalink to this heading"></a></h2>
-<p>Typically, multiple single-analyses Pb/U ages will be computed in one go. For Pb/U ages, data points should be arranged with columns ordered as:</p>
-<blockquote>
-<div><table class="docutils align-default">
-<colgroup>
-<col style="width: 47%" />
-<col style="width: 53%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><sup>206</sup>Pb/<sup>238</sup>U or <sup>207</sup>Pb/<sup>235</sup>U</p></td>
-<td><p><sup>206</sup>Pb/<sup>235</sup>U or <sup>207</sup>Pb/<sup>235</sup>U uncert.</p></td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>and each row as a separate analysis (i.e., a separate mineral grain or spot analysis).</p>
-<p>For modified <sup>207</sup>Pb ages, data points should be input as Tera-Wasserburg diagram variables (i.e., columns ordered as <a class="reference internal" href="#concordia-intercept"><span class="std std-ref">above</span></a>).</p>
-<p>To output a plot of data points on a Tera-Wasserburg diagram, select the <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">data</span> <span class="pre">point</span> <span class="pre">plot</span> <span class="pre">for</span> <span class="pre">mod.</span> <span class="pre">207Pb</span> <span class="pre">ages</span></code> option in ‘Plotting’ tab of the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a> window. A disequilibrium concordia may also be plotted if the Th/U disequilibrium state is input as a constant D <sub>Th/U</sub>  value for all data points, depending on the settings in the <a class="reference internal" href="settings.html#type-settings"><span class="std std-ref">Type-specific plot settings</span></a> window.</p>
-<p>For <sup>206</sup>Pb/<sup>238</sup>U and modified <sup>207</sup>Pb ages where initial Th/U <sub>melt</sub> value is assumed constant, the Th/U <sub>melt</sub> values are set in the ‘Disequilibrium’ tab of the main window, and the Th/U <sub>min</sub> values for each data point are selected via a separate dialog that pops up after clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code>.</p>
-<p>As for other age types, a single initial age guess can either be entered directly (under the ‘Disequilibrium’ tab of the main window) or set to the lower intercept equilibrium age solution(s).</p>
+<section id="single-aliquot-pb-u-and-207pb-corrected-ages">
+<h2>Single aliquot Pb/U and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages<a class="headerlink" href="#single-aliquot-pb-u-and-207pb-corrected-ages" title="Permalink to this heading"></a></h2>
+<p>Typically, multiple co-genetic single aliquot Pb/U ages will be computed at once. For Pb/U ages, data points should be arranged with columns ordered as:</p>
+<p><span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}^*\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>, <span class="math notranslate nohighlight">\({u(^{206}\mathrm{Pb}^*/^{238}\mathrm{U})}\)</span></p>
+<p>or,</p>
+<p><span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}^*\)</span>/<span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span>, <span class="math notranslate nohighlight">\({u(^{207}\mathrm{Pb}^*/^{235}\mathrm{U})}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\({u}\)</span> denotes uncertainty (at given <span class="math notranslate nohighlight">\(\sigma\)</span> level). Each row relates to a separate aliquot (i.e., a separate mineral grain or spot analysis). For <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected-corrected ages, data points should be arranged as Tera-Wasserburg diagram variables (i.e., columns ordered as <a class="reference internal" href="age_uncertainties.html#concordia-intercept"><span class="std std-ref">above</span></a>).</p>
+<p><span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span> and <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>-corrected ages are either computed by assuming that (i) the partition coefficient ratio (i.e. <span class="math notranslate nohighlight">\(\mathrm{Th}/\mathrm{U}\)</span>) is constant for all mineral grains, but Th/U of the melt may be heterogenous, or (ii) Th/<span class="math notranslate nohighlight">\(\mathrm{U}_{\mathrm{melt}}\)</span> value is constant for all aliquots, but the partition coefficients may vary. For single aliquot <span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span>/<span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span> ages, only approach (i) is available. To implement approach i, ensure that <code class="docutils literal notranslate"><span class="pre">Single</span> <span class="pre">aliquot</span> <span class="pre">ages</span></code> is selected in the first tab of the main window along with the correct data type. Then under the ‘Disequilibrium’ tab, select <code class="docutils literal notranslate"><span class="pre">`DThU</span> <span class="pre">const.`</span></code> in the active combo box. The value and its uncertainty may then be set in the fields to the left.</p>
+<p>To implement approach ii, select <code class="docutils literal notranslate"><span class="pre">Th/U</span> <span class="pre">melt</span> <span class="pre">const</span></code> from the combo box. The Th/U value of the melt and its uncertainty may then be entered in the fields to the left. After clicking <code class="docutils literal notranslate"><span class="pre">OK</span></code>, a separate dialog pops up allowing either measured <span class="math notranslate nohighlight">\({\mathrm{^{232}Th/^{238}U}}\)</span> or <span class="math notranslate nohighlight">\({\mathrm{^{208}Pb^*/^{206}Pb^*}}\)</span> values and uncertainties to be selected from the spreadsheet. With this approach, Th/U of the mineral is inferred from these measured values and aliquot age, using an iterative procedure.</p>
+<p>As for other age types, a single age guess can either be entered directly (under the ‘Disequilibrium’ tab of the main window) or set to the lower intercept equilibrium age solution(s).</p>
+<p>To output a plot of data points on a Tera-Wasserburg diagram, select the <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">data</span> <span class="pre">point</span> <span class="pre">plot</span> <span class="pre">for</span> <span class="pre">207Pb-corrected</span> <span class="pre">ages</span></code> option in ‘Plotting’ tab of the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a> window. A disequilibrium concordia may also be plotted if the Th/U disequilibrium state is input as a constant <span class="math notranslate nohighlight">\(\mathrm{Th}/\mathrm{U}\)</span>  value for all data points, depending on the settings in the <a class="reference internal" href="settings.html#type-settings"><span class="std std-ref">Type-specific plot settings</span></a> window.</p>
 <p>To compute a weighted average age from multiple single-analysis ages, select either <code class="docutils literal notranslate"><span class="pre">spine</span></code> or <code class="docutils literal notranslate"><span class="pre">classical</span></code> from the Fit type combo box on the main window. To output a plot of the weighted average, ensure <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">weighted</span> <span class="pre">average</span> <span class="pre">plot</span></code> is checked in the Plotting tab of the <a class="reference internal" href="settings.html#prefs-window"><span class="std std-ref">Preferences</span></a> window.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Assume</span> <span class="pre">initial</span> <span class="pre">equilibrium</span></code> option is not yet implemented for single-analysis Pb/U ages.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Assume</span> <span class="pre">initial</span> <span class="pre">equilibrium</span></code> option is not yet implemented for single aliquot Pb/U ages.</p>
 </div>
 </section>
 <section id="concordant-initial-234u-238u-routine">
-<h2>Concordant initial [<sup>234</sup>U/<sup>238</sup>U] routine<a class="headerlink" href="#concordant-initial-234u-238u-routine" title="Permalink to this heading"></a></h2>
-<p>The concordant initial [<sup>234</sup>U/<sup>238</sup>U] routine computes an initial [<sup>234</sup>U/<sup>238</sup>U] value that results in agreement (i.e., “concordance”) between the <sup>238</sup>U-<sup>206</sup>Pb and <sup>235</sup>U-<sup>207</sup>Pb isochron ages following <a class="reference internal" href="references.html#engel2019" id="id2"><span>[ENGEL2019]</span></a>. This routine requires two data selections, one to compute a <sup>235</sup>U-<sup>207</sup>Pb isochron ages, and another to compute a <sup>238</sup>U-<sup>206</sup>Pb isochron age. The columns for these data selections should be arranged as outlined above for <a class="reference internal" href="#isochron-ages"><span class="std std-ref">U-Pb isochron ages</span></a> above. After clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code> on the main window, a data point selection dialog will appear. The initial activity ratio state of isotopes other than <sup>234</sup>U may be specified in the ‘Disequilibrium’ tab of the main window. Typically, for carbonates [<sup>230</sup>Th/<sup>238</sup>U] and [<sup>231</sup>Pa/<sup>235</sup>U] will be set to zero. Uncertainties in the initial [<sup>234</sup>U/<sup>238</sup>U] value are computed using Monte Carlo methods.</p>
+<h2>Concordant initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] routine<a class="headerlink" href="#concordant-initial-234u-238u-routine" title="Permalink to this heading"></a></h2>
+<p>The concordant initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] routine computes an initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value that results in agreement (i.e., “concordance”) between the <span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>-<span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span> and <span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span>-<span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span> isochron ages following <a class="reference internal" href="references.html#engel2019" id="id2"><span>[ENGEL2019]</span></a>. This routine requires two data selections, one to compute a <span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span>-<span class="math notranslate nohighlight">\(^{207}\mathrm{Pb}\)</span> isochron ages, and another to compute a <span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>-<span class="math notranslate nohighlight">\(^{206}\mathrm{Pb}\)</span> isochron age. The columns for these data selections should be arranged as outlined above for <a class="reference internal" href="#isochron-ages"><span class="std std-ref">U-Pb isochron ages</span></a> above. After clicking <code class="docutils literal notranslate"><span class="pre">Ok</span></code> on the main window, a data point selection dialog will appear. The initial activity ratio state of isotopes other than <span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span> may be specified in the ‘Disequilibrium’ tab of the main window. Typically, for carbonates [<span class="math notranslate nohighlight">\(^{230}\mathrm{Th}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] and [<span class="math notranslate nohighlight">\(^{231}\mathrm{Pa}\)</span>/<span class="math notranslate nohighlight">\(^{235}\mathrm{U}\)</span>] will be set to zero. Uncertainties in the initial [<span class="math notranslate nohighlight">\(^{234}\mathrm{U}\)</span>/<span class="math notranslate nohighlight">\(^{238}\mathrm{U}\)</span>] value are computed using Monte Carlo methods.</p>
 </section>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h3><a href="index.html">Table of Contents</a></h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing this work</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Basic usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Age calculations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#concordia-intercept-u-pb-ages">Concordia-intercept U-Pb ages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#u-pb-isochron-ages">U-Pb isochron ages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pb-u-and-modified-207pb-ages">Pb/U and modified <sup>207</sup>Pb ages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#concordant-initial-234u-238u-routine">Concordant initial [<sup>234</sup>U/<sup>238</sup>U] routine</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="other_tasks.html">Other calculation and plotting functionality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="regression.html">Linear regression algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wtd_average.html">Weighted average algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Basic usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="age_uncertainties.html" class="btn btn-neutral float-right" title="Age uncertainties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="usage.html"
-                          title="previous chapter">Basic usage</a></p>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Timothy Pollard.</p>
   </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="other_tasks.html"
-                          title="next chapter">Other calculation and plotting functionality</a></p>
-  </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="other_tasks.html" title="Other calculation and plotting functionality"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="usage.html" title="Basic usage"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">DQPB software</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Age calculations</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2022, Timothy Pollard.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
