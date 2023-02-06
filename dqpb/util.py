@@ -66,10 +66,10 @@ def get_save_path(dirname, fname, file_ext, overwrite=False):
 def vep_format(v, e, plims=(-3,5)):
     """
     Use order of magnitude of error to determine number of decimal places to
-    show.
+    show for a numeric result, given error is shown to two decimal places.
     """
 
-    if any(np.isnan((v,e))):
+    if not np.all(np.isfinite((v, e))):
         return "#.00", "#.00"
 
     s = -1 if v < 0 else 1  # get sign for later
