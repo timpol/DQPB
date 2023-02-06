@@ -47,9 +47,9 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-2185</y>
            <width>556</width>
-           <height>3427</height>
+           <height>3483</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout" columnstretch="0">
@@ -2602,49 +2602,17 @@
           <item row="54" column="0">
            <widget class="QGroupBox" name="groupBox_9">
             <property name="title">
-             <string>Wtd.  average plot markers - systematic uncertainty</string>
+             <string>Wtd.  average plot markers - total uncertainty</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_9">
              <item>
               <layout class="QGridLayout" name="gridLayout_17">
-               <item row="0" column="2">
-                <spacer name="horizontalSpacer_107">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="0" column="3">
+                <widget class="QComboBox" name="wavMarkerFaceColorCombo">
+                 <property name="editable">
+                  <bool>true</bool>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="0">
-                <spacer name="horizontalSpacer_108">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="7">
-                <spacer name="horizontalSpacer_22">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item row="0" column="9">
                 <spacer name="horizontalSpacer_23">
@@ -2659,8 +2627,11 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="7">
-                <spacer name="horizontalSpacer_109">
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="wavMarkerWidthEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_108">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2672,8 +2643,8 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="5">
-                <spacer name="horizontalSpacer_110">
+               <item row="2" column="7">
+                <spacer name="horizontalSpacer_22">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2685,7 +2656,43 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="2">
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_107">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_68">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="wavMarkerZEntry"/>
+               </item>
+               <item row="2" column="5">
+                <spacer name="horizontalSpacer_111">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="2">
                 <spacer name="horizontalSpacer_24">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -2698,8 +2705,15 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="5">
-                <spacer name="horizontalSpacer_111">
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_110">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2718,42 +2732,48 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3">
-                <widget class="QComboBox" name="wavMarkerFaceColorCombo">
-                 <property name="editable">
-                  <bool>true</bool>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_109">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_140">
+                 <property name="text">
+                  <string>edge color</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="6">
+               <item row="1" column="6">
                 <widget class="QLabel" name="label_67">
                  <property name="text">
                   <string>alpha</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="6">
-                <widget class="QLabel" name="label_68">
-                 <property name="text">
-                  <string>z-order</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="8">
+               <item row="1" column="8">
                 <widget class="QLineEdit" name="wavMarkerAlphaEntry"/>
                </item>
-               <item row="1" column="8">
-                <widget class="QLineEdit" name="wavMarkerZEntry"/>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="label_3">
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_141">
                  <property name="text">
-                  <string>width</string>
+                  <string>line width</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="3">
-                <widget class="QLineEdit" name="wavMarkerWidthEntry"/>
+                <widget class="QLineEdit" name="wavMarkerEdgeColor"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavMarkerLineWidth"/>
                </item>
               </layout>
              </item>
@@ -2763,13 +2783,20 @@
           <item row="55" column="0">
            <widget class="QGroupBox" name="groupBox_24">
             <property name="title">
-             <string>Wtd.  average plot markers - random uncertainty</string>
+             <string>Wtd.  average plot markers - random analytical uncertainty</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_24">
              <item>
               <layout class="QGridLayout" name="gridLayout_32">
-               <item row="0" column="2">
-                <spacer name="horizontalSpacer_175">
+               <item row="2" column="6">
+                <widget class="QLabel" name="label_123">
+                 <property name="text">
+                  <string>z-order</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <spacer name="horizontalSpacer_179">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2781,8 +2808,8 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="0">
-                <spacer name="horizontalSpacer_176">
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_67">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2794,7 +2821,40 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="7">
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_178">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_121">
+                 <property name="text">
+                  <string>fill color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_177">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="7">
                 <spacer name="horizontalSpacer_65">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -2820,8 +2880,11 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="7">
-                <spacer name="horizontalSpacer_177">
+               <item row="2" column="8">
+                <widget class="QLineEdit" name="wavRandMarkerZEntry"/>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_176">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -2833,51 +2896,25 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="5">
-                <spacer name="horizontalSpacer_178">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="2">
-                <spacer name="horizontalSpacer_67">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="5">
-                <spacer name="horizontalSpacer_179">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="label_121">
-                 <property name="text">
-                  <string>fill color</string>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="wavRandMarkerWidthEntry">
+                 <property name="enabled">
+                  <bool>false</bool>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_175">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="0" column="3">
                 <widget class="QComboBox" name="wavRandMarkerFaceColorCombo">
@@ -2886,27 +2923,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="6">
-                <widget class="QLabel" name="label_122">
-                 <property name="text">
-                  <string>alpha</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="QLabel" name="label_123">
-                 <property name="text">
-                  <string>z-order</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="8">
-                <widget class="QLineEdit" name="wavRandMarkerAlphaEntry"/>
-               </item>
-               <item row="1" column="8">
-                <widget class="QLineEdit" name="wavRandMarkerZEntry"/>
-               </item>
-               <item row="1" column="1">
+               <item row="2" column="1">
                 <widget class="QLabel" name="label_34">
                  <property name="enabled">
                   <bool>false</bool>
@@ -2917,9 +2934,32 @@
                 </widget>
                </item>
                <item row="1" column="3">
-                <widget class="QLineEdit" name="wavRandMarkerWidthEntry">
-                 <property name="enabled">
-                  <bool>false</bool>
+                <widget class="QLineEdit" name="wavRandMarkerEdgeColor"/>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLabel" name="label_122">
+                 <property name="text">
+                  <string>alpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="8">
+                <widget class="QLineEdit" name="wavRandMarkerAlphaEntry"/>
+               </item>
+               <item row="0" column="8">
+                <widget class="QLineEdit" name="wavRandMarkerLineWidth"/>
+               </item>
+               <item row="0" column="6">
+                <widget class="QLabel" name="label_142">
+                 <property name="text">
+                  <string>line width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_143">
+                 <property name="text">
+                  <string>edge color</string>
                  </property>
                 </widget>
                </item>
@@ -4750,7 +4790,6 @@
   <tabstop>ellipseAlphaEntry</tabstop>
   <tabstop>ellipseZEntry</tabstop>
   <tabstop>wavMarkerFaceColorCombo</tabstop>
-  <tabstop>wavMarkerAlphaEntry</tabstop>
   <tabstop>wavMarkerZEntry</tabstop>
   <tabstop>wavMarkerWidthEntry</tabstop>
   <tabstop>mcMarkerEdgeColorCombo</tabstop>
@@ -4764,7 +4803,6 @@
   <tabstop>wavEnvFaceColorCombo</tabstop>
   <tabstop>wavEnvLineWidthEntry</tabstop>
   <tabstop>wavRandMarkerFaceColorCombo</tabstop>
-  <tabstop>wavRandMarkerAlphaEntry</tabstop>
   <tabstop>wavRandMarkerZEntry</tabstop>
   <tabstop>concEnvZEntry</tabstop>
   <tabstop>concEnvFaceColorCombo</tabstop>
