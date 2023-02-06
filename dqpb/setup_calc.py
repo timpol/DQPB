@@ -1,5 +1,5 @@
 """
-Prepare and run plotting and/or calculation tasks.
+Prepare and run plotting and calculation tasks.
 
 """
 
@@ -9,7 +9,7 @@ import xlwings as xw
 import matplotlib as mpl
 
 from dqpb import combo
-from dqpb import recipes
+from dqpb import calcs
 from dqpb import spreadsheet
 
 
@@ -19,10 +19,10 @@ logger = logging.getLogger("dqpb.tasks")
 
 class Task:
     """
-    Setup and run a plotting or calc recipe.
+    Setup and run a calculation.
     """
 
-    def __init__(self, task_obj,  msg_signal, progress_signal):
+    def __init__(self, task_obj,  msg_signal, progress_signal, ret_signal):
 
         # Dump all settings to log (only displayed in console if set to debug).
         # for k, v in task_obj.items():
@@ -31,6 +31,8 @@ class Task:
         self.__dict__ = task_obj  # set all task dict items to instance attributes
         self.msg_signal = msg_signal
         self.progress_signal = progress_signal
+        self.ret_signal = ret_signal
+        self.retval = ''
 
         logger.info(f'running: {self.task}')
 
@@ -62,7 +64,7 @@ class Task:
 
         # read settings file
         logger.debug("setting DQPB config...")
-        recipes.set_dqpb_config(self)
+        calcs.set_dqpb_config(self)
 
         # Reset maplotlib defaults just in case. Then set font family and
         # preferred fonts.
@@ -87,14 +89,25 @@ class Task:
             logger.debug('unable to get matplotlib font...')
 
         # some additional derived settings etc.
-        self.concordia_intercept = True if self.task == 'concordia_intercept_age' \
-            else False
+        self.concordia_intercept = False
+        if self.task == 'concordia_intercept_age':
+            self.concordia_intercept = True
+
         if self.eq_guess:
             self.age_guess = 'eq'
+
+        # uncertainty propagation approach
+        if self.mc_uncert:
+            self.uncert = 'mc'
+        else:
+            self.uncert = 'analytical'
+
         self.error_type = self.error_type + str(self.sigma_level) + "s"
+
         self.init = [True, True]
         self.init[0] = True if self.A48_type == 'initial' else False
         self.init[1] = True if self.A08_type == 'initial' else False
+
 
     def update_progress(self, val, msg):
         """Update gui progress bar.
@@ -114,15 +127,15 @@ class Task:
         try:
             # call task
             if self.task in ('concordia_intercept_age', 'isochron_age'):
-                recipes.diagram_age(self)
+                calcs.diagram_age(self)
             elif self.task == 'plot_data':
-                recipes.plot_data(self)
+                calcs.plot_data(self)
             elif self.task == 'pbu_age':
-                recipes.pbu_age(self)
+                calcs.pbu_age(self)
             elif self.task == 'wtd_average':
-                recipes.wav_other(self)
+                calcs.wav_other(self)
             elif self.task == 'forced_concordance':
-                recipes.forced_concordance(self)
+                calcs.forced_concordance(self)
 
             finish = time.perf_counter()
             logger.debug(f"{self.task} finished in "
@@ -134,9 +147,13 @@ class Task:
                 self.clean_up_xl()
                 # raise printing error as well:
                 raise
+            self.ret_signal.emit(self.retval)
             raise
         else:
             self.clean_up_xl()
+            # self.retval += 'text|informative text::'
+            self.ret_signal.emit(self.retval)
 
     def clean_up_xl(self):
         self.app.screen_updating = True
+
