@@ -1964,7 +1964,7 @@ class AboutDialog(QDialog):
         self.nameLabel.setText(f"DQPB {version}")
         # self.iconLabel.setPixmap(QPixmap(self.parent().iconPath))
 
-        docsUrl = "See online <a href=\"https://github.com/timpol/DQPB/blob/main/docs/\"> documentation </a>"
+        docsUrl = "See online <a href=\"https://timpol.github.io/DQPB/\"> documentation </a>"
         self.docsLabel.setText(docsUrl)
         self.docsLabel.setOpenExternalLinks(True)
 
