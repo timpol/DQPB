@@ -22,7 +22,7 @@ In cases where present-day [|234U|/|238U|] or [|230Th|/|238U|] values are entere
 
    .. figure:: assets/disequilibrium_tab.png
       :alt: Disequilibrium tab
-      :width: 500
+      :width: 400
 
       Disequilibrium tab of the main window on Mac
 

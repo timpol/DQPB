@@ -21,7 +21,7 @@ All tasks are invoked via the main window, which is displayed when the applicati
 
 
    .. figure:: assets/data_selection.png
-      :width: 550
+      :width: 700
       :align: center
       :alt: Data selection example screenshot
 
@@ -49,7 +49,7 @@ All tasks are invoked via the main window, which is displayed when the applicati
 #. When the task is complete, results and figures (in .jpg format) will be printed back to the Excel worksheet.
 
    .. figure:: assets/progress_bar.png
-      :width: 550
+      :width: 700
       :align: center
       :alt: Progress bar screenshot
 

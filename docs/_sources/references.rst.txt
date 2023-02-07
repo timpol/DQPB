@@ -47,10 +47,6 @@ References
     Worked Examples and a Computer Program, Journal of Metamorphic Geology, 6,
     173–204, https://doi.org/10.1111/j.1525-1314.1988.tb00415.x, 1988.
 
-.. [SAKATA2018] A practical method for calculating the U-Pb age of Quaternary
-    zircon: Correction for common Pb and initial disequilibria. Geochemical
-    Journal 52, 281–286. https://doi.org/10.2343/geochemj.2.0508
-
 .. [TAYLOR1997] Taylor, J., 1997. Introduction to Error Analysis, the Study of
     Uncertainties in Physical Measurements, 2nd Edition, Published by
     University Science Books. University Science Books, New York.
