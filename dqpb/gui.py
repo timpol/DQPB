@@ -889,13 +889,13 @@ def validateDiseqState(main, data_type):
 
         if not diseq_234_238 or not diseq_230_238:
             ratio = 'ratio'
-            if diseq_230_238:
-                bad_ratio = '234U/238U activity ratio is'
-            elif diseq_234_238:
-                bad_ratio = '230Th/238U activity ratio is'
-            else:
+            if not diseq_230_238 and not diseq_234_238:
                 bad_ratio = '234U/238U and 230Th/238U activity ratios are'
                 ratio = 'ratios'
+            elif not diseq_234_238:
+                bad_ratio = '234U/238U activity ratio is'
+            else:
+                bad_ratio = '230Th/238U activity ratio is'
 
             txt = f"The input measured {bad_ratio} not resolvable from " \
                   f"radioactive equilibrium with 95% confidence. Monte Carlo " \
