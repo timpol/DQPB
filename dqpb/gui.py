@@ -876,23 +876,23 @@ def validateDiseqState(main, data_type):
     # check measured activity ratios are resolvable from equilibrium
     if (data_type in ('tw', 'wc', 'iso-206Pb') and not
         main.initialEqOpt.isChecked()):
-        diseq_234_238 = True
-        diseq_230_238 = True
+        resolvable_234_238 = True
+        resolvable_230_238 = True
         if main.A48Combo.currentText() == 'present-day':
             a234_238 = float(main.A48Entry.text())
             a234_238_1s = float(main.A48ErrEntry.text())
-            diseq_234_238 = util.meas_diseq(a234_238, a234_238_1s)
+            resolvable_234_238 = util.meas_diseq(a234_238, a234_238_1s)
         if main.A08Combo.currentText() == 'present-day':
             a230_238 = float(main.A08Entry.text())
             a230_238_1s = float(main.A08ErrEntry.text())
-            diseq_230_238 = util.meas_diseq(a230_238, a230_238_1s, which='a230_238')
+            resolvable_230_238 = util.meas_diseq(a230_238, a230_238_1s, which='a230_238')
 
-        if not diseq_234_238 or not diseq_230_238:
+        if not resolvable_234_238 or not resolvable_230_238:
             ratio = 'ratio'
-            if not diseq_230_238 and not diseq_234_238:
+            if not resolvable_230_238 and not resolvable_234_238:
                 bad_ratio = '234U/238U and 230Th/238U activity ratios are'
                 ratio = 'ratios'
-            elif not diseq_234_238:
+            elif not resolvable_234_238:
                 bad_ratio = '234U/238U activity ratio is'
             else:
                 bad_ratio = '230Th/238U activity ratio is'
