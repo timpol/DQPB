@@ -676,7 +676,7 @@ def pbu_age(task):
             if any([fails / diseqAges['mc']['trials'] > 0.025 for fails in
                     diseqAges['mc']['fails']]):
                 task.retval += 'Less than 97.5% of Monte Carlo trials were ' \
-                   'successful for some or all aliquots|A large number of failed ' \
+                   'successful for one or more aliquots|A large number of failed ' \
                    'trials can bias calculated age uncertainties and make results ' \
                    'unreliable. These results should not be used without careful ' \
                    'consideration::'
@@ -693,7 +693,7 @@ def pbu_age(task):
         if any((task.age_hist, task.ratio_hist)):
             task.retval += 'Histograms could not be plotted|Age and activity ' \
                            'ratio histograms are not yet implemented for Pb/U ages.::'
-        logger.error('Age and activity ratio histograms not yet implemented '
+        logger.error('Age and ratio histograms not yet implemented '
                      'for Pb/U ages.')
 
         if wav and task.show_wav_plot:
@@ -1269,12 +1269,12 @@ def results_for_diseq_pbu(results, mc_summary=False, uncert='mc',
                 for i in range(n):
                     # fa, fte = util.vep_format(results['age'][i], 2. * results['age_1s'][i],
                     #              plims=(-3, 5))
-                    ThU_min += [None]
+                    ThU_min += [results['ThU_min'][i]]
                     ThU_min_1s += [None]
-                    format[j] += [None]
+                    format[j] += ["0.00"]
                     format[j+1] += [None]
 
-            out += [ThU_min, ThU_min_1s]
+                out += [ThU_min, ThU_min_1s]
 
     return out, format
 
