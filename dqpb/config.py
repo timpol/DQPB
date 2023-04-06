@@ -135,6 +135,7 @@ GuiSettingsMap = {
     'dpp_plot_concordia':               {'default': False,    'widget': 'dppPlotConcordiaOpt'},
     'dpp_concordia_envelope':           {'default': False,    'widget': 'dppConcordiaEnvelopeOpt'},
     'dpp_conc_spaghetti':               {'default': False,    'widget': 'dppConcSpaghettiOpt'},
+    'dpp_age_point_markers':            {'default': True,    'widget': 'dppAgePointOpt'},
     'dpp_age_ellipse_markers':          {'default': False,    'widget': 'dppAgeEllipseOpt'},
     'dpp_marker_max_age':               {'default': 'None',   'widget': 'dppMarkerMaxAgeEntry'},
     'dpp_use_manual_age_markers':       {'default': False,    'widget': 'dppManualAgeMarkersOpt'},
@@ -162,6 +163,7 @@ GuiSettingsMap = {
 
     'int_concordia_envelope':           {'default': False,    'widget': 'intConcordiaEnvelopeOpt'},
     'int_conc_spaghetti':               {'default': False,    'widget': 'intConcSpaghettiOpt'},
+    'int_age_point_markers':            {'default': True,    'widget': 'intAgePointOpt'},
     'int_age_ellipse_markers':          {'default': False,    'widget': 'intAgeEllipseOpt'},
     'int_marker_max_age':               {'default': 'None',   'widget': 'intMarkerMaxAgeEntry'},
     'int_use_manual_age_markers':       {'default': False,    'widget': 'intManualAgeMarkersOpt'},
