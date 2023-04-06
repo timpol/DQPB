@@ -32,16 +32,6 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#808080;&quot;&gt;These settings apply to isochron plots and plots of arbitrary x-y data.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QScrollArea" name="scrollArea">
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -55,7 +45,7 @@
              <x>0</x>
              <y>0</y>
              <width>425</width>
-             <height>941</height>
+             <height>968</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -134,6 +124,9 @@
                  </item>
                  <item row="3" column="0">
                   <widget class="QCheckBox" name="dppConcSpaghettiOpt">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="text">
                     <string>'spaghetti' type concordia enveleope</string>
                    </property>
@@ -150,48 +143,55 @@
                <string>Concordia age markers</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_4">
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>auto markers max age (Ma):</string>
+               <item row="5" column="0" colspan="2">
+                <widget class="QLineEdit" name="dppManualAgeMarkersEntry">
+                 <property name="placeholderText">
+                  <string>none</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="dppAgeEllipseOpt">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="text">
+                  <string>plot age ellipse markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
                 <widget class="QLineEdit" name="dppMarkerMaxAgeEntry">
                  <property name="placeholderText">
                   <string>none</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="4" column="0">
                 <widget class="QLabel" name="label">
                  <property name="text">
                   <string>manual age marker locations:</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="dppAgeEllipseOpt">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_2">
                  <property name="text">
-                  <string>plot age markers as age ellipses</string>
+                  <string>auto markers max age (Ma):</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="3" column="0">
                 <widget class="QCheckBox" name="dppManualAgeMarkersOpt">
                  <property name="text">
                   <string>use manual age markers</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QLineEdit" name="dppManualAgeMarkersEntry">
-                 <property name="placeholderText">
-                  <string>none</string>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="dppAgePointOpt">
+                 <property name="text">
+                  <string>plot age point markers</string>
                  </property>
                 </widget>
                </item>
@@ -411,6 +411,16 @@
           </widget>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#808080;&quot;&gt;These settings apply to isochron plots and plots of arbitrary x-y data.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
@@ -440,9 +450,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-269</y>
+             <y>0</y>
              <width>425</width>
-             <height>992</height>
+             <height>1019</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -509,7 +519,7 @@
                <item row="0" column="0" rowspan="2" colspan="2">
                 <widget class="QCheckBox" name="interceptEllipseOpt">
                  <property name="text">
-                  <string>plot concordia intercept age ellipse</string>
+                  <string>plot concordia intercept ellipse</string>
                  </property>
                 </widget>
                </item>
@@ -538,6 +548,9 @@
                </item>
                <item>
                 <widget class="QCheckBox" name="intConcSpaghettiOpt">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string>'spaghetti' type concordia enveleope</string>
                  </property>
@@ -552,45 +565,52 @@
                <string>Concordia age markers</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_8">
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_17">
-                 <property name="text">
-                  <string>manual age marker locations:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="intMarkerMaxAgeEntry">
-                 <property name="placeholderText">
-                  <string>none</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_6">
                  <property name="text">
                   <string>auto markers max age (Ma):</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="intAgeEllipseOpt">
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_17">
                  <property name="text">
-                  <string>plot age markers as age ellipses</string>
+                  <string>manual age marker locations:</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="3" column="0">
                 <widget class="QCheckBox" name="intManualAgeMarkersOpt">
                  <property name="text">
                   <string>use manual age markers</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0" colspan="2">
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="intMarkerMaxAgeEntry">
+                 <property name="placeholderText">
+                  <string>none</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" colspan="2">
                 <widget class="QLineEdit" name="intManualAgeMarkersEntry">
                  <property name="placeholderText">
                   <string>none</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="intAgeEllipseOpt">
+                 <property name="text">
+                  <string>plot age ellipse markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="intAgePointOpt">
+                 <property name="text">
+                  <string>plot age point markers</string>
                  </property>
                 </widget>
                </item>
