@@ -787,7 +787,7 @@ class MainWindow(QMainWindow):
                     msg = 'User set axis limits are not yet implemented for ' \
                           'concordant [234U/238U]i routine. Axis limits will be ' \
                           'autoscaled.'
-                    self.showErrorDialog(text='Please Note:', informative_text=msg)
+                    self.showErrorDialog(text='Note:', informative_text=msg)
                 else:
                     self.axisLimsDialog.exec()
             # Get output address.
