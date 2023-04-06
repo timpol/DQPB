@@ -632,69 +632,78 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
-           <widget class="QCheckBox" name="McSummaryOpt">
-            <property name="text">
-             <string>Show full Monte Carlo results summary</string>
+           <widget class="QGroupBox" name="groupBox_5">
+            <property name="title">
+             <string>Uncertainty options</string>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QCheckBox" name="dcErrOpt">
+               <property name="text">
+                <string>Include decay constant uncertainties</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="uratErrOpt">
+               <property name="text">
+                <string>Include natural 238U/235U uncertainties</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_6">
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="nTrialsEntry"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Number of trials:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <widget class="QGroupBox" name="groupBox_6">
               <property name="title">
-               <string>Simulation options</string>
+               <string>Monte Carlo simulation options</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_4">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="dcErrOpt">
+               <item row="6" column="0">
+                <widget class="QCheckBox" name="McSummaryOpt">
                  <property name="text">
-                  <string>Include decay constant errors</string>
+                  <string>Show full Monte Carlo results summary</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="uratErrOpt">
-                 <property name="text">
-                  <string>Include 238U/235U errors</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="rnArvOpt">
                  <property name="text">
                   <string>Reject negative activity / abundance ratio trials</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout">
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Number of trials:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="nTrialsEntry"/>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="5" column="0">
                 <widget class="QCheckBox" name="rnAgesOpt">
                  <property name="text">
                   <string>Reject negative age trials</string>
@@ -711,7 +720,7 @@
             <item>
              <widget class="QGroupBox" name="groupBox_8">
               <property name="title">
-               <string>Monte Carlo Plots</string>
+               <string>Monte Carlo results plots</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_3">
                <item row="0" column="0">
@@ -796,10 +805,6 @@
   <tabstop>A15ErrEntry</tabstop>
   <tabstop>A15Combo</tabstop>
   <tabstop>initialEqOpt</tabstop>
-  <tabstop>McSummaryOpt</tabstop>
-  <tabstop>nTrialsEntry</tabstop>
-  <tabstop>dcErrOpt</tabstop>
-  <tabstop>uratErrOpt</tabstop>
   <tabstop>rnArvOpt</tabstop>
   <tabstop>rnAgesOpt</tabstop>
   <tabstop>ageHistOpt</tabstop>
