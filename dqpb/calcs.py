@@ -118,6 +118,7 @@ def plot_data(task):
             concordia.plot_concordia(
                 ax, task.data_type,
                 env=task.dpp_concordia_envelope,
+                point_markers=task.dpp_age_point_markers,
                 age_ellipses=task.dpp_age_ellipse_markers,
                 marker_max=task.dpp_marker_max_age,
                 marker_ages=task.dpp_manual_age_markers,
@@ -127,11 +128,12 @@ def plot_data(task):
             )
         else:
             A = [task.A48, task.A08, task.A68, task.A15]
-            sA = [task.A48_err, task.A08_err, task.A68_err, task.A15_err],
-            init = task.init
+            sA = [task.A48_err, task.A08_err, task.A68_err, task.A15_err]
+            meas = task.meas
             concordia.plot_diseq_concordia(
-                ax, A, init, sA=sA, diagram='tw',
+                ax, A, meas, sA=sA, diagram='tw',
                 env=task.dpp_concordia_envelope,
+                point_markers=task.dpp_age_point_markers,
                 age_ellipses=task.dpp_age_ellipse_markers,
                 marker_max=task.dpp_marker_max_age,
                 marker_ages=task.dpp_manual_age_markers,
@@ -185,7 +187,7 @@ def diagram_age(task):
             opts += ['normalising isotope: %s' % task.norm_isotope]
         if not task.eq and task.data_type.startswith('tw'):
             opts += ['disequilibrium age guess: %s' % task.age_guess]
-            if not any(task.init):
+            if any(task.meas):
                 opts += ['disequilibrium age range: %s' % cfg.conc_age_bounds]
         if task.concordia_intercept:
             series = 'both'
@@ -207,15 +209,15 @@ def diagram_age(task):
 
     A = [task.A48, task.A08, task.A68, task.A15]
     sA = [task.A48_err, task.A08_err, task.A68_err, task.A15_err]
-    init = task.init
+    meas = task.meas
 
     # Check for resolvable disequilibrium
     uncert = task.uncert
     if not task.eq:
-        if not init[0]:
+        if meas[0]:
             if not util.meas_diseq(A[0], sA[0]):
                 uncert = 'none'
-        if not init[1]:
+        if meas[1]:
             if not util.meas_diseq(A[1], sA[1]):
                 uncert = 'none'
 
@@ -264,7 +266,7 @@ def diagram_age(task):
         if task.eq and task.dpp_plot_concordia:
             concordia.plot_concordia(
                 ax, task.data_type,
-                plot_markers=True,
+                point_markers= task.dpp_age_point_markers,
                 env=task.dpp_concordia_envelope,
                 age_ellipses=task.dpp_age_ellipse_markers,
                 marker_max=task.dpp_marker_max_age,
@@ -275,8 +277,8 @@ def diagram_age(task):
             )
         elif task.dpp_plot_concordia:
             concordia.plot_diseq_concordia(
-                ax, A, init, sA=sA, diagram='tw',
-                plot_markers=True,
+                ax, A, meas, sA=sA, diagram='tw',
+                point_markers= task.dpp_age_point_markers,
                 env=task.dpp_concordia_envelope,
                 age_ellipses=task.dpp_age_ellipse_markers,
                 marker_max=task.dpp_marker_max_age,
@@ -324,6 +326,7 @@ def diagram_age(task):
                     hist=task.age_hist,
                     env=task.int_concordia_envelope,
                     age_ellipses=task.int_age_ellipse_markers,
+                    point_markers=task.int_age_point_markers,
                     marker_max = task.int_marker_max_age,
                     marker_ages = task.int_manual_age_markers,
                     auto_marker_ages = not task.int_use_manual_age_markers,
@@ -362,12 +365,12 @@ def diagram_age(task):
         try:
             if task.concordia_intercept:
                 conc_kw = dict(env=task.int_concordia_envelope,
+                               point_markers=task.int_age_point_markers,
                                age_ellipses=task.int_age_ellipse_markers,
                                marker_max=task.int_marker_max_age,
                                marker_ages=task.int_manual_age_markers,
                                auto_markers= not task.int_use_manual_age_markers,
                                remove_overlaps=task.int_avoid_label_overlaps,
-                               env_trials=1_000, spaghetti=task.int_conc_spaghetti,
                                age_prefix=task.int_age_prefix
                                )
                 int_plot_kw = dict(ylim=(task.int_ymin, task.int_ymax),
@@ -376,7 +379,8 @@ def diagram_age(task):
                                    intercept_points=task.conc_intercept_points,
                                    )
                 diseqAge = dqpb.concint_age(
-                    fit, A, sA, init, t0,
+                    fit, A, sA, t0,
+                    meas=meas,
                     uncert=uncert,
                     conc_kw=conc_kw,
                     intercept_plot_kw=int_plot_kw,
@@ -402,7 +406,7 @@ def diagram_age(task):
                     A = A[-1]
                     sA = sA[-1]
                 diseqAge = dqpb.isochron_age(
-                    fit, A, sA, t0, init=init,
+                    fit, A, sA, t0, meas=meas,
                     age_type=task.data_type,
                     norm_isotope=task.norm_isotope,
                     hist = (task.age_hist, task.ratio_hist),
@@ -724,15 +728,20 @@ def pbu_age(task):
                 concordia.plot_diseq_concordia(
                     ax,
                     [cfg.a234_238_eq, task.DThU, cfg.a226_238_eq, task.DPaU],
-                    [True, True],
+                    [False, False],
                     sA=[0.0, task.DThU_1s, 0.0, task.DPaU_1s],
                     diagram='tw',
                     env=task.int_concordia_envelope,
+                    point_markers=task.int_age_point_markers,
                     age_ellipses=task.int_age_ellipse_markers,
                     marker_ages=task.int_manual_age_markers,
                     auto_markers=not task.int_use_manual_age_markers,
                     remove_overlaps=task.int_avoid_label_overlaps,
+                    age_prefix=task.int_age_prefix,
                 )
+
+            # TODO: reset axis limits here
+
             plotting.plot_cor207_projection(ax, *dp, task.Pb76)
             task.printer.stack_figure(fig_dp, yorder=3)
 
