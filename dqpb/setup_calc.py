@@ -104,9 +104,9 @@ class Task:
 
         self.error_type = self.error_type + str(self.sigma_level) + "s"
 
-        self.init = [True, True]
-        self.init[0] = True if self.A48_type == 'initial' else False
-        self.init[1] = True if self.A08_type == 'initial' else False
+        self.meas = [False, False]
+        self.meas[0] = False if self.A48_type == 'initial' else True
+        self.meas[1] = False if self.A08_type == 'initial' else True
 
 
     def update_progress(self, val, msg):
