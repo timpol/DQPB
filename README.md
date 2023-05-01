@@ -32,7 +32,20 @@ See the DQPB [documentation](https://timpol.github.io/DQPB/) for more details on
 
 # Citation
 
-If using DQPB in published work, please cite the companion article - details coming soon.
+If using DQPB in published work, please cite the companion Gchron [article](https://gchron.copernicus.org/articles/5/181/2023/):
+
+    @misc{pollard_2023,
+      author       = {Pollard, Timothy and Woodhead, Jon and Hellstrom, John and Engel, John and Powell, Roger and Drysdale, Russell},
+      title        = {{DQP}: software for calculating disequilibrium U–Pb ages},
+      journaltitle = {Geochronology},
+      year         = {2023},
+      volume       = {5},
+      pages = {181--196},
+      date = {2023},
+      doi = {10.5194/gchron-5-181-2023},
+      url = {https://gchron.copernicus.org/articles/5/181/2023/},
+    }
+
 
 In addition, please cite primary works upon which the algorithms implemented in DQPB are based. Further information may be found within the [documentation](https://timpol.github.io/DQPB/) and in the DQPB source code.
 
