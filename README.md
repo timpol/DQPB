@@ -40,10 +40,10 @@ If using DQPB in published work, please cite the companion Gchron [article](http
       journaltitle = {Geochronology},
       year         = {2023},
       volume       = {5},
-      pages = {181--196},
-      date = {2023},
-      doi = {10.5194/gchron-5-181-2023},
-      url = {https://gchron.copernicus.org/articles/5/181/2023/},
+      pages        = {181--196},
+      date         = {2023},
+      doi          = {10.5194/gchron-5-181-2023},
+      url          = {https://gchron.copernicus.org/articles/5/181/2023/},
     }
 
 
